@@ -26,12 +26,15 @@ class Recipe {
   }
 
   getInstructions() {
-    return this.instructions
-  }  
+    return this.instructions;
+  }
 
   getCost() {
-    const recipeCostTotal = this.ingredientsNeeded.reduce((arr, values) => arr + values.estimatedCostInCents, 0)
-    return recipeCostTotal/100
+    const recipeCostTotal = this.ingredientsNeeded.reduce(
+      (arr, values) => arr + values.estimatedCostInCents,
+      0
+    );
+    return recipeCostTotal / 100;
   }
 }
 
