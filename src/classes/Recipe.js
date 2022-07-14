@@ -1,5 +1,5 @@
 class Recipe {
-  constructor() {
+  constructor(recipeData) {
     this.id = id;
   }
 }
