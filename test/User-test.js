@@ -5,7 +5,8 @@ import Recipe from "../src/classes/Recipe";
 
 describe("User", () => {
   let userData = [];
-  let recipe1 = new Recipe(newRecipe);
+  let newRecipe = {};
+  //let recipe1 = new Recipe(newRecipe);
   // let recipeRepository = new RecipeRepository(recipeData)
   beforeEach(() => {
     userData = new User([
