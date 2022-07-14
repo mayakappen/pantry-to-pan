@@ -3,6 +3,7 @@ import Recipe from "../src/classes/Recipe";
 
 describe("Recipe", () => {
   let newRecipe, recipe1
+  let newIngredients = []
 
   beforeEach(() => {
     newRecipe = {
@@ -50,6 +51,27 @@ describe("Recipe", () => {
       name: "Loaded Chocolate Chip Pudding Cookie Cups",
       tags: ["antipasti", "starter", "snack"],
     };
+    newIngredients = [
+      {
+        "id": 20081,
+        "name": "wheat flour",
+        "estimatedCostInCents": 142
+      },
+      {
+        "id": 18372,
+        "name": "bicarbonate of soda",
+        "estimatedCostInCents": 582
+      },
+      {
+        "id": 1123,
+        "name": "eggs",
+        "estimatedCostInCents": 472
+      },
+      {
+        "id": 9003,
+        "name": "apple",
+        "estimatedCostInCents": 207
+      }]
     recipe1 = new Recipe(newRecipe);
   });
 
@@ -75,27 +97,27 @@ describe("Recipe", () => {
     expect(recipe1.ingredients).to.deep.equal(newRecipe.ingredients);
   });
 
-  it.skip("Should have an instructions", () => {
+  it("Should have an instructions", () => {
     expect(recipe1.instructions).to.deep.equal(newRecipe.instructions);
   });
 
-  it.skip("Should have an name", () => {
+  it("Should have an name", () => {
     expect(recipe1.name).to.equal("Loaded Chocolate Chip Pudding Cookie Cups");
   });
 
-  it.skip("Should have tags", () => {
+  it("Should have tags", () => {
     expect(recipe1.tags).to.deep.equal(newRecipe.tags);
   });
 
-  it.skip("Should determine the name of ingredients", () => {
-    expect(recipe1.getIngedients()).to.deep.equal([
+  it("Should determine the name of ingredients", () => {
+    expect(recipe1.getIngredients(newIngredients)).to.deep.equal([
       "wheat flour",
       "bicarbonate of soda",
       "eggs",
     ]);
   });
 
-  it.skip("Should determine the instructions", () => {
+  it("Should determine the instructions", () => {
     expect(recipe1.getInstructions()).to.deep.equal([
       {
         instruction:
@@ -114,7 +136,9 @@ describe("Recipe", () => {
     ]);
   });
 
-  it.skip("Should determine the cost of ingredients", () => {
-    expect(recipe1.getCost()).to.equal(23.03);
+  it("Should determine the cost of ingredients", () => {
+    recipe1.getIngredients(newIngredients)
+
+    expect(recipe1.getCost()).to.equal(11.96);
   });
 });
