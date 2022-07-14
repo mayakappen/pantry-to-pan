@@ -1,8 +1,9 @@
 class User {
-    constructor(newUser) {
-      this.newUser = newUser;
-    }
+  constructor(newUser) {
+    this.newUser = newUser;
   }
+  recipeToCook() {}
+  deleteRecipeToCook() {}
+}
 
-  export default User;
-         
+export default User;
