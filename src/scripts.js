@@ -2,6 +2,12 @@ import "./styles.css";
 import apiCalls from "./apiCalls";
 // An example of how you tell webpack to use an image (also need to link to it in the index.html)
 import "./images/turing-logo.png";
+import RecipeRepository from "../src/classes/RecipeRepository";
+import Recipe from "./Recipe";
+import User from "../src/classes/User-class";
+import "../data/users.js";
+import "../data/recipes.js";
+import "../data/ingredients.js";
 
 //Click on the allRecipes button
 // Create a list of recipe names
@@ -48,7 +54,7 @@ console.log("Hello world");
 // show recipe card
 // ---- Make new card with title, image, and directions
 // ---- Updates left menu to hide filters, but show ingredients needed for this recipe
-// ---- do we want 
+// ---- do we want
 
 // Do we want to build a pantry page that has updatable values for what the user has?
 // ---- Pantry button displays message that it is under construction
