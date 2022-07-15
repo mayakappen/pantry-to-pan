@@ -10,10 +10,10 @@ class Recipe {
   }
 
   getIngredients(ingredients) {
-    const ingredientIds = this.ingredients.map((ingredient) => {
+    const ingredientIds = this.ingredients.map(ingredient => {
       return ingredient.id;
     });
-    const filteredIngredients = ingredients.filter((ingredient) => {
+    const filteredIngredients = ingredients.filter(ingredient => {
       if (ingredientIds.includes(ingredient.id)) {
         return ingredient;
       }
@@ -22,7 +22,7 @@ class Recipe {
       this.ingredientsNeeded.push(ingredient);
     });
     const ingredientNames = this.ingredientsNeeded.map(
-      (ingredient) => ingredient.name
+      ingredient => ingredient.name
     );
     return ingredientNames;
   }

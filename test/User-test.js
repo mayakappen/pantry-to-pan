@@ -5,7 +5,7 @@ import Recipe from "../src/classes/Recipe";
 
 describe("User", () => {
   let user1 
-  let user2
+  let user2cd 
   let newRecipe
   let recipe1
   // let recipeRepository = new RecipeRepository(recipeData)
