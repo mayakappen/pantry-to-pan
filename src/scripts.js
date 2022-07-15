@@ -25,6 +25,7 @@ const breakfastRecipe = document.getElementById();
 const lunchRecipes = document.getElementById();
 const dinnerRecipes = document.getElementById();
 
+window.addEventListener("load", homeView);
 allRecipes.addEventListener("click", functionAll);
 breakfastRecipe.addEventListener("click", functionBreakfast);
 lunchRecipes.addEventListener("click", functionLunch);
@@ -39,6 +40,20 @@ home.addEventListener("click", functionCategory);
 pantry.addEventListener("click", functionPantry);
 
 console.log("Hello world");
+
+function viewElement(element) {
+  element.classList.remove("hidden");
+}
+
+function hideElement(element) {
+  element.classList.add("hidden");
+}
+
+function homeView() {
+  hideElement(filterPanel);
+  hideElement(recipeTileGrid);
+  hideElement(savedRecipes);
+}
 
 // As a user, I should be able to view a list of all recipes.
 // click on button
