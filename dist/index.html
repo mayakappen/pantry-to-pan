@@ -24,9 +24,9 @@
         <src>imagesource</src>
       </section>
     </section>
-    <section class="filter-screen">
+    <section class="filter-screen hidden">
       <section class="selection-boxes">
-        <h3>Allergies</h3>
+        <h2>Allergies</h2>
         <div><input type="checkbox" class="checkbox" id="">
         <label for="allergy1">Allergy 1</label></div>
         <div><input type="checkbox" class="checkbox" id="">
@@ -35,7 +35,7 @@
         <label for="allergy3"> placeholder</label></div>
         <div><input type="checkbox" class="checkbox" id="">
         <label for="allergy4"> placeholder</label></div>
-        <h3>Dietary Restrictions</h3>
+        <h2>Dietary Restrictions</h2>
         <div><input type="checkbox" class="checkbox" id="">
         <label for="restriction1"> placeholder</label></div>
         <div><input type="checkbox" class="checkbox" id="">
@@ -44,7 +44,7 @@
         <label for="restriction3"> placeholder</label></div>
         <div><input type="checkbox" class="checkbox" id="">
         <label for="restriction4"> placeholder</label></div>
-        <h3>Seasons</h3>
+        <h2>Seasons</h2>
         <div><input type="checkbox" class="checkbox" id="">
         <label for="season"> placeholder</label></div>
         <div><input type="checkbox" class="checkbox" id="">
@@ -53,7 +53,7 @@
         <label for="season3"> placeholder</label></div>
         <div><input type="checkbox" class="checkbox" id="">
         <label for="season4"> placeholder</label></div>
-        <h3>Ingredients</h3>
+        <h2>Ingredients</h2>
         <div><input type="checkbox" class="checkbox" id="">
         <label for="ingredient1"> placeholder</label></div>
         <div><input type="checkbox" class="checkbox" id="">
@@ -62,7 +62,7 @@
         <label for="ingredient3"> placeholder</label></div>
         <div><input type="checkbox" class="checkbox" id="">
         <label for="ingredient4"> placeholder</label></div>
-        <h3>Category</h3>
+        <h2>Category</h2>
         <div><input type="checkbox" class="checkbox" id="">
         <label for="category1"> placeholder</label></div>
         <div><input type="checkbox" class="checkbox" id="">
@@ -74,11 +74,22 @@
       </section>
       <section class="image-grid">
         <section class="recipe-card">
+          <h3>Recipe Name</h3>
           <src="">imgurl</src>
-          <h4>Recipe Name</h4>
         </section>
       </section>
     </section>  
+    <section class="saved-recipes">
+      <section class="ingredients-needed">
+        <ul>Item</ul>
+      </section>
+      <section class="recipe-page">
+        <h1>Recipe Title</h1>
+        <src="">image here</src>
+        <h4>directions</h4>
+        <button class="previous-page">Previous Page</button>
+      </section>
+    </section>
   </body>
   <!-- Do not include the scripts.js file here - it is done automatically by the webpack server -->
   <script src="bundle.js"></script>

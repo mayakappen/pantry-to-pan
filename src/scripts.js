@@ -33,3 +33,28 @@ home.addEventListener("click", functionCategory);
 pantry.addEventListener("click", functionPantry);
 
 console.log("Hello world");
+
+// As a user, I should be able to view a list of all recipes.
+// click on button
+// hide main page
+// show list of recipes
+// ----we want this to display the grid of images and recipe names
+
+// As a user, I should be able to click on a recipe to view more information including directions, ingredients needed, and total cost.
+// We need to build a card/page to show this information
+// Do we want it to have a name above image, above ingredients, above directions
+// click recipe
+// hide grid
+// show recipe card
+// ---- Make new card with title, image, and directions
+// ---- Updates left menu to hide filters, but show ingredients needed for this recipe
+// ---- do we want 
+
+// Do we want to build a pantry page that has updatable values for what the user has?
+// ---- Pantry button displays message that it is under construction
+
+// As a user, I should be able to add/remove a recipe to a list of recipes to cook
+// click saved recipes
+// hide main page
+// show grid of saved recipes
+// functionality to save or delete, similar to book covers
