@@ -3,10 +3,11 @@ import RecipeRepository from "../src/classes/RecipeRepository";
 import Recipe from "../src/classes/Recipe";
 
 describe("RecipeRepository", () => {
-  let recipeData;
+  let recipeData; //recipe.js
   let recipeRepository;
+
   beforeEach(function () {
-    recipeData = [
+    recipeData = [ //sample recipeData
       {
         id: 595736,
         image: "https://spoonacular.com/recipeImages/595736-556x370.jpg",
@@ -90,6 +91,7 @@ describe("RecipeRepository", () => {
       },
     ];
     recipeRepository = new RecipeRepository(recipeData);
+
   });
 
   it("Should be a function", () => {
@@ -105,7 +107,7 @@ describe("RecipeRepository", () => {
   });
 
   it("Should be able to filter by tag", () => {
-    expect(recipeRepository.filterTag("sauce")).to.deep.equal([recipeData[1]]);
+    expect(recipeRepository.filterTag("sauce")).to.deep.equal(recipeData[1]);
   });
 
   it("Should be able to filter by name", () => {
