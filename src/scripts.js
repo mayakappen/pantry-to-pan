@@ -6,7 +6,7 @@ import RecipeRepository from "../src/classes/RecipeRepository";
 import recipeData from "./data/recipes";
 import usersData from "./data/users";
 import ingredientsData from "./data/ingredients";
-import Recipe from "./classes/Recipe";
+import Recipe from "../src/classes/Recipe";
 console.log(recipeData);
 console.log(usersData);
 console.log(ingredientsData);
@@ -15,10 +15,10 @@ console.log(ingredientsData);
 // 👇🏽 Global variables 👇🏽
 let recipeRepo = new RecipeRepository(recipeData)
 
-console.log('recipeRepo: ', recipeRepo)
-console.log('Recipe tags: ', recipeRepo.recipes.tag)
+// console.log('recipeRepo: ', recipeRepo)
+// console.log('Recipe tags: ', recipeRepo.recipes.tag)
 
-console.log(recipeRepo)
+// console.log(recipeRepo)
 
 // let newRecipe = new Recipe(recipeData)
 // console.log(newRecipe)
@@ -35,27 +35,28 @@ console.log(recipeRepo)
 // currentRecipe will be whatever recipe is chosen and will open the entire recipe availabe on all pages except the main page
 // tide to the input box
 
-let allRecipeBtn = document.querySelector("#all-recipe-button");
-let allRecipesView = document.querySelector(".filter-panel");
-let homeBtn = document.querySelector("#home-button");
-let homeView = document.querySelector(".home-view");
-let savedRecipeBtn = document.querySelector("#saved-button");
-let savedRecipesView = document.querySelector(".saved-recipes");
-let pantryBtn = document.querySelector("#pantry-button");
-const breakfastCategory = document.querySelector('.breakfast');//ln 24-breakfast panel on home
-const lunchCategory = document.querySelector('.lunch');
-const dinnerCategory = document.querySelector('.dinner');
+let allRecipeBtn = document.getElementById("all-recipe-button");
+let allRecipesView = document.querySelector("#filter-panel");
+let homeBtn = document.getElementById("home-button");
+let homeView = document.querySelector("#home-view");
+let savedRecipeBtn = document.getElementById("saved-button");
+let savedRecipesView = document.querySelector("#saved-recipes");
+let pantryBtn = document.getElementById("pantry-button");
+const breakfastCategory = document.getElementById("breakfast");//ln 24-breakfast panel on home
+const lunchCategory = document.getElementById('lunch');
+const dinnerCategory = document.getElementById('dinner');
 
 // 👇🏽 Event Handlers & Functions 👇🏽
 console.log("Hello world");
 // window.addEventListener("load", homeView);
-breakfastCategory.addEventListener("click", recipeByCategory);//filter by recipe tag
-lunchCategory.addEventListener("click", recipeByCategory);
-dinnerCategory.addEventListener("click", recipeByCategory);
+// button => button.addEventListener('click', event => this.method1(event, button))
+breakfastCategory.addEventListener("click", recipeByCategory('breakfast'));
+lunchCategory.addEventListener("click", recipeByCategory('lunch'));
+dinnerCategory.addEventListener("click", recipeByCategory('dinner'));
 allRecipeBtn.addEventListener("click", showAllRecipes);
 homeBtn.addEventListener("click", showHomeScreen);
 savedRecipeBtn.addEventListener("click", showSavedRecipes);
-pantryBtn.addEventListener("click", showPantry)
+pantryBtn.addEventListener("click", showPantry);
 
 // allRecipes.addEventListener("click", functionAll);
 // lunchRecipes.addEventListener("click", functionLunch);
@@ -82,6 +83,18 @@ function showHomeScreen() {
   const showElements = [homeView, allRecipeBtn, savedRecipeBtn];
   hideElements.forEach(element => element.classList.add("hidden"));
   showElements.forEach(element => element.classList.remove("hidden"));
+homeView.innerHTML += `<button class="home-category-panel" id="breakfast">
+        <h2>Breakfast</h2>
+      <img src="${recipeRepo.filterTag('breakfast').filtered[0].image}" alt="breakfastPic" width="500" height="600">
+      </button>
+      <section class="home-category-panel" id="lunch">
+        <h2>Lunch</h2>
+        <src>${recipeByCategory('lunch').image}</src>
+      </section>
+      <section class="home-category-panel" id="dinner">
+        <h2>Dinner</h2>
+        <src>${recipeRepo.filterByTag('dinner').filtered[0].image}</src>
+      </section>`
 }
 
 // 👇🏽 Filter recipes by tag
@@ -91,6 +104,7 @@ function recipeByCategory(tag) {
     recipeRepo.filterTag(tag)
     return recipeRepo.filtered 
 };
+recipeByCategory();
 console.log('recipeByCategory(): ', recipeByCategory('dinner'))
 
 function showSavedRecipes() {

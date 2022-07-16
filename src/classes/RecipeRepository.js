@@ -9,9 +9,7 @@ class RecipeRepository {
       return recipe.tags.includes(tag);
     });
     this.filtered.push(recipes)
-    console.log(this.filtered)
-    console.log(recipes)
-    return recipes;
+    return this.filtered
   }
   filterName(name) {
     const recipe = this.recipes.find((value) => {
