@@ -107,7 +107,7 @@ describe("RecipeRepository", () => {
   });
 
   it("Should be able to filter by tag", () => {
-    expect(recipeRepository.filterTag("sauce")).to.deep.equal(recipeData[1]);
+    expect(recipeRepository.filterTag("sauce")).to.deep.equal([recipeData[1]]);
   });
 
   it("Should be able to filter by name", () => {
