@@ -154,6 +154,7 @@ describe("User", () => {
     expect(user1.toCook[0]).to.be.an("object");
   });
 
+  
   it("should delete an object from the array of recipes", () => {
     user1.recipeToCook(recipe1);
     expect(user1.toCook.length).to.equal(1);

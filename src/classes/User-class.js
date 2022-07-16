@@ -14,6 +14,7 @@ class User {
   removeRecipeToCook(recipe) {
     return this.toCook.pop(recipe)
   }
+  
 }
 
 export default User;
