@@ -14,7 +14,9 @@ console.log(ingredientsData);
 
 // 👇🏽 Global variables 👇🏽
 let recipeRepo = new RecipeRepository(recipeData)
-console.log(recipeRepo)
+console.log('recipeRepo: ', recipeRepo)
+console.log('Recipe tags: ', recipeRepo.recipes.tag)
+
 // let newRecipe = new Recipe(recipeData)
 // console.log(newRecipe)
 // console.log(recipeRepo.filterTag('breakfast'))
@@ -33,14 +35,18 @@ console.log(recipeRepo)
 // const category = document.getElementById();
 // const home = document.getElementById();
 // const pantry = document.getElementById();
-const breakfastRecipes = document.getElementById('breakfast');//ln 24-breakfast panel on home
+const breakfastCategory = document.querySelector('.breakfast');//ln 24-breakfast panel on home
+const lunchCategory = document.querySelector('.lunch');
+const dinnerCategory = document.querySelector('.dinner');
+
 // const lunchRecipes = document.getElementById();
 // const dinnerRecipes = document.getElementById();
 
 //👇🏽 Event listeners 👇🏽
 // window.addEventListener("load", homeView);
-breakfastRecipes.addEventListener("click", recipeRepo.filterTag('lunch'));//filter recipes for breakfast tag
-
+breakfastCategory.addEventListener("click", recipeByCategory);//filter by recipe tag
+lunchCategory.addEventListener("click", recipeByCategory);
+dinnerCategory.addEventListener("click", recipeByCategory);
 // allRecipes.addEventListener("click", functionAll);
 // lunchRecipes.addEventListener("click", functionLunch);
 // dinnerRecipes.addEventListener("click", functionDinner);
@@ -72,17 +78,14 @@ console.log("Hello world");
 // }
 
 // 👇🏽 Filter recipes by tag
-// function findBreakfastCategory() {
+function recipeByCategory(tag) {
+    //if receipeData.tag includes desired tag, then push recipe to recipeRepo.filtered (empty array in recipeRepository)
+    
+    recipeRepo.filterTag(tag)
+    return recipeRepo.filtered 
+};
+console.log('recipeByCategory(): ', recipeByCategory('dinner'))
 
-//     recipeRepo.filterTag('lunch')
-//     return recipeRepo.filtered 
-
-// };
-
-// console.log(findBreakfastCategory())
-
-
-// console.log(findBreakfastCategory())
 
 
 

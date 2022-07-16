@@ -4,6 +4,10 @@ class RecipeRepository {
     this.filtered = []
     // One class to get you started!
   }
+
+  //we need to pull the in an instantiation of Recipe class
+  
+
   filterTag(tag) {
     const recipes = this.recipes.filter((recipe) => {
       return recipe.tags.includes(tag);
