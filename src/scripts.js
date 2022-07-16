@@ -14,8 +14,11 @@ console.log(ingredientsData);
 
 // 👇🏽 Global variables 👇🏽
 let recipeRepo = new RecipeRepository(recipeData)
+
 console.log('recipeRepo: ', recipeRepo)
 console.log('Recipe tags: ', recipeRepo.recipes.tag)
+
+console.log(recipeRepo)
 
 // let newRecipe = new Recipe(recipeData)
 // console.log(newRecipe)
@@ -24,29 +27,36 @@ console.log('Recipe tags: ', recipeRepo.recipes.tag)
 // Create a list of recipe names
 // Click on a recipe
 // Display title, directions, ingredients needed and total cost, picture
-// const allRecipes = document.getElementById();
-// //allRecipes is the main recipe button on the main page
-// const allRecipeGrid = document.querySelector(".")
-// const recipeByIngredient = document.getElementById(); //recipeByIngredient is available when we click on the pantry button
-// const savedRecipes = document.getElementById(); // saveRecipe will be on the main page and will take you to saved recipes
-// const savedRecipeGrid = document.querySelector(".recipe-tile-grid")
-// const currentRecipe = document.getElementById(); // currentRecipe will be whatever recipe is chosen and will open the entire recipe availabe on all pages except the main page
-// const recipeByName = document.getElementById(); // tide to the input box
-// const category = document.getElementById();
-// const home = document.getElementById();
-// const pantry = document.getElementById();
+
+
+//allRecipes is the main recipe button on the main page
+//recipeByIngredient is available when we click on the pantry button
+// saveRecipe will be on the main page and will take you to saved recipes
+// currentRecipe will be whatever recipe is chosen and will open the entire recipe availabe on all pages except the main page
+// tide to the input box
+
+let allRecipeBtn = document.querySelector("#all-recipe-button");
+let allRecipesView = document.querySelector(".filter-panel");
+let homeBtn = document.querySelector("#home-button");
+let homeView = document.querySelector(".home-view");
+let savedRecipeBtn = document.querySelector("#saved-button");
+let savedRecipesView = document.querySelector(".saved-recipes");
+let pantryBtn = document.querySelector("#pantry-button");
 const breakfastCategory = document.querySelector('.breakfast');//ln 24-breakfast panel on home
 const lunchCategory = document.querySelector('.lunch');
 const dinnerCategory = document.querySelector('.dinner');
 
-// const lunchRecipes = document.getElementById();
-// const dinnerRecipes = document.getElementById();
-
-//👇🏽 Event listeners 👇🏽
+// 👇🏽 Event Handlers & Functions 👇🏽
+console.log("Hello world");
 // window.addEventListener("load", homeView);
 breakfastCategory.addEventListener("click", recipeByCategory);//filter by recipe tag
 lunchCategory.addEventListener("click", recipeByCategory);
 dinnerCategory.addEventListener("click", recipeByCategory);
+allRecipeBtn.addEventListener("click", showAllRecipes);
+homeBtn.addEventListener("click", showHomeScreen);
+savedRecipeBtn.addEventListener("click", showSavedRecipes);
+pantryBtn.addEventListener("click", showPantry)
+
 // allRecipes.addEventListener("click", functionAll);
 // lunchRecipes.addEventListener("click", functionLunch);
 // dinnerRecipes.addEventListener("click", functionDinner);
@@ -59,23 +69,20 @@ dinnerCategory.addEventListener("click", recipeByCategory);
 // home.addEventListener("click", functionCategory);//home button
 // pantry.addEventListener("click", functionPantry);
 
-// 👇🏽 Event Handlers & Functions 👇🏽
-console.log("Hello world");
 
-// function viewElement(element) {
-//   element.classList.remove("hidden");
-// }
+function showAllRecipes() {
+  const hideElements = [homeView, allRecipeBtn, savedRecipesView];
+  const showElements = [allRecipesView, homeBtn, savedRecipeBtn];
+  hideElements.forEach(element => element.classList.add("hidden"));
+  showElements.forEach(element => element.classList.remove("hidden"));
+}
 
-// function hideElement(element) {
-//   element.classList.add("hidden");
-// }
-
-// 👇🏽 Homeview 👇🏽
-// function homeView() {
-//   hideElement(filterPanel);
-//   hideElement(recipeTileGrid);
-//   hideElement(savedRecipes);
-// }
+function showHomeScreen() {
+  const hideElements = [allRecipesView, savedRecipesView, homeBtn];
+  const showElements = [homeView, allRecipeBtn, savedRecipeBtn];
+  hideElements.forEach(element => element.classList.add("hidden"));
+  showElements.forEach(element => element.classList.remove("hidden"));
+}
 
 // 👇🏽 Filter recipes by tag
 function recipeByCategory(tag) {
@@ -85,6 +92,17 @@ function recipeByCategory(tag) {
     return recipeRepo.filtered 
 };
 console.log('recipeByCategory(): ', recipeByCategory('dinner'))
+
+function showSavedRecipes() {
+  const hideElements = [homeView, allRecipesView, savedRecipeBtn];
+  const showElements = [savedRecipesView, homeBtn, allRecipeBtn];
+  hideElements.forEach(element => element.classList.add("hidden"));
+  showElements.forEach(element => element.classList.remove("hidden"));
+}
+
+function showPantry() {
+    window.alert("This page is under construction!");
+}
 
 
 
