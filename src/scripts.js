@@ -2,12 +2,13 @@ import "./styles.css";
 import apiCalls from "./apiCalls";
 // An example of how you tell webpack to use an image (also need to link to it in the index.html)
 import "./images/turing-logo.png";
-import RecipeRepository from "../src/classes/RecipeRepository";
-import Recipe from "../src/classes/Recipe";
-import User from "../src/classes/User-class";
-//import "../data/users.js";
+// import RecipeRepository from "../src/classes/RecipeRepository";
 import recipeData from "./data/recipes";
+import usersData from "./data/users";
+import ingredientsData from "./data/ingredients";
 console.log(recipeData);
+console.log(usersData);
+console.log(ingredientsData);
 //import "../data/ingredients.js";
 
 //Click on the allRecipes button
