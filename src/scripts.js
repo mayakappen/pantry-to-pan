@@ -2,15 +2,22 @@ import "./styles.css";
 import apiCalls from "./apiCalls";
 // An example of how you tell webpack to use an image (also need to link to it in the index.html)
 import "./images/turing-logo.png";
-// import RecipeRepository from "../src/classes/RecipeRepository";
+import RecipeRepository from "../src/classes/RecipeRepository";
 import recipeData from "./data/recipes";
 import usersData from "./data/users";
 import ingredientsData from "./data/ingredients";
+import Recipe from "./classes/Recipe";
 console.log(recipeData);
 console.log(usersData);
 console.log(ingredientsData);
 //import "../data/ingredients.js";
 
+// 👇🏽 Global variables 👇🏽
+let recipeRepo = new RecipeRepository(recipeData)
+console.log(recipeRepo)
+// let newRecipe = new Recipe(recipeData)
+// console.log(newRecipe)
+// console.log(recipeRepo.filterTag('breakfast'))
 //Click on the allRecipes button
 // Create a list of recipe names
 // Click on a recipe
@@ -36,6 +43,23 @@ pantryBtn.addEventListener("click", showPantry)
 
 
 
+//👇🏽 Event listeners 👇🏽
+// window.addEventListener("load", homeView);
+breakfastRecipes.addEventListener("click", recipeRepo.filterTag('lunch'));//filter recipes for breakfast tag
+
+// allRecipes.addEventListener("click", functionAll);
+// lunchRecipes.addEventListener("click", functionLunch);
+// dinnerRecipes.addEventListener("click", functionDinner);
+// recipeByIngredient.addEventListener("click", functionrecipeByIngredient);
+// savedRecipes.addEventListener("click", functionSavedRecipes);
+// currentRecipe.addEventListener("click", functionCurrentRecipe);
+// recipeByName.addEventListener("click", functionRecipeByName);
+// recipeByCategory.addEventListener("click", functionRecipeByCategory);
+// category.addEventListener("click", functioncurrentRecipe);
+// home.addEventListener("click", functionCategory);//home button
+// pantry.addEventListener("click", functionPantry);
+
+// 👇🏽 Event Handlers & Functions 👇🏽
 console.log("Hello world");
 
 function showAllRecipes() {
@@ -62,6 +86,7 @@ function showSavedRecipes() {
 function showPantry() {
     window.alert("This page is under construction!");
 }
+
 
 // As a user, I should be able to view a list of all recipes.
 // click on button
