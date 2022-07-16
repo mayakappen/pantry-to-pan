@@ -14,7 +14,8 @@ console.log(ingredientsData);
 
 // 👇🏽 Global variables 👇🏽
 let recipeRepo = new RecipeRepository(recipeData)
-let newRecipe = new Recipe(recipeData)
+console.log(recipeRepo)
+// let newRecipe = new Recipe(recipeData)
 // console.log(newRecipe)
 // console.log(recipeRepo.filterTag('breakfast'))
 //Click on the allRecipes button
@@ -38,7 +39,7 @@ const breakfastRecipes = document.getElementById('breakfast');//ln 24-breakfast 
 
 //👇🏽 Event listeners 👇🏽
 // window.addEventListener("load", homeView);
-breakfastRecipes.addEventListener("click", findBreakfastCategory);//filter recipes for breakfast tag
+breakfastRecipes.addEventListener("click", recipeRepo.filterTag('lunch'));//filter recipes for breakfast tag
 
 // allRecipes.addEventListener("click", functionAll);
 // lunchRecipes.addEventListener("click", functionLunch);
@@ -71,11 +72,16 @@ console.log("Hello world");
 // }
 
 // 👇🏽 Filter recipes by tag
-function findBreakfastCategory() {
-    recipeRepo.filterTag('breakfast')
+// function findBreakfastCategory() {
 
-    return recipeRepo.filter
-};
+//     recipeRepo.filterTag('lunch')
+//     return recipeRepo.filtered 
+
+// };
+
+// console.log(findBreakfastCategory())
+
+
 // console.log(findBreakfastCategory())
 
 
