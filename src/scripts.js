@@ -14,9 +14,12 @@ console.log(recipeData);
 // Create a list of recipe names
 // Click on a recipe
 // Display title, directions, ingredients needed and total cost, picture
-const allRecipes = document.getElementById(); //allRecipes is the main recipe button on the main page
+const allRecipes = document.getElementById();
+//allRecipes is the main recipe button on the main page
+const allRecipeGrid = document.querySelector(".")
 const recipeByIngredient = document.getElementById(); //recipeByIngredient is available when we click on the pantry button
 const savedRecipes = document.getElementById(); // saveRecipe will be on the main page and will take you to saved recipes
+const savedRecipeGrid = document.querySelector(".recipe-tile-grid")
 const currentRecipe = document.getElementById(); // currentRecipe will be whatever recipe is chosen and will open the entire recipe availabe on all pages except the main page
 const recipeByName = document.getElementById(); // tide to the input box
 const category = document.getElementById();
@@ -80,3 +83,24 @@ function homeView() {
 // hide main page
 // show grid of saved recipes
 // functionality to save or delete, similar to book covers
+
+//Make a class for saved recipes?
+//Add save recipe button to recipe card.
+//Save button adds save class to recipe card.
+//Removes save button and adds delete button.
+//If recipe card id contains "save" push to array.
+//Delete button will search saved array for recipe id and remove it.
+//Update saved grid
+
+//let recipeCard = new Recipe(recipeInfo);
+//event listener
+/*
+let recipeTile = document.querySelector(".recipe-tile") - line 91;
+function addToCook(recipe) {
+    let newRecipeCard = <section class="recipe-tile">
+          <h3>${recipeCard.name}</h3>
+          <src="">${recipeCard.image}</src>
+        </section>;
+    savedRecipeGrid.innerHTML += newRecipeCard;
+    return newRecipeCard;
+*/
