@@ -22,20 +22,26 @@ console.log(recipeRepo)
 // Create a list of recipe names
 // Click on a recipe
 // Display title, directions, ingredients needed and total cost, picture
-// const allRecipes = document.getElementById();
-// //allRecipes is the main recipe button on the main page
-// const allRecipeGrid = document.querySelector(".")
-// const recipeByIngredient = document.getElementById(); //recipeByIngredient is available when we click on the pantry button
-// const savedRecipes = document.getElementById(); // saveRecipe will be on the main page and will take you to saved recipes
-// const savedRecipeGrid = document.querySelector(".recipe-tile-grid")
-// const currentRecipe = document.getElementById(); // currentRecipe will be whatever recipe is chosen and will open the entire recipe availabe on all pages except the main page
-// const recipeByName = document.getElementById(); // tide to the input box
-// const category = document.getElementById();
-// const home = document.getElementById();
-// const pantry = document.getElementById();
-const breakfastRecipes = document.getElementById('breakfast');//ln 24-breakfast panel on home
-// const lunchRecipes = document.getElementById();
-// const dinnerRecipes = document.getElementById();
+//allRecipes is the main recipe button on the main page
+//recipeByIngredient is available when we click on the pantry button
+// saveRecipe will be on the main page and will take you to saved recipes
+// currentRecipe will be whatever recipe is chosen and will open the entire recipe availabe on all pages except the main page
+// tide to the input box
+
+let allRecipeBtn = document.querySelector("#all-recipe-button");
+let allRecipesView = document.querySelector(".filter-panel");
+let homeBtn = document.querySelector("#home-button");
+let homeView = document.querySelector(".home-view");
+let savedRecipeBtn = document.querySelector("#saved-button");
+let savedRecipesView = document.querySelector(".saved-recipes");
+let pantryBtn = document.querySelector("#pantry-button");
+
+allRecipeBtn.addEventListener("click", showAllRecipes);
+homeBtn.addEventListener("click", showHomeScreen);
+savedRecipeBtn.addEventListener("click", showSavedRecipes);
+pantryBtn.addEventListener("click", showPantry)
+
+
 
 //👇🏽 Event listeners 👇🏽
 // window.addEventListener("load", homeView);
@@ -56,34 +62,30 @@ breakfastRecipes.addEventListener("click", recipeRepo.filterTag('lunch'));//filt
 // 👇🏽 Event Handlers & Functions 👇🏽
 console.log("Hello world");
 
-// function viewElement(element) {
-//   element.classList.remove("hidden");
-// }
+function showAllRecipes() {
+  const hideElements = [homeView, allRecipeBtn, savedRecipesView];
+  const showElements = [allRecipesView, homeBtn, savedRecipeBtn];
+  hideElements.forEach(element => element.classList.add("hidden"));
+  showElements.forEach(element => element.classList.remove("hidden"));
+}
 
-// function hideElement(element) {
-//   element.classList.add("hidden");
-// }
+function showHomeScreen() {
+  const hideElements = [allRecipesView, savedRecipesView, homeBtn];
+  const showElements = [homeView, allRecipeBtn, savedRecipeBtn];
+  hideElements.forEach(element => element.classList.add("hidden"));
+  showElements.forEach(element => element.classList.remove("hidden"));
+}
 
-// 👇🏽 Homeview 👇🏽
-// function homeView() {
-//   hideElement(filterPanel);
-//   hideElement(recipeTileGrid);
-//   hideElement(savedRecipes);
-// }
+function showSavedRecipes() {
+  const hideElements = [homeView, allRecipesView, savedRecipeBtn];
+  const showElements = [savedRecipesView, homeBtn, allRecipeBtn];
+  hideElements.forEach(element => element.classList.add("hidden"));
+  showElements.forEach(element => element.classList.remove("hidden"));
+}
 
-// 👇🏽 Filter recipes by tag
-// function findBreakfastCategory() {
-
-//     recipeRepo.filterTag('lunch')
-//     return recipeRepo.filtered 
-
-// };
-
-// console.log(findBreakfastCategory())
-
-
-// console.log(findBreakfastCategory())
-
+function showPantry() {
+    window.alert("This page is under construction!");
+}
 
 
 // As a user, I should be able to view a list of all recipes.
