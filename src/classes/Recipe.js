@@ -10,6 +10,7 @@ class Recipe {
   }
 
   getIngredients(ingredients) {
+
   const ingredientIds = this.ingredients.map(ingredient => {
     return ingredient.id;
   });
@@ -23,6 +24,7 @@ class Recipe {
   });
   const ingredientNames = this.ingredientsNeeded.map(ingredient => ingredient.name)
   return ingredientNames
+
   }
 
   getInstructions() {
