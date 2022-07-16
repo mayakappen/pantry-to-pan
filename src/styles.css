@@ -1,13 +1,19 @@
 body {
   height: 100vh;
   width: 100vw;
+  display: flex;
+  flex-direction: column;
 }
 
 * {
   border: solid 2px red;
 }
 
-.search-options {
+.hidden {
+  display: none!important;
+}
+
+.page-header {
   height: 30%;
   width: 100%;
   display: flex;
@@ -24,9 +30,10 @@ body {
 
 h1 {
   font-size: 36px;
+  text-align: center;
 }
 
-.filter-boxes {
+.button-panel {
   height: 20%;
   display: flex;
   justify-content: space-around;
@@ -37,11 +44,13 @@ button {
   height: 50%;
 }
 
-.slider-boxes {
+.home-view {
   height: 70%;
-  display: flex;
-  align-items: center;
-  padding-left: 5%;
+    display: flex;
+    align-items: center;
+    padding-left: 5%;
+    flex-direction: row;
+    justify-content: space-around;
 }
 
 .recipe-box {
@@ -51,6 +60,50 @@ button {
   flex-direction: column;
 }
 
-h2 {
+h2, h3, h4 {
   text-align: center;
+}
+
+.filter-screen {
+  display: flex;
+  height: 80%;
+}
+
+.selection-boxes {
+  display: flex;
+  flex-direction: column;
+  width: 15%;
+}
+
+.image-grid {
+  padding: 15px;
+  display: flex;
+  flex-direction: column;
+  width: 85%;
+}
+
+.recipe-card{
+  width: 20%;
+  height: 20%;
+  display: flex;
+  flex-direction: column;
+}
+
+.saved-recipes {
+  display: flex;
+  height: 80%;
+}
+
+.ingredients-needed {
+  display: flex;
+  flex-direction: column;
+  width: 15%;
+}
+
+.recipe-page {
+  padding: 5%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 85%;
 }

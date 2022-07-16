@@ -10,21 +10,21 @@ class Recipe {
   }
 
   getIngredients(ingredients) {
-    const ingredientIds = this.ingredients.map(ingredient => {
-      return ingredient.id;
-    });
-    const filteredIngredients = ingredients.filter(ingredient => {
-      if (ingredientIds.includes(ingredient.id)) {
-        return ingredient;
-      }
-    });
-    filteredIngredients.forEach((ingredient) => {
-      this.ingredientsNeeded.push(ingredient);
-    });
-    const ingredientNames = this.ingredientsNeeded.map(
-      ingredient => ingredient.name
-    );
-    return ingredientNames;
+
+  const ingredientIds = this.ingredients.map(ingredient => {
+    return ingredient.id;
+  });
+  const filteredIngredients = ingredients.filter(ingredient => {
+    if (ingredientIds.includes(ingredient.id)) {
+      return ingredient;
+    };
+  });
+  filteredIngredients.forEach(ingredient => {
+    this.ingredientsNeeded.push(ingredient);
+  });
+  const ingredientNames = this.ingredientsNeeded.map(ingredient => ingredient.name)
+  return ingredientNames
+
   }
 
   getInstructions() {
