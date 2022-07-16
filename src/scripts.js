@@ -3,11 +3,12 @@ import apiCalls from "./apiCalls";
 // An example of how you tell webpack to use an image (also need to link to it in the index.html)
 import "./images/turing-logo.png";
 import RecipeRepository from "../src/classes/RecipeRepository";
-import Recipe from "./Recipe";
+import Recipe from "../src/classes/Recipe";
 import User from "../src/classes/User-class";
-import "../data/users.js";
-import "../data/recipes.js";
-import "../data/ingredients.js";
+//import "../data/users.js";
+import recipeData from "./data/recipes";
+console.log(recipeData);
+//import "../data/ingredients.js";
 
 //Click on the allRecipes button
 // Create a list of recipe names
@@ -25,6 +26,7 @@ const breakfastRecipe = document.getElementById();
 const lunchRecipes = document.getElementById();
 const dinnerRecipes = document.getElementById();
 
+window.addEventListener("load", homeView);
 allRecipes.addEventListener("click", functionAll);
 breakfastRecipe.addEventListener("click", functionBreakfast);
 lunchRecipes.addEventListener("click", functionLunch);
@@ -39,6 +41,20 @@ home.addEventListener("click", functionCategory);
 pantry.addEventListener("click", functionPantry);
 
 console.log("Hello world");
+
+function viewElement(element) {
+  element.classList.remove("hidden");
+}
+
+function hideElement(element) {
+  element.classList.add("hidden");
+}
+
+function homeView() {
+  hideElement(filterPanel);
+  hideElement(recipeTileGrid);
+  hideElement(savedRecipes);
+}
 
 // As a user, I should be able to view a list of all recipes.
 // click on button

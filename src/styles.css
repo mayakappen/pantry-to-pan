@@ -1,6 +1,8 @@
 body {
   height: 100vh;
   width: 100vw;
+  display: flex;
+  flex-direction: column;
 }
 
 * {
@@ -11,7 +13,7 @@ body {
   display: none!important;
 }
 
-.search-options {
+.page-header {
   height: 30%;
   width: 100%;
   display: flex;
@@ -31,7 +33,7 @@ h1 {
   text-align: center;
 }
 
-.filter-boxes {
+.button-panel {
   height: 20%;
   display: flex;
   justify-content: space-around;
@@ -42,11 +44,13 @@ button {
   height: 50%;
 }
 
-.slider-boxes {
+.home-view {
   height: 70%;
-  display: flex;
-  align-items: center;
-  padding-left: 5%;
+    display: flex;
+    align-items: center;
+    padding-left: 5%;
+    flex-direction: row;
+    justify-content: space-around;
 }
 
 .recipe-box {
