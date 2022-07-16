@@ -14,7 +14,12 @@ console.log(ingredientsData);
 
 // 👇🏽 Global variables 👇🏽
 let recipeRepo = new RecipeRepository(recipeData)
+
+console.log('recipeRepo: ', recipeRepo)
+console.log('Recipe tags: ', recipeRepo.recipes.tag)
+
 console.log(recipeRepo)
+
 // let newRecipe = new Recipe(recipeData)
 // console.log(newRecipe)
 // console.log(recipeRepo.filterTag('breakfast'))
@@ -22,6 +27,8 @@ console.log(recipeRepo)
 // Create a list of recipe names
 // Click on a recipe
 // Display title, directions, ingredients needed and total cost, picture
+
+
 //allRecipes is the main recipe button on the main page
 //recipeByIngredient is available when we click on the pantry button
 // saveRecipe will be on the main page and will take you to saved recipes
@@ -35,17 +42,20 @@ let homeView = document.querySelector(".home-view");
 let savedRecipeBtn = document.querySelector("#saved-button");
 let savedRecipesView = document.querySelector(".saved-recipes");
 let pantryBtn = document.querySelector("#pantry-button");
+const breakfastCategory = document.querySelector('.breakfast');//ln 24-breakfast panel on home
+const lunchCategory = document.querySelector('.lunch');
+const dinnerCategory = document.querySelector('.dinner');
 
+// 👇🏽 Event Handlers & Functions 👇🏽
+console.log("Hello world");
+// window.addEventListener("load", homeView);
+breakfastCategory.addEventListener("click", recipeByCategory);//filter by recipe tag
+lunchCategory.addEventListener("click", recipeByCategory);
+dinnerCategory.addEventListener("click", recipeByCategory);
 allRecipeBtn.addEventListener("click", showAllRecipes);
 homeBtn.addEventListener("click", showHomeScreen);
 savedRecipeBtn.addEventListener("click", showSavedRecipes);
 pantryBtn.addEventListener("click", showPantry)
-
-
-
-//👇🏽 Event listeners 👇🏽
-// window.addEventListener("load", homeView);
-breakfastRecipes.addEventListener("click", recipeRepo.filterTag('lunch'));//filter recipes for breakfast tag
 
 // allRecipes.addEventListener("click", functionAll);
 // lunchRecipes.addEventListener("click", functionLunch);
@@ -59,8 +69,6 @@ breakfastRecipes.addEventListener("click", recipeRepo.filterTag('lunch'));//filt
 // home.addEventListener("click", functionCategory);//home button
 // pantry.addEventListener("click", functionPantry);
 
-// 👇🏽 Event Handlers & Functions 👇🏽
-console.log("Hello world");
 
 function showAllRecipes() {
   const hideElements = [homeView, allRecipeBtn, savedRecipesView];
@@ -76,6 +84,15 @@ function showHomeScreen() {
   showElements.forEach(element => element.classList.remove("hidden"));
 }
 
+// 👇🏽 Filter recipes by tag
+function recipeByCategory(tag) {
+    //if receipeData.tag includes desired tag, then push recipe to recipeRepo.filtered (empty array in recipeRepository)
+    
+    recipeRepo.filterTag(tag)
+    return recipeRepo.filtered 
+};
+console.log('recipeByCategory(): ', recipeByCategory('dinner'))
+
 function showSavedRecipes() {
   const hideElements = [homeView, allRecipesView, savedRecipeBtn];
   const showElements = [savedRecipesView, homeBtn, allRecipeBtn];
@@ -86,6 +103,8 @@ function showSavedRecipes() {
 function showPantry() {
     window.alert("This page is under construction!");
 }
+
+
 
 
 // As a user, I should be able to view a list of all recipes.
