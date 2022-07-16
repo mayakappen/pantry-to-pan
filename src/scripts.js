@@ -15,49 +15,52 @@ console.log(ingredientsData);
 // Create a list of recipe names
 // Click on a recipe
 // Display title, directions, ingredients needed and total cost, picture
-const allRecipes = document.getElementById();
 //allRecipes is the main recipe button on the main page
-const allRecipeGrid = document.querySelector(".")
-const recipeByIngredient = document.getElementById(); //recipeByIngredient is available when we click on the pantry button
-const savedRecipes = document.getElementById(); // saveRecipe will be on the main page and will take you to saved recipes
-const savedRecipeGrid = document.querySelector(".recipe-tile-grid")
-const currentRecipe = document.getElementById(); // currentRecipe will be whatever recipe is chosen and will open the entire recipe availabe on all pages except the main page
-const recipeByName = document.getElementById(); // tide to the input box
-const category = document.getElementById();
-const home = document.getElementById();
-const pantry = document.getElementById();
-const breakfastRecipe = document.getElementById();
-const lunchRecipes = document.getElementById();
-const dinnerRecipes = document.getElementById();
+//recipeByIngredient is available when we click on the pantry button
+// saveRecipe will be on the main page and will take you to saved recipes
+// currentRecipe will be whatever recipe is chosen and will open the entire recipe availabe on all pages except the main page
+// tide to the input box
 
-window.addEventListener("load", homeView);
-allRecipes.addEventListener("click", functionAll);
-breakfastRecipe.addEventListener("click", functionBreakfast);
-lunchRecipes.addEventListener("click", functionLunch);
-dinnerRecipes.addEventListener("click", functionDinner);
-recipeByIngredient.addEventListener("click", functionrecipeByIngredient);
-savedRecipes.addEventListener("click", functionSavedRecipes);
-currentRecipe.addEventListener("click", functionCurrentRecipe);
-recipeByName.addEventListener("click", functionRecipeByName);
-recipeByCategory.addEventListener("click", functionRecipeByCategory);
-category.addEventListener("click", functioncurrentRecipe);
-home.addEventListener("click", functionCategory);
-pantry.addEventListener("click", functionPantry);
+let allRecipeBtn = document.querySelector("#all-recipe-button");
+let allRecipesView = document.querySelector(".filter-panel");
+let homeBtn = document.querySelector("#home-button");
+let homeView = document.querySelector(".home-view");
+let savedRecipeBtn = document.querySelector("#saved-button");
+let savedRecipesView = document.querySelector(".saved-recipes");
+let pantryBtn = document.querySelector("#pantry-button");
+
+allRecipeBtn.addEventListener("click", showAllRecipes);
+homeBtn.addEventListener("click", showHomeScreen);
+savedRecipeBtn.addEventListener("click", showSavedRecipes);
+pantryBtn.addEventListener("click", showPantry)
+
+
 
 console.log("Hello world");
 
-function viewElement(element) {
-  element.classList.remove("hidden");
+function showAllRecipes() {
+  const hideElements = [homeView, allRecipeBtn, savedRecipesView];
+  const showElements = [allRecipesView, homeBtn, savedRecipeBtn];
+  hideElements.forEach(element => element.classList.add("hidden"));
+  showElements.forEach(element => element.classList.remove("hidden"));
 }
 
-function hideElement(element) {
-  element.classList.add("hidden");
+function showHomeScreen() {
+  const hideElements = [allRecipesView, savedRecipesView, homeBtn];
+  const showElements = [homeView, allRecipeBtn, savedRecipeBtn];
+  hideElements.forEach(element => element.classList.add("hidden"));
+  showElements.forEach(element => element.classList.remove("hidden"));
 }
 
-function homeView() {
-  hideElement(filterPanel);
-  hideElement(recipeTileGrid);
-  hideElement(savedRecipes);
+function showSavedRecipes() {
+  const hideElements = [homeView, allRecipesView, savedRecipeBtn];
+  const showElements = [savedRecipesView, homeBtn, allRecipeBtn];
+  hideElements.forEach(element => element.classList.add("hidden"));
+  showElements.forEach(element => element.classList.remove("hidden"));
+}
+
+function showPantry() {
+    window.alert("This page is under construction!");
 }
 
 // As a user, I should be able to view a list of all recipes.
