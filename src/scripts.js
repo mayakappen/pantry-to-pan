@@ -14,9 +14,9 @@ console.log(ingredientsData);
 
 // 👇🏽 Global variables 👇🏽
 let recipeRepo = new RecipeRepository(recipeData)
-let newRecipe = new Recipe(recipeData)
-// console.log(newRecipe)
-// console.log(recipeRepo.filterTag('breakfast'))
+let newRecipe = new Recipe(recipeData[0])
+console.log('newRecipe: ', newRecipe)
+console.log(recipeRepo.filterTag('breakfast'))
 //Click on the allRecipes button
 // Create a list of recipe names
 // Click on a recipe
