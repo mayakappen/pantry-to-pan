@@ -5,6 +5,7 @@ import Recipe from "../src/classes/Recipe";
 describe("RecipeRepository", () => {
   let recipeData; //recipe.js
   let recipeRepository;
+  let newRecipe;
 
   beforeEach(function () {
     recipeData = [ //sample recipeData
@@ -91,7 +92,7 @@ describe("RecipeRepository", () => {
       },
     ];
     recipeRepository = new RecipeRepository(recipeData);
-
+    newRecipe = new Recipe()
   });
 
   it("Should be a function", () => {
