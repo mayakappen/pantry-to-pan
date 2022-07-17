@@ -54,7 +54,7 @@ allRecipeBtn.addEventListener("click", showAllRecipes);
 homeBtn.addEventListener("click", showHomeScreen);
 savedRecipeBtn.addEventListener("click", showSavedRecipes);
 pantryBtn.addEventListener("click", showPantry);
-tileImage.addEventListener("click", viewRecipe);
+recipeTile.addEventListener("click", viewRecipe);
 //recipePage.addEventListener("click", viewRecipe);
 
 // 👇🏽 Filter recipes by tag
@@ -132,34 +132,31 @@ function addRecipeCards() {
 }
 addRecipeCards(recipeData);
 
-function viewRecipe(event) {
-  // console.log("hiiiiiiii");
-  //console.log("recipe9797", recipe);
+function viewRecipe(ev) {
   //console.log("recipeData", recipeData[1].id);
   // console.log("recipeRepo", recipeRepo.recipes);
   const hideElements = [homeView, allRecipesView, savedRecipesView];
   const showElements = [homeBtn, allRecipeBtn, savedRecipeBtn, recipePage];
   hideElements.forEach((element) => element.classList.add("hidden"));
   showElements.forEach((element) => element.classList.remove("hidden"));
-  const targetRecipe = document.getElementById(event.target.id);
-  console.log(targetRecipe);
-  const currentRecipe = new Recipe(targetRecipe);
-  currentRecipe.getIngredients(ingredientsData);
-  const singleRecipeInstructions = recipeRepo.recipes.forEach((recipe) => {
-    if (recipeRepo.recipes.id === currentRecipe.id) {
-      recipePage.innerHTML += `<h1>${recipe.name}</h1>
+  const targetRecipeId = document.getElementById(ev.target.id);
+    const singleRecipeInstructions = recipeData.forEach((recipe) => {
+        if (recipe.id == targetRecipeId) {
+        const currentRecipe = new Recipe(ev.target)
+        currentRecipe.getIngredients(ingredientsData);
+        recipePage.innerHTML += `<h1>${recipe.name}</h1>
       <img src="${recipe.image}">
       <h4>${recipe.instructions}</h4>
       <h4>${recipe.ingredientsNeeded}</h4>
       <h4>${recipe.getCost()}</h4>`;
-    }
-    console.log("recipe", recipe.id);
+        }
+        console.log(singleRecipeInstructions)
+        return singleRecipeInstructions
     //console.log("recipedataID", recipeData.id);
   });
   //console.log("jgj", singleRecipeInstructions);
-  return singleRecipeInstructions;
 }
-viewRecipe();
+
 // console.log("recipeCard", recipeCard);
 // console.log(addRecipeCard(recipeData[0]));
 
