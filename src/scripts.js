@@ -122,7 +122,7 @@ function showPantry() {
 
 let recipeCard = new Recipe(recipeData[0]);
 //event listener
-function addRecipeCards(recipes) {
+function addRecipeCards() {
   const allRecipies = recipeRepo.recipes.forEach((recipe) => {
     allRecipeGrid.innerHTML += `<h3>"${recipe.name}"</h3>
     <input type="image" src="${recipe.image}" id="${recipe.id}"/>`;
@@ -133,28 +133,20 @@ function addRecipeCards(recipes) {
 }
 addRecipeCards(recipeData);
 
-function viewRecipe() {
-  const hideElements = [
-    homeView,
-    allRecipesView,
-    homeBtn,
-    allRecipeBtn,
-    savedRecipeBtn,
-    recipePage,
-  ];
-  // const showElements = [homeBtn, allRecipeBtn, savedRecipeBtn, recipePage];
-  hideElements.forEach((element) => element.classList.add("hidden"));
-  // showElements.forEach((element) => element.classList.remove("hidden"));
-  // const targetID = document.getElementById(event.target.id);
-  // const newRecipe = new Recipe(
-  //   recipeData.find((recipe) => targetID === parseInt(recipe.id))
-  // );
-  // newRecipe.getIngredients(recipeData);
-  // console.log(targetID);
-  // return newRecipe;
-  // console.log(recipe);
-  // return recipe;
+function viewRecipe(recipe) {
+  console.log("hiiiiiiii");
+  console.log("recipe.id", recipe);
+  console.log("recipeData", recipeData);
+  console.log("recipeRepo", recipeRepo.recipes);
+  const singleRecipeInstructions = recipeRepo.recipes.forEach((recipe) => {
+    if (recipe.id === recipeData.id) {
+      console.log("recipe", recipe.id);
+    }
+    console.log("recipe", recipe);
+  });
+  return singleRecipeInstructions;
 }
+viewRecipe();
 // console.log("recipeCard", recipeCard);
 // console.log(addRecipeCard(recipeData[0]));
 
