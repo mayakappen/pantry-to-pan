@@ -10,21 +10,21 @@ class Recipe {
   }
 
   getIngredients(ingredients) {
-
-  const ingredientIds = this.ingredients.map(ingredient => {
-    return ingredient.id;
-  });
-  const filteredIngredients = ingredients.filter(ingredient => {
-    if (ingredientIds.includes(ingredient.id)) {
-      return ingredient;
-    };
-  });
-  filteredIngredients.forEach(ingredient => {
-    this.ingredientsNeeded.push(ingredient);
-  });
-  const ingredientNames = this.ingredientsNeeded.map(ingredient => ingredient.name)
-  return ingredientNames
-
+    const ingredientIds = this.ingredients.map((ingredient) => {
+      return ingredient.id;
+    });
+    const filteredIngredients = ingredients.filter((ingredient) => {
+      if (ingredientIds.includes(ingredient.id)) {
+        return ingredient;
+      }
+    });
+    filteredIngredients.forEach((ingredient) => {
+      this.ingredientsNeeded.push(ingredient);
+    });
+    const ingredientNames = this.ingredientsNeeded.map(
+      (ingredient) => ingredient.name
+    );
+    return ingredientNames;
   }
 
   getInstructions() {
@@ -32,11 +32,18 @@ class Recipe {
   }
 
   getCost() {
-    const recipeCostTotal = this.ingredientsNeeded.reduce(
-      (arr, values) => arr + values.estimatedCostInCents,
-      0
-    );
-    return recipeCostTotal / 100;
+    console.log("this.ingredients", this.ingredients);
+    console.log("this.ingredientsNeeded", this.ingredientsNeeded);
+    console.log("this.id", this.id);
+    let totalCost = 0;
+    let figureTotalCost = this.ingredients.forEach((ingredient) => {
+      this.ingredientsNeeded.forEach((item) => {
+        if (ingredient.id === item.id) {
+          totalCost += ingredient.quantity.amount * item.estimatedCostInCents;
+        }
+      });
+    });
+    return `$${(totalCost / 100).toFixed(2)}`;
   }
 }
 

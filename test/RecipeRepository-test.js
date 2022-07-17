@@ -8,7 +8,7 @@ describe("RecipeRepository", () => {
   let newRecipe;
 
   beforeEach(function () {
-    recipeData = [ //sample recipeData
+    recipeData = [
       {
         id: 595736,
         image: "https://spoonacular.com/recipeImages/595736-556x370.jpg",
@@ -91,8 +91,9 @@ describe("RecipeRepository", () => {
         tags: ["sauce"],
       },
     ];
+
     recipeRepository = new RecipeRepository(recipeData);
-    newRecipe = new Recipe()
+    // newRecipe = new Recipe();
   });
 
   it("Should be a function", () => {
@@ -108,7 +109,9 @@ describe("RecipeRepository", () => {
   });
 
   it("Should be able to filter by tag", () => {
-    expect(recipeRepository.filterTag("sauce")).to.deep.equal([recipeData[1]]);
+    expect(recipeRepository.filterTag("sauce")).to.deep.equal([
+      [recipeData[1]],
+    ]);
   });
 
   it("Should be able to filter by name", () => {
