@@ -3,10 +3,6 @@ class RecipeRepository {
     this.recipes = cookbook
     // One class to get you started!
   }
-
-  //we need to pull the in an instantiation of Recipe class
-  
-
   filterTag(tag) {
     this.filtered = []
     const recipes = this.recipes.filter((recipe) => {
