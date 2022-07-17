@@ -139,19 +139,28 @@ function viewRecipe(ev) {
   const showElements = [homeBtn, allRecipeBtn, savedRecipeBtn, recipePage];
   hideElements.forEach((element) => element.classList.add("hidden"));
   showElements.forEach((element) => element.classList.remove("hidden"));
-  const targetRecipeId = document.getElementById(ev.target.id);
-    const singleRecipeInstructions = recipeData.forEach((recipe) => {
-        if (recipe.id == targetRecipeId) {
-        const currentRecipe = new Recipe(ev.target)
-        currentRecipe.getIngredients(ingredientsData);
-        recipePage.innerHTML += `<h1>${recipe.name}</h1>
+  const targetRecipeId = parseInt(ev.target.id);
+
+  recipeData.forEach((recipe) => {
+    if (recipe.id === targetRecipeId) {
+      const recipeInfo = recipeRepo.getById(targetRecipeId);
+      const currentRecipe = new Recipe(recipeInfo);
+      recipePage.innerHTML += `<h1>${recipe.name}</h1>
       <img src="${recipe.image}">
-      <h4>${recipe.instructions}</h4>
-      <h4>${recipe.ingredientsNeeded}</h4>
-      <h4>${recipe.getCost()}</h4>`;
-        }
-        console.log(singleRecipeInstructions)
-        return singleRecipeInstructions
+      <h4>
+        <ol>
+          ${recipe.instructions
+            .map((instruction) => {
+              return `<li>${instruction.instruction}</li>`;
+            })
+            .join("")}
+        </ol>
+      </h4>
+      <h4>${currentRecipe.getIngredients(ingredientsData)}</h4>
+      <h4>${currentRecipe.getCost(ingredientsData)}</h4>`;
+    }
+    //console.log(singleRecipeInstructions);
+    //return singleRecipeInstructions;
     //console.log("recipedataID", recipeData.id);
   });
   //console.log("jgj", singleRecipeInstructions);
