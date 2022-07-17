@@ -7,17 +7,11 @@ import recipeData from "./data/recipes";
 import usersData from "./data/users";
 import ingredientsData from "./data/ingredients";
 import Recipe from "../src/classes/Recipe";
-// console.log(recipeData);
-// console.log(usersData);
-// console.log(ingredientsData);
 //import "../data/ingredients.js";
 
 // 👇🏽 Global variables 👇🏽
 let recipeRepo = new RecipeRepository(recipeData)
-// console.log('recipeRepo: ', recipeRepo)
-// console.log('Recipe tags: ', recipeRepo.recipes.tag)
 
-// console.log(recipeRepo)
 
 // let newRecipe = new Recipe(recipeData)
 // console.log(newRecipe)
@@ -41,14 +35,16 @@ let homeView = document.querySelector(".home-view");
 let savedRecipeBtn = document.querySelector("#saved-button");
 let savedRecipesView = document.querySelector(".saved-recipes");
 let pantryBtn = document.querySelector("#pantry-button");
-// const breakfastCategory = document.getElementById("breakfast");//ln 24-breakfast panel on home
-// const lunchCategory = document.getElementById('lunch');
-// const dinnerCategory = document.getElementById('dinner');
+
+const breakfastCategory = document.getElementById('breakfast');//ln 24-breakfast panel on home
+const lunchCategory = document.getElementById('lunch');
+const dinnerCategory = document.getElementById('dinner');
 
 // 👇🏽 Event Handlers & Functions 👇🏽
 // console.log("Hello world");
 // window.addEventListener("load", homeView);
 // button => button.addEventListener('click', event => this.method1(event, button))
+
 // breakfastCategory.addEventListener("click", recipeByCategory('breakfast'));
 // lunchCategory.addEventListener("click", recipeByCategory('lunch'));
 // dinnerCategory.addEventListener("click", recipeByCategory('dinner'));
@@ -57,6 +53,24 @@ homeBtn.addEventListener("click", showHomeScreen);
 savedRecipeBtn.addEventListener("click", showSavedRecipes);
 pantryBtn.addEventListener("click", showPantry);
 
+
+
+// 👇🏽 Filter recipes by tag
+function recipeByCategory(tag) {
+    //if receipeData.tag includes desired tag, then push recipe to recipeRepo.filtered (empty array in recipeRepository)
+
+    recipeRepo.filterTag(tag)
+    return recipeRepo.filtered
+};
+
+
+breakfastCategory.addEventListener("click", recipeByCategory('breakfast'));
+lunchCategory.addEventListener("click", recipeByCategory('lunch'));
+dinnerCategory.addEventListener("click", recipeByCategory('dinner'));
+allRecipeBtn.addEventListener("click", showAllRecipes);
+homeBtn.addEventListener("click", showHomeScreen);
+savedRecipeBtn.addEventListener("click", showSavedRecipes);
+pantryBtn.addEventListener("click", showPantry);
 
 
 function showAllRecipes() {
@@ -71,27 +85,21 @@ function showHomeScreen() {
   const showElements = [homeView, allRecipeBtn, savedRecipeBtn];
   hideElements.forEach(element => element.classList.add("hidden"));
   showElements.forEach(element => element.classList.remove("hidden"));
-homeView.innerHTML += `<button class="home-category-panel" id="breakfast">
+    homeView.innerHTML = `<button class="home-category-panel" id="breakfast">
         <h2>Breakfast</h2>
-      <img src="${recipeRepo.filterTag('breakfast').filtered[0].image}" alt="breakfastPic" width="500" height="600">
+        <input type="image" alt="breakfastPic" src="${recipeByCategory('breakfast')[0][0].image}" id="breakfastImage" />
       </button>
-      <section class="home-category-panel" id="lunch">
+      <section class="home-category-panel" id="lunch" id="lunchImage">
         <h2>Lunch</h2>
-        <src>${recipeByCategory('lunch').image}</src>
+        <input type="image" alt="lunchPic" src="${recipeByCategory('lunch')[0][0].image}" id="lunchImage"/>
       </section>
       <section class="home-category-panel" id="dinner">
         <h2>Dinner</h2>
-        <src>${recipeRepo.filterByTag('dinner').filtered[0].image}</src>
+        <input type="image" alt="dinnerPic" src="${recipeByCategory('dinner')[0][1].image}" id="dinnerImage"/>
       </section>`
 }
 
-// 👇🏽 Filter recipes by tag
-function recipeByCategory(tag) {
-    //if receipeData.tag includes desired tag, then push recipe to recipeRepo.filtered (empty array in recipeRepository)
-    
-    recipeRepo.filterTag(tag)
-    return recipeRepo.filtered 
-};
+showHomeScreen();
 recipeByCategory();
 // console.log('recipeByCategory(): ', recipeByCategory('dinner'))
 
