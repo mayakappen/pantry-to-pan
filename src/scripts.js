@@ -118,14 +118,18 @@ function showPantry() {
 let recipeCard = new Recipe(recipeData[0]);
 //event listener
 let recipeTile = document.querySelector(".recipe-tile");
-function addRecipeCard(recipe) {
-    recipe = recipeData;
-    return allRecipeGrid.innerHTML += recipeData.map(singleRecipe => {return `<input type="image" src="${singleRecipe.image}" id="tileImage"/>`});
+function addRecipeCards(recipes) {
+    const allRecipies = recipeRepo.recipes.forEach(recipe => {
+    allRecipeGrid.innerHTML += `<h3>"${recipe.name}"</h3>
+    <input type="image" src="${recipe.image}" id="tileImage"/>`})
+    return allRecipies
     //allRecipeGrid.innerHTML += recipeTile;
     //return newRecipeCard;
 }
-console.log("recipeCard", recipeCard);
-console.log(addRecipeCard(recipeRepo.recipes[0]));
+addRecipeCards(recipeData)
+
+// console.log("recipeCard", recipeCard);
+// console.log(addRecipeCard(recipeData[0]));
     
 /*
 
