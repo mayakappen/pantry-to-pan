@@ -1,7 +1,6 @@
 class RecipeRepository {
   constructor(cookbook) {
     this.recipes = cookbook
-    this.filtered = []
     // One class to get you started!
   }
 
@@ -9,13 +8,12 @@ class RecipeRepository {
   
 
   filterTag(tag) {
+    this.filtered = []
     const recipes = this.recipes.filter((recipe) => {
       return recipe.tags.includes(tag);
     });
     this.filtered.push(recipes)
-    console.log(this.filtered)
-    console.log(recipes)
-    return recipes;
+    return this.filtered
   }
   filterName(name) {
     const recipe = this.recipes.find((value) => {

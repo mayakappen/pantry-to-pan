@@ -6,16 +6,11 @@ import RecipeRepository from "../src/classes/RecipeRepository";
 import recipeData from "./data/recipes";
 import usersData from "./data/users";
 import ingredientsData from "./data/ingredients";
-import Recipe from "./classes/Recipe";
-console.log(recipeData);
-console.log(usersData);
-console.log(ingredientsData);
+import Recipe from "../src/classes/Recipe";
 //import "../data/ingredients.js";
 
 // 👇🏽 Global variables 👇🏽
-let recipeRepo = new RecipeRepository(recipeData)
-console.log('recipeRepo: ', recipeRepo)
-console.log('Recipe tags: ', recipeRepo.recipes.tag)
+let recipeRepo = new RecipeRepository(recipeData);
 
 // let newRecipe = new Recipe(recipeData)
 // console.log(newRecipe)
@@ -24,82 +19,154 @@ console.log('Recipe tags: ', recipeRepo.recipes.tag)
 // Create a list of recipe names
 // Click on a recipe
 // Display title, directions, ingredients needed and total cost, picture
-// const allRecipes = document.getElementById();
-// //allRecipes is the main recipe button on the main page
-// const allRecipeGrid = document.querySelector(".")
-// const recipeByIngredient = document.getElementById(); //recipeByIngredient is available when we click on the pantry button
-// const savedRecipes = document.getElementById(); // saveRecipe will be on the main page and will take you to saved recipes
-// const savedRecipeGrid = document.querySelector(".recipe-tile-grid")
-// const currentRecipe = document.getElementById(); // currentRecipe will be whatever recipe is chosen and will open the entire recipe availabe on all pages except the main page
-// const recipeByName = document.getElementById(); // tide to the input box
-// const category = document.getElementById();
-// const home = document.getElementById();
-// const pantry = document.getElementById();
-const breakfastCategory = document.querySelector('.breakfast');//ln 24-breakfast panel on home
-const lunchCategory = document.querySelector('.lunch');
-const dinnerCategory = document.querySelector('.dinner');
 
-// const lunchRecipes = document.getElementById();
-// const dinnerRecipes = document.getElementById();
+//allRecipes is the main recipe button on the main page
+//recipeByIngredient is available when we click on the pantry button
+// saveRecipe will be on the main page and will take you to saved recipes
+// currentRecipe will be whatever recipe is chosen and will open the entire recipe availabe on all pages except the main page
+// tide to the input box
 
-//👇🏽 Event listeners 👇🏽
-// window.addEventListener("load", homeView);
-breakfastCategory.addEventListener("click", recipeByCategory);//filter by recipe tag
-lunchCategory.addEventListener("click", recipeByCategory);
-dinnerCategory.addEventListener("click", recipeByCategory);
-// allRecipes.addEventListener("click", functionAll);
-// lunchRecipes.addEventListener("click", functionLunch);
-// dinnerRecipes.addEventListener("click", functionDinner);
-// recipeByIngredient.addEventListener("click", functionrecipeByIngredient);
-// savedRecipes.addEventListener("click", functionSavedRecipes);
-// currentRecipe.addEventListener("click", functionCurrentRecipe);
-// recipeByName.addEventListener("click", functionRecipeByName);
-// recipeByCategory.addEventListener("click", functionRecipeByCategory);
-// category.addEventListener("click", functioncurrentRecipe);
-// home.addEventListener("click", functionCategory);//home button
-// pantry.addEventListener("click", functionPantry);
+const allRecipeBtn = document.querySelector("#all-recipe-button");
+const allRecipesView = document.querySelector(".filter-panel");
+const homeBtn = document.querySelector("#home-button");
+const homeView = document.querySelector(".home-view");
+const savedRecipeBtn = document.querySelector("#saved-button");
+const savedRecipesView = document.querySelector(".saved-recipes");
+const pantryBtn = document.querySelector("#pantry-button");
+const allRecipeGrid = document.querySelector(".recipe-tile-grid");
+const recipeTile = document.querySelector(".recipe-tile");
+const tileImage = document.getElementById("tileImage");
+const recipePage = document.querySelector(".recipe-page");
+
+const breakfastCategory = document.getElementById("breakfast"); //ln 24-breakfast panel on home
+const lunchCategory = document.getElementById("lunch");
+const dinnerCategory = document.getElementById("dinner");
 
 // 👇🏽 Event Handlers & Functions 👇🏽
-console.log("Hello world");
+// console.log("Hello world");
+// window.addEventListener("load", addRecipeCard);
+// button => button.addEventListener('click', event => this.method1(event, button))
 
-// function viewElement(element) {
-//   element.classList.remove("hidden");
-// }
-
-// function hideElement(element) {
-//   element.classList.add("hidden");
-// }
-
-// 👇🏽 Homeview 👇🏽
-// function homeView() {
-//   hideElement(filterPanel);
-//   hideElement(recipeTileGrid);
-//   hideElement(savedRecipes);
-// }
+// breakfastCategory.addEventListener("click", recipeByCategory('breakfast'));
+// lunchCategory.addEventListener("click", recipeByCategory('lunch'));
+// dinnerCategory.addEventListener("click", recipeByCategory('dinner'));
+allRecipeBtn.addEventListener("click", showAllRecipes);
+homeBtn.addEventListener("click", showHomeScreen);
+savedRecipeBtn.addEventListener("click", showSavedRecipes);
+pantryBtn.addEventListener("click", showPantry);
+tileImage.addEventListener("click", viewRecipe);
+//recipePage.addEventListener("click", viewRecipe);
 
 // 👇🏽 Filter recipes by tag
 function recipeByCategory(tag) {
-    //if receipeData.tag includes desired tag, then push recipe to recipeRepo.filtered (empty array in recipeRepository)
-    
-    recipeRepo.filterTag(tag)
-    return recipeRepo.filtered 
-};
-console.log('recipeByCategory(): ', recipeByCategory('dinner'))
+  //if receipeData.tag includes desired tag, then push recipe to recipeRepo.filtered (empty array in recipeRepository)
 
+  recipeRepo.filterTag(tag);
+  return recipeRepo.filtered;
+}
 
+breakfastCategory.addEventListener("click", recipeByCategory("breakfast"));
+lunchCategory.addEventListener("click", recipeByCategory("lunch"));
+dinnerCategory.addEventListener("click", recipeByCategory("dinner"));
+allRecipeBtn.addEventListener("click", showAllRecipes);
+homeBtn.addEventListener("click", showHomeScreen);
+savedRecipeBtn.addEventListener("click", showSavedRecipes);
+pantryBtn.addEventListener("click", showPantry);
 
+function showAllRecipes() {
+  const hideElements = [homeView, allRecipeBtn, savedRecipesView];
+  const showElements = [allRecipesView, homeBtn, savedRecipeBtn];
+  hideElements.forEach((element) => element.classList.add("hidden"));
+  showElements.forEach((element) => element.classList.remove("hidden"));
+}
+
+function showHomeScreen() {
+  const hideElements = [allRecipesView, savedRecipesView, homeBtn];
+  const showElements = [homeView, allRecipeBtn, savedRecipeBtn];
+  hideElements.forEach((element) => element.classList.add("hidden"));
+  showElements.forEach((element) => element.classList.remove("hidden"));
+  homeView.innerHTML = `<button class="home-category-panel" id="breakfast">
+        <h2>Breakfast</h2>
+        <input type="image" alt="breakfastPic" src="${
+          recipeByCategory("breakfast")[0][0].image
+        }" id="breakfastImage" />
+      </button>
+      <section class="home-category-panel" id="lunch" id="lunchImage">
+        <h2>Lunch</h2>
+        <input type="image" alt="lunchPic" src="${
+          recipeByCategory("lunch")[0][0].image
+        }" id="lunchImage"/>
+      </section>
+      <section class="home-category-panel" id="dinner">
+        <h2>Dinner</h2>
+        <input type="image" alt="dinnerPic" src="${
+          recipeByCategory("dinner")[0][1].image
+        }" id="dinnerImage"/>
+      </section>`;
+}
+
+showHomeScreen();
+recipeByCategory();
+// console.log('recipeByCategory(): ', recipeByCategory('dinner'))
+
+function showSavedRecipes() {
+  const hideElements = [homeView, allRecipesView, savedRecipeBtn];
+  const showElements = [savedRecipesView, homeBtn, allRecipeBtn];
+  hideElements.forEach((element) => element.classList.add("hidden"));
+  showElements.forEach((element) => element.classList.remove("hidden"));
+}
+
+function showPantry() {
+  window.alert("This page is under construction!");
+}
+
+let recipeCard = new Recipe(recipeData[0]);
+//event listener
+function addRecipeCards(recipes) {
+  const allRecipies = recipeRepo.recipes.forEach((recipe) => {
+    allRecipeGrid.innerHTML += `<h3>"${recipe.name}"</h3>
+    <input type="image" src="${recipe.image}" id="${recipe.id}"/>`;
+  });
+  return allRecipies;
+  //allRecipeGrid.innerHTML += recipeTile;
+  //return newRecipeCard;
+}
+addRecipeCards(recipeData);
+
+function viewRecipe() {
+  const hideElements = [
+    homeView,
+    allRecipesView,
+    homeBtn,
+    allRecipeBtn,
+    savedRecipeBtn,
+    recipePage,
+  ];
+  // const showElements = [homeBtn, allRecipeBtn, savedRecipeBtn, recipePage];
+  hideElements.forEach((element) => element.classList.add("hidden"));
+  // showElements.forEach((element) => element.classList.remove("hidden"));
+  // const targetID = document.getElementById(event.target.id);
+  // const newRecipe = new Recipe(
+  //   recipeData.find((recipe) => targetID === parseInt(recipe.id))
+  // );
+  // newRecipe.getIngredients(recipeData);
+  // console.log(targetID);
+  // return newRecipe;
+  // console.log(recipe);
+  // return recipe;
+}
+// console.log("recipeCard", recipeCard);
+// console.log(addRecipeCard(recipeData[0]));
+
+/*
 
 // As a user, I should be able to view a list of all recipes.
-// click on button
-// hide main page
 // show list of recipes
 // ----we want this to display the grid of images and recipe names
 
 // As a user, I should be able to click on a recipe to view more information including directions, ingredients needed, and total cost.
 // We need to build a card/page to show this information
 // Do we want it to have a name above image, above ingredients, above directions
-// click recipe
-// hide grid
 // show recipe card
 // ---- Make new card with title, image, and directions
 // ---- Updates left menu to hide filters, but show ingredients needed for this recipe
@@ -122,15 +189,15 @@ console.log('recipeByCategory(): ', recipeByCategory('dinner'))
 //Delete button will search saved array for recipe id and remove it.
 //Update saved grid
 
-//let recipeCard = new Recipe(recipeInfo);
-//event listener
-/*
-let recipeTile = document.querySelector(".recipe-tile") - line 91;
-function addToCook(recipe) {
-    let newRecipeCard = <section class="recipe-tile">
-          <h3>${recipeCard.name}</h3>
-          <src="">${recipeCard.image}</src>
-        </section>;
-    savedRecipeGrid.innerHTML += newRecipeCard;
-    return newRecipeCard;
+
+
+// addRecipeCard can be invoked by clicking breakfast, lunch, dinner, or all recipes, with b.l.d. having pre-selected filter
+
+eventlistener on breakfast invokes addRecipeCard with filter applied.
+view all recipes doesnt have a filter applied
+
+to add to saved array, we need button to save recipe at bottom of recipe page, adds a saved class, and change add button to remove button, which will remove saved class
+
+saved recipe grid will filter to only show recipes with saved class when we hit saved recipes button
+
 */
