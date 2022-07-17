@@ -35,6 +35,7 @@ let homeView = document.querySelector(".home-view");
 let savedRecipeBtn = document.querySelector("#saved-button");
 let savedRecipesView = document.querySelector(".saved-recipes");
 let pantryBtn = document.querySelector("#pantry-button");
+let allRecipeGrid = document.querySelector(".recipe-tile-grid");
 
 const breakfastCategory = document.getElementById('breakfast');//ln 24-breakfast panel on home
 const lunchCategory = document.getElementById('lunch');
@@ -42,7 +43,7 @@ const dinnerCategory = document.getElementById('dinner');
 
 // 👇🏽 Event Handlers & Functions 👇🏽
 // console.log("Hello world");
-// window.addEventListener("load", homeView);
+// window.addEventListener("load", addRecipeCard);
 // button => button.addEventListener('click', event => this.method1(event, button))
 
 // breakfastCategory.addEventListener("click", recipeByCategory('breakfast'));
@@ -115,19 +116,16 @@ function showPantry() {
 }
 
 let recipeCard = new Recipe(recipeData[0]);
-console.log(recipeCard);
 //event listener
 let recipeTile = document.querySelector(".recipe-tile");
-function addRecipeCard(recipeCard) {
-    let newRecipeCard = recipeData.map(singleRecipe => {return `<section class="recipe-tile">
-          <h3>${singleRecipe.name}</h3>
-          <img src="${singleRecipe.image}"></img></src>
-        </section>;
-        savedRecipeGrid.innerHTML += newRecipeCard;
-        return newRecipeCard;`})
-    return newRecipeCard;
+function addRecipeCard(recipe) {
+    recipe = recipeData;
+    return allRecipeGrid.innerHTML += recipeData.map(singleRecipe => {return `<input type="image" src="${singleRecipe.image}" id="tileImage"/>`});
+    //allRecipeGrid.innerHTML += recipeTile;
+    //return newRecipeCard;
 }
-    
+console.log("recipeCard", recipeCard);
+console.log(addRecipeCard(recipeRepo.recipes[0]));
     
 /*
 
