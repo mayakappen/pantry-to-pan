@@ -124,8 +124,7 @@ let recipeCard = new Recipe(recipeData[0]);
 //event listener
 function addRecipeCards() {
   const allRecipies = recipeRepo.recipes.forEach((recipe) => {
-    allRecipeGrid.innerHTML += `<h3>"${recipe.name}"</h3>
-    <input type="image" src="${recipe.image}" id="${recipe.id}"/>`;
+    recipeTile.innerHTML += `<input type="image" src="${recipe.image}" id="${recipe.id}"/><h3>"${recipe.name}"</h3>`;
   });
   return allRecipies;
   //allRecipeGrid.innerHTML += recipeTile;
