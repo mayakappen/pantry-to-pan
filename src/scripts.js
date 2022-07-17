@@ -134,15 +134,15 @@ function addRecipeCards() {
 addRecipeCards(recipeData);
 
 function viewRecipe(recipe) {
-  console.log("hiiiiiiii");
-  console.log("recipe.id", recipe);
-  console.log("recipeData", recipeData);
-  console.log("recipeRepo", recipeRepo.recipes);
+  // console.log("hiiiiiiii");
+  // console.log("recipe.id", recipe);
+  // console.log("recipeData", recipeData);
+  // console.log("recipeRepo", recipeRepo.recipes);
   const singleRecipeInstructions = recipeRepo.recipes.forEach((recipe) => {
     if (recipe.id === recipeData.id) {
-      console.log("recipe", recipe.id);
+      console.log("recipe", recipe);
     }
-    console.log("recipe", recipe);
+    // console.log("recipe", recipe);
   });
   return singleRecipeInstructions;
 }
