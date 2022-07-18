@@ -16,7 +16,7 @@ class Recipe {
       let name = ingredientsData.find(
         (ingredient) => measurement.id === ingredient.id
       );
-      let measurementInfo = `${measurement.quantity.amount} ${measurement.quantity.unit} ${name.name}`;
+      let measurementInfo = `  ${measurement.quantity.amount} ${measurement.quantity.unit} ${name.name}`;
       acc.push(measurementInfo);
       return acc;
     }, []);
