@@ -9,7 +9,7 @@ import usersData from "./data/users";
 import ingredientsData from "./data/ingredients";
 import Recipe from "../src/classes/Recipe";
 //import "../data/ingredients.js";
-import {userAPIData, ingredientAPIData, recipeAPIData} from './apiCalls';
+// import {userAPIData, ingredientAPIData, recipeAPIData} from './apiCalls';
 
 // 👇🏽 Global variables 👇🏽
 let recipeRepo = new RecipeRepository(recipeData);
@@ -17,7 +17,7 @@ let userAPIData;
 let ingredientAPIData;
 let recipeAPIData;
 
-Promise.all([userAPIData, ingredientAPIData, recipeAPIData]).then(data => data.json()).catch(error => console.log(error));
+// Promise.all([userAPIData, ingredientAPIData, recipeAPIData]).then(data => data.json()).catch(error => console.log(error));
 
 
 // let newRecipe = new Recipe(recipeData)
@@ -153,7 +153,7 @@ function viewRecipe(ev) {
     if (recipe.id === targetRecipeId) {
       const recipeInfo = recipeRepo.getById(targetRecipeId);
       const currentRecipe = new Recipe(recipeInfo);
-      recipePage.innerHTML = `<h1>${recipe.name}</h1>
+      recipePage.innerHTML = `<h2 class="recipePageName">${recipe.name}</h2>
       <img src="${recipe.image}">
       <h4>
         <ol>
