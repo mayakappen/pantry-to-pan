@@ -93,8 +93,7 @@ function showHomeScreen() {
   const showElements = [homeView, allRecipeBtn, savedRecipeBtn];
   hideElements.forEach((element) => element.classList.add("hidden"));
   showElements.forEach((element) => element.classList.remove("hidden"));
-  homeView.innerHTML = 
-  `<button class="home-category-panel" id="breakfast">
+  homeView.innerHTML = `<button class="home-category-panel" id="breakfast">
         <h2>Breakfast</h2>
         <input type="image" alt="breakfastPic" src="${
           recipeByCategory("breakfast")[0][0].image
@@ -162,7 +161,7 @@ function viewRecipe(ev) {
             .map((instruction) => {
               return `<li>${instruction.instruction}</li>`;
             })
-            .join(" , ")}
+            .join("")}
         </ol>
       </h4>
       <h4>${currentRecipe.getIngredients(ingredientsData)}</h4>
