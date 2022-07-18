@@ -94,19 +94,19 @@ function showHomeScreen() {
   hideElements.forEach((element) => element.classList.add("hidden"));
   showElements.forEach((element) => element.classList.remove("hidden"));
   homeView.innerHTML = `<button class="home-category-panel" id="breakfast">
-        <h2>Breakfast</h2>
+        <h2 class="homeViewTitle">Breakfast</h2>
         <input type="image" alt="breakfastPic" src="${
           recipeByCategory("breakfast")[0][0].image
         }" id="breakfastImage" />
   </button>
       <button class="home-category-panel" id="lunch">
-        <h2>Lunch</h2>
+        <h2 class="homeViewTitle">Lunch</h2>
         <input type="image" alt="lunchPic" src="${
           recipeByCategory("lunch")[0][0].image
         }" id="lunchImage"/>
       </button>
       <button class="home-category-panel" id="dinner">
-        <h2>Dinner</h2>
+        <h2 class="homeViewTitle">Dinner</h2>
         <input type="image" alt="dinnerPic" src="${
           recipeByCategory("dinner")[0][1].image
         }" id="dinnerImage"/>
