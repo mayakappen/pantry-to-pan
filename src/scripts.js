@@ -16,6 +16,7 @@ let recipeRepo = new RecipeRepository(recipeData);
 let userAPIData;
 let ingredientAPIData;
 let recipeAPIData;
+let savedRecipes = [];
 
 // Promise.all([userAPIData, ingredientAPIData, recipeAPIData]).then(data => data.json()).catch(error => console.log(error));
 
@@ -145,8 +146,6 @@ function addRecipeCards() {
 addRecipeCards();
 
 function viewRecipe(ev) {
-  //console.log("recipeData", recipeData[1].id);
-  // console.log("recipeRepo", recipeRepo.recipes);
   const hideElements = [homeView, allRecipesView, savedRecipesView];
   const showElements = [homeBtn, allRecipeBtn, savedRecipeBtn, recipePage];
   hideElements.forEach((element) => element.classList.add("hidden"));
@@ -157,7 +156,6 @@ function viewRecipe(ev) {
     if (recipe.id === targetRecipeId) {
       const recipeInfo = recipeRepo.getById(targetRecipeId);
       const currentRecipe = new Recipe(recipeInfo);
-
 
       recipePage.innerHTML = `<h2 class="recipePageName">${recipe.name}</h2>
       <img src="${recipe.image}">
@@ -211,7 +209,23 @@ var filteredRecipes = filteredRepo.forEach((recipe) => {
 }
 
 
+function saveRecipe() {
+    //click button
+    
+    //event listener
+    //recipe information added to array
+    //replace save button with remove button 
+    //update saved page
+}
 
+// function addRecipeCards() {
+//     const allRecipies = recipeRepo.recipes.forEach((recipe) => {
+//       recipeTile.innerHTML += `<input type="image" src="${recipe.image}" id="${recipe.id}"/><h3>"${recipe.name}"</h3>`;
+//     });
+//     return allRecipies;
+//     //allRecipeGrid.innerHTML += recipeTile;
+//     //return newRecipeCard;
+//   }
 
 
 // function showCost() {
