@@ -3,11 +3,12 @@ body {
   width: 100vw;
   display: flex;
   flex-direction: column;
+  background-color:rgb(236, 235, 239);
 }
 
-* {
+/* * {
   border: solid 2px red;
-}
+} */
 
 .hidden {
   display: none!important;
@@ -31,6 +32,8 @@ body {
 h1 {
   font-size: 36px;
   text-align: center;
+  font-family: 'Acme', sans-serif;
+  font-family: 'Lobster Two', cursive;
 }
 
 .button-panel {
