@@ -9,9 +9,16 @@ import usersData from "./data/users";
 import ingredientsData from "./data/ingredients";
 import Recipe from "../src/classes/Recipe";
 //import "../data/ingredients.js";
+import {userAPIData, ingredientAPIData, recipeAPIData} from './apiCalls';
 
 // 👇🏽 Global variables 👇🏽
 let recipeRepo = new RecipeRepository(recipeData);
+let userAPIData;
+let ingredientAPIData;
+let recipeAPIData;
+
+Promise.all([userAPIData, ingredientAPIData, recipeAPIData]).then(data => data.json()).catch(error => console.log(error));
+
 
 // let newRecipe = new Recipe(recipeData)
 // console.log(newRecipe)
