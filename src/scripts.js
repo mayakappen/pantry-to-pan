@@ -240,10 +240,7 @@ return value
 function filterByName() {
   let input = getInput()
   let result = recipeRepo.filterName(input)
-  console.log(result)
-  let name = recipeRepo.filterName(input).name
-  let keywords = name.split()
-  if (input && input.trim().length > 0 && (result || name.toLowerCase() || input.contains(keywords) )) {
+  if (input && input.trim().length > 0 && (result)) {
     showAllRecipes()
     recipeTile.innerHTML = ''
     recipeTile.innerHTML += ` <input type="image" src="${result.image}" id="${result.id}"/><h3>"${result.name}"</h3>`
