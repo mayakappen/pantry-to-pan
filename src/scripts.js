@@ -21,6 +21,7 @@ console.log(user);
 let userAPIData;
 let ingredientAPIData;
 let recipeAPIData;
+let savedRecipes = [];
 
 // Promise.all([userAPIData, ingredientAPIData, recipeAPIData]).then(data => data.json()).catch(error => console.log(error));
 
@@ -50,6 +51,7 @@ const recipeTile = document.querySelector(".recipe-tile");
 const tileImage = document.getElementById("tileImage");
 const recipePage = document.querySelector(".recipe-page");
 const checkboxes = document.querySelectorAll("input[type='checkbox']");
+const saveThisRecipeBtn = document.querySelector(".save-this-recipe");
 
 const breakfastCategory = document.getElementById("breakfast"); //ln 24-breakfast panel on home
 const lunchCategory = document.getElementById("lunch");
@@ -66,6 +68,7 @@ const dinnerCategory = document.getElementById("dinner");
 allRecipeBtn.addEventListener("click", showAllRecipes);
 homeBtn.addEventListener("click", showHomeScreen);
 savedRecipeBtn.addEventListener("click", showSavedRecipes);
+saveThisRecipeBtn.addEventListener("click", saveThisRecipe);
 pantryBtn.addEventListener("click", showPantry);
 recipeTile.addEventListener("click", viewRecipe);
 checkboxes.forEach((box) => {
@@ -149,8 +152,6 @@ function addRecipeCards() {
 addRecipeCards();
 
 function viewRecipe(ev) {
-  //console.log("recipeData", recipeData[1].id);
-  // console.log("recipeRepo", recipeRepo.recipes);
   const hideElements = [homeView, allRecipesView, savedRecipesView];
   const showElements = [homeBtn, allRecipeBtn, savedRecipeBtn, recipePage];
   hideElements.forEach((element) => element.classList.add("hidden"));
@@ -213,6 +214,32 @@ function displayFiltered(repo) {
   console.log(filteredRecipes);
   return filteredRecipes;
 }
+
+
+function saveThisRecipe() {
+    //click button
+    
+    //event listener
+    //recipe information added to array
+    //replace save button with remove button 
+    //update saved page
+}
+
+// function addRecipeCards() {
+//     const allRecipies = recipeRepo.recipes.forEach((recipe) => {
+//       recipeTile.innerHTML += `<input type="image" src="${recipe.image}" id="${recipe.id}"/><h3>"${recipe.name}"</h3>`;
+//     });
+//     return allRecipies;
+//     //allRecipeGrid.innerHTML += recipeTile;
+//     //return newRecipeCard;
+//   }
+
+
+// function showCost() {
+
+// }
+// console.log("recipeCard", recipeCard);
+// console.log(addRecipeCard(recipeData[0]));
 
 /*
 // As a user, I should be able to view a list of all recipes.
