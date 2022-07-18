@@ -50,6 +50,10 @@ const recipeTile = document.querySelector(".recipe-tile");
 const tileImage = document.getElementById("tileImage");
 const recipePage = document.querySelector(".recipe-page");
 const checkboxes = document.querySelectorAll("input[type='checkbox']");
+const searchBar = document.querySelector("#recipe-search")
+const searchButton = document.querySelector("#search-button")
+const searchInput = document.querySelector(".input")
+
 
 const breakfastCategory = document.getElementById("breakfast"); //ln 24-breakfast panel on home
 const lunchCategory = document.getElementById("lunch");
@@ -73,6 +77,21 @@ checkboxes.forEach((box) => {
   box.addEventListener("change", () => displayFiltered(recipeRepo));
 });
 recipePage.addEventListener("click", viewRecipe);
+searchButton.addEventListener("click", filterByName);
+searchInput.addEventListener("input", getInput)
+//=> {
+  // let value = ev.target.value
+  // let result = recipeRepo.filterName(value)
+  // if (value && value.trim().length > 0 &&) {
+  //   showAllRecipes()
+  //   recipeTile.innerHTML = ''
+  //   recipeTile.innerHTML += ` <input type="image" src="${result.image}" id="${result.id}"/><h3>"${result.name}"</h3>`
+  // } else {
+  //   alert("No results found")
+  // }
+  // return result
+// })
+
 
 // 👇🏽 Filter recipes by tag
 function recipeByCategory(tag) {
@@ -212,6 +231,26 @@ function displayFiltered(repo) {
   });
   console.log(filteredRecipes);
   return filteredRecipes;
+}
+
+function getInput() {
+let value = searchBar.value
+return value
+}
+function filterByName() {
+  let input = getInput()
+  let result = recipeRepo.filterName(input)
+  console.log(result)
+  let name = recipeRepo.filterName(input).name
+  let keywords = name.split()
+  if (input && input.trim().length > 0 && (result || name.toLowerCase() || input.contains(keywords) )) {
+    showAllRecipes()
+    recipeTile.innerHTML = ''
+    recipeTile.innerHTML += ` <input type="image" src="${result.image}" id="${result.id}"/><h3>"${result.name}"</h3>`
+  } else {
+    alert("No results found")
+  }
+  return result
 }
 
 /*
