@@ -17,7 +17,8 @@ let recipeRepo = new RecipeRepository(recipeData);
 let randomUser = usersData[Math.floor(Math.random() * usersData.length)];
 console.log(randomUser);
 let user = new User(randomUser);
-console.log(user);
+user.recipeToCook();
+console.log(user.toCook);
 let userAPIData;
 let ingredientAPIData;
 let recipeAPIData;
@@ -37,11 +38,10 @@ const recipeTile = document.querySelector(".recipe-tile");
 const tileImage = document.getElementById("tileImage");
 const recipePage = document.querySelector(".recipe-page");
 const checkboxes = document.querySelectorAll("input[type='checkbox']");
-const searchBar = document.querySelector("#recipe-search")
-const searchButton = document.querySelector("#search-button")
-const searchInput = document.querySelector(".input")
-
-
+const tagSelectionBoxes = document.getElementById("filter-input-wrapper");
+const searchBar = document.querySelector("#recipe-search");
+const searchButton = document.querySelector("#search-button");
+const searchInput = document.querySelector(".input");
 
 const saveThisRecipeBtn = document.querySelector(".save-this-recipe");
 const breakfastCategory = document.getElementById("breakfast");
@@ -62,7 +62,6 @@ checkboxes.forEach((box) => {
 recipePage.addEventListener("click", viewRecipe);
 searchButton.addEventListener("click", filterByName);
 searchInput.addEventListener("input", getInput);
-
 
 // 👇🏽 Filter recipes by tag
 function recipeByCategory(tag) {
@@ -114,10 +113,19 @@ showHomeScreen();
 recipeByCategory();
 
 function showSavedRecipes() {
-  const hideElements = [homeView, allRecipesView, savedRecipeBtn];
-  const showElements = [savedRecipesView, homeBtn, allRecipeBtn];
+  const hideElements = [homeView, savedRecipeBtn];
+  const showElements = [
+    allRecipesView,
+    savedRecipesView,
+    homeBtn,
+    allRecipeBtn,
+  ];
   hideElements.forEach((element) => element.classList.add("hidden"));
   showElements.forEach((element) => element.classList.remove("hidden"));
+  recipeTile.innerHTML = "";
+  const savedRecipes = user.toCook.forEach((recipe) => {
+    recipeTile.innerHTML += `<input type="image" src="${recipe.image}" id="${recipe.id}"/><h3>"${recipe.name}"</h3>`;
+  });
 }
 
 function showPantry() {
@@ -194,32 +202,30 @@ function displayFiltered(repo) {
   return filteredRecipes;
 }
 
-
 function getInput() {
-let value = searchBar.value
-return value
+  let value = searchBar.value;
+  return value;
 }
 function filterByName() {
-  let input = getInput()
-  let result = recipeRepo.filterName(input)
-  if (input && input.trim().length > 0 && (result)) {
-    showAllRecipes()
-    recipeTile.innerHTML = ''
-    recipeTile.innerHTML += ` <input type="image" src="${result.image}" id="${result.id}"/><h3>"${result.name}"</h3>`
+  let input = getInput();
+  let result = recipeRepo.filterName(input);
+  if (input && input.trim().length > 0 && result) {
+    showAllRecipes();
+    recipeTile.innerHTML = "";
+    recipeTile.innerHTML += ` <input type="image" src="${result.image}" id="${result.id}"/><h3>"${result.name}"</h3>`;
   } else {
-    alert("No results found")
+    alert("No results found");
   }
-  return result
+  return result;
 }
 
-
 function saveThisRecipe() {
-    //savedRecipes.push()
-    //recipe information added to array
-    //set this.id to date.time
-    //
-    //replace save button with remove button 
-    //update saved page
+  //savedRecipes.push()
+  //recipe information added to array
+  //set this.id to date.time
+  //
+  //replace save button with remove button
+  //update saved page
 }
 
 // function addRecipeCards() {
@@ -230,7 +236,6 @@ function saveThisRecipe() {
 //     //allRecipeGrid.innerHTML += recipeTile;
 //     //return newRecipeCard;
 //   }
-
 
 /*
 // As a user, I should be able to add/remove a recipe to a list of recipes to cook
