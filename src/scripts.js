@@ -145,7 +145,7 @@ function viewRecipe(ev) {
     if (recipe.id === targetRecipeId) {
       const recipeInfo = recipeRepo.getById(targetRecipeId);
       const currentRecipe = new Recipe(recipeInfo);
-      recipePage.innerHTML += `<h1>${recipe.name}</h1>
+      recipePage.innerHTML = `<h1>${recipe.name}</h1>
       <img src="${recipe.image}">
       <h4>
         <ol>
@@ -153,11 +153,12 @@ function viewRecipe(ev) {
             .map((instruction) => {
               return `<li>${instruction.instruction}</li>`;
             })
-            .join("")}
+            .join(" , ")}
         </ol>
       </h4>
       <h4>${currentRecipe.getIngredients(ingredientsData)}</h4>
-      <h4>${currentRecipe.getCost(ingredientsData)}</h4>`;
+      <h4>${currentRecipe.getCost()}</h4>`;
+      console.log(recipe.ingredients[0].quantity);
     }
     //console.log(singleRecipeInstructions);
     //return singleRecipeInstructions;
@@ -166,6 +167,9 @@ function viewRecipe(ev) {
   //console.log("jgj", singleRecipeInstructions);
 }
 
+// function showCost() {
+
+// }
 // console.log("recipeCard", recipeCard);
 // console.log(addRecipeCard(recipeData[0]));
 
