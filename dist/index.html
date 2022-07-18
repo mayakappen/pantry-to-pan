@@ -3,12 +3,15 @@
   <head>
     <meta charset="UTF-8">
     <link rel="stylesheet" href="../src/styles.css">
-    <title>Pantry to Pan</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Acme&family=Lobster+Two&display=swap" rel="stylesheet">
+    <title>From Pantry to Pan</title>
   </head>
   <body>
     <section class="page-header">
       <section class="title-search">
-        <h1>Pantry to Pan</h1>
+        <h1>From Pantry to Pan</h1>
         <input type="text" id="recipe-search" name="recipe-search" placeholder="Recipe Search">
       </section>
       <section class="button-panel">
@@ -20,19 +23,18 @@
     </section>
 
     <section class="home-view">
-
-      <button class="home-category-panel" id="breakfast">
+      <button class="home-category-panel" id="breakfast" id="breakfast">
         <h2>Breakfast</h2>
-        <input type="image" alt="breakfastPic" src="" id="breakfastImage" />
+        <input class="panel-tile" type="image" alt="breakfastPic" src="" id="breakfastImage"/>
       </button>
-      <section class="home-category-panel" id="lunch" id="lunchImage">
+      <button class="home-category-panel" id="lunch" id="lunch">
         <h2>Lunch</h2>
-        <input type="image" alt="lunchPic" src="" id="lunchImage"/>
-      </section>
-      <section class="home-category-panel" id="dinner">
+        <input class="panel-tile" type="image" alt="lunchPic" src="" id="lunchImage"/>
+      </button>
+      <button class="home-category-panel" id="dinner">
         <h2>Dinner</h2>
-        <input type="image" alt="dinnerPic" src="" id="dinnerImage"/>
-      </section>
+        <input class="panel-tile" type="image" alt="dinnerPic" src="" id="dinnerImage"/>
+      </button>
 
     </section>
 
@@ -81,10 +83,11 @@
         </div>
       </section>
       <section class="recipe-tile-grid">
+
         <div class="recipe-tile">
-          <h3>""</h3>
           <input type="image" src="" id="tileImage"/>
         </div>
+
         </section>
       </section>
 
@@ -100,18 +103,21 @@
       </section>
     </section>
 
-      <section class="ingredients-needed">
-        <ul>Item</ul>
-      </section>
+    <section class="ingredients-needed">
+    </section>
 
-      <section class="recipe-page hidden">
+    <section class="recipe-page hidden">
         <h1>Recipe Title</h1>
         <img src="">
         <h4>directions</h4>
         <button class="previous-page">Previous Page</button>
+
         <button class="save-recipe">Save Recipe</button>
         <button class="remove-recipe hidden"></button>
       </section>
+
+    </section>
+
 
   </body>
   <!-- Do not include the scripts.js file here - it is done automatically by the webpack server -->
