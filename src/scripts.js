@@ -51,6 +51,7 @@ const recipeTile = document.querySelector(".recipe-tile");
 const tileImage = document.getElementById("tileImage");
 const recipePage = document.querySelector(".recipe-page");
 const checkboxes = document.querySelectorAll("input[type='checkbox']");
+const saveThisRecipeBtn = document.querySelector(".save-this-recipe");
 
 const breakfastCategory = document.getElementById("breakfast"); //ln 24-breakfast panel on home
 const lunchCategory = document.getElementById("lunch");
@@ -67,6 +68,7 @@ const dinnerCategory = document.getElementById("dinner");
 allRecipeBtn.addEventListener("click", showAllRecipes);
 homeBtn.addEventListener("click", showHomeScreen);
 savedRecipeBtn.addEventListener("click", showSavedRecipes);
+saveThisRecipeBtn.addEventListener("click", saveThisRecipe);
 pantryBtn.addEventListener("click", showPantry);
 recipeTile.addEventListener("click", viewRecipe);
 checkboxes.forEach((box) => {
@@ -214,7 +216,7 @@ function displayFiltered(repo) {
 }
 
 
-function saveRecipe() {
+function saveThisRecipe() {
     //click button
     
     //event listener
