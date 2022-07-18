@@ -8,11 +8,16 @@ import recipeData from "./data/recipes";
 import usersData from "./data/users";
 import ingredientsData from "./data/ingredients";
 import Recipe from "../src/classes/Recipe";
+import User from "../src/classes/User-class";
 //import "../data/ingredients.js";
 // import {userAPIData, ingredientAPIData, recipeAPIData} from './apiCalls';
 
 // 👇🏽 Global variables 👇🏽
 let recipeRepo = new RecipeRepository(recipeData);
+let randomUser = usersData[Math.floor(Math.random() * usersData.length)];
+console.log(randomUser);
+let user = new User(randomUser);
+console.log(user);
 let userAPIData;
 let ingredientAPIData;
 let recipeAPIData;
@@ -51,7 +56,6 @@ const breakfastCategory = document.getElementById("breakfast"); //ln 24-breakfas
 const lunchCategory = document.getElementById("lunch");
 const dinnerCategory = document.getElementById("dinner");
 
-
 // 👇🏽 Event Handlers & Functions 👇🏽
 // console.log("Hello world");
 // window.addEventListener("load", addRecipeCard);
@@ -67,7 +71,7 @@ pantryBtn.addEventListener("click", showPantry);
 recipeTile.addEventListener("click", viewRecipe);
 checkboxes.forEach((box) => {
   box.checked = false;
-  box.addEventListener("change", () => displayFiltered(recipeRepo))
+  box.addEventListener("change", () => displayFiltered(recipeRepo));
 });
 recipePage.addEventListener("click", viewRecipe);
 
@@ -136,10 +140,10 @@ function showPantry() {
 let recipeCard = new Recipe(recipeData[0]);
 //event listener
 function addRecipeCards() {
-  const allRecipies = recipeRepo.recipes.forEach((recipe) => {
+  const allRecipes = recipeRepo.recipes.forEach((recipe) => {
     recipeTile.innerHTML += `<input type="image" src="${recipe.image}" id="${recipe.id}"/><h3>"${recipe.name}"</h3>`;
   });
-  return allRecipies;
+  return allRecipes;
   //allRecipeGrid.innerHTML += recipeTile;
   //return newRecipeCard;
 }
@@ -177,34 +181,35 @@ function viewRecipe(ev) {
   });
   //console.log("jgj", singleRecipeInstructions);
 }
-let checked = []
+let checked = [];
 function grabCheckboxValues() {
-  checked = []
+  checked = [];
   checkboxes.forEach((checkbox) => {
-    if (checkbox.checked) checked.push(checkbox.id)
-  })
-  console.log(checked)
-  return checked
+    if (checkbox.checked) checked.push(checkbox.id);
+  });
+  console.log(checked);
+  return checked;
 }
 
 function returnFiltered(repo) {
-grabCheckboxValues()
-console.log(checked)
-recipeTile.innerHTML = ``
-checked.forEach(value => {
-repo.filterTag(value)})
-console.log(repo.filtered)
-return repo.filtered
+  grabCheckboxValues();
+  console.log(checked);
+  recipeTile.innerHTML = ``;
+  checked.forEach((value) => {
+    repo.filterTag(value);
+  });
+  console.log(repo.filtered);
+  return repo.filtered;
 }
 
 function displayFiltered(repo) {
-returnFiltered(repo)
-console.log(repo.filtered)
-var filteredRepo = repo.filtered.pop()
-var filteredRecipes = filteredRepo.forEach((recipe) => {
-  recipeTile.innerHTML += ` <input type="image" src="${recipe.image}" id="${recipe.id}"/><h3>"${recipe.name}"</h3>`
-})
-  console.log(filteredRecipes)
+  returnFiltered(repo);
+  console.log(repo.filtered);
+  var filteredRepo = repo.filtered.pop();
+  var filteredRecipes = filteredRepo.forEach((recipe) => {
+    recipeTile.innerHTML += ` <input type="image" src="${recipe.image}" id="${recipe.id}"/><h3>"${recipe.name}"</h3>`;
+  });
+  console.log(filteredRecipes);
   return filteredRecipes;
 }
 
