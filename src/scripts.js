@@ -9,9 +9,16 @@ import usersData from "./data/users";
 import ingredientsData from "./data/ingredients";
 import Recipe from "../src/classes/Recipe";
 //import "../data/ingredients.js";
+// import {userAPIData, ingredientAPIData, recipeAPIData} from './apiCalls';
 
 // 👇🏽 Global variables 👇🏽
 let recipeRepo = new RecipeRepository(recipeData);
+let userAPIData;
+let ingredientAPIData;
+let recipeAPIData;
+
+// Promise.all([userAPIData, ingredientAPIData, recipeAPIData]).then(data => data.json()).catch(error => console.log(error));
+
 
 // let newRecipe = new Recipe(recipeData)
 // console.log(newRecipe)
@@ -86,21 +93,20 @@ function showHomeScreen() {
   const showElements = [homeView, allRecipeBtn, savedRecipeBtn];
   hideElements.forEach((element) => element.classList.add("hidden"));
   showElements.forEach((element) => element.classList.remove("hidden"));
-  homeView.innerHTML = 
-  `<button class="home-category-panel" id="breakfast">
-        <h2>Breakfast</h2>
+  homeView.innerHTML = `<button class="home-category-panel" id="breakfast">
+        <h2 class="homeViewTitle">Breakfast</h2>
         <input type="image" alt="breakfastPic" src="${
           recipeByCategory("breakfast")[0][0].image
         }" id="breakfastImage" />
   </button>
       <button class="home-category-panel" id="lunch">
-        <h2>Lunch</h2>
+        <h2 class="homeViewTitle">Lunch</h2>
         <input type="image" alt="lunchPic" src="${
           recipeByCategory("lunch")[0][0].image
         }" id="lunchImage"/>
       </button>
       <button class="home-category-panel" id="dinner">
-        <h2>Dinner</h2>
+        <h2 class="homeViewTitle">Dinner</h2>
         <input type="image" alt="dinnerPic" src="${
           recipeByCategory("dinner")[0][1].image
         }" id="dinnerImage"/>
@@ -147,7 +153,7 @@ function viewRecipe(ev) {
     if (recipe.id === targetRecipeId) {
       const recipeInfo = recipeRepo.getById(targetRecipeId);
       const currentRecipe = new Recipe(recipeInfo);
-      recipePage.innerHTML += `<h1>${recipe.name}</h1>
+      recipePage.innerHTML = `<h2 class="recipePageName">${recipe.name}</h2>
       <img src="${recipe.image}">
       <h4>
         <ol>
@@ -159,7 +165,8 @@ function viewRecipe(ev) {
         </ol>
       </h4>
       <h4>${currentRecipe.getIngredients(ingredientsData)}</h4>
-      <h4>${currentRecipe.getCost(ingredientsData)}</h4>`;
+      <h4>${currentRecipe.getCost()}</h4>`;
+      console.log(recipe.ingredients[0].quantity);
     }
     //console.log(singleRecipeInstructions);
     //return singleRecipeInstructions;
@@ -168,6 +175,9 @@ function viewRecipe(ev) {
   //console.log("jgj", singleRecipeInstructions);
 }
 
+// function showCost() {
+
+// }
 // console.log("recipeCard", recipeCard);
 // console.log(addRecipeCard(recipeData[0]));
 
