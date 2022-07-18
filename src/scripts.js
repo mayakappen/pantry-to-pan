@@ -2,6 +2,7 @@ import "./styles.css";
 import apiCalls from "./apiCalls";
 // An example of how you tell webpack to use an image (also need to link to it in the index.html)
 import "./images/turing-logo.png";
+import "./images/banner-design.png";
 import RecipeRepository from "../src/classes/RecipeRepository";
 import recipeData from "./data/recipes";
 import usersData from "./data/users";
@@ -65,7 +66,7 @@ function recipeByCategory(tag) {
   return recipeRepo.filtered;
 }
 
-//breakfastCategory.addEventListener("click", recipeByCategory("breakfast"));
+breakfastCategory.addEventListener("click", recipeByCategory("breakfast"));
 lunchCategory.addEventListener("click", recipeByCategory("lunch"));
 dinnerCategory.addEventListener("click", recipeByCategory("dinner"));
 allRecipeBtn.addEventListener("click", showAllRecipes);
@@ -85,24 +86,25 @@ function showHomeScreen() {
   const showElements = [homeView, allRecipeBtn, savedRecipeBtn];
   hideElements.forEach((element) => element.classList.add("hidden"));
   showElements.forEach((element) => element.classList.remove("hidden"));
-  homeView.innerHTML = `<button class="home-category-panel" id="breakfast">
+  homeView.innerHTML = 
+  `<button class="home-category-panel" id="breakfast">
         <h2>Breakfast</h2>
         <input type="image" alt="breakfastPic" src="${
           recipeByCategory("breakfast")[0][0].image
         }" id="breakfastImage" />
-      </button>
-      <section class="home-category-panel" id="lunch" id="lunchImage">
+  </button>
+      <button class="home-category-panel" id="lunch">
         <h2>Lunch</h2>
         <input type="image" alt="lunchPic" src="${
           recipeByCategory("lunch")[0][0].image
         }" id="lunchImage"/>
-      </section>
-      <section class="home-category-panel" id="dinner">
+      </button>
+      <button class="home-category-panel" id="dinner">
         <h2>Dinner</h2>
         <input type="image" alt="dinnerPic" src="${
           recipeByCategory("dinner")[0][1].image
         }" id="dinnerImage"/>
-      </section>`;
+      </button>`;
 }
 
 showHomeScreen();
