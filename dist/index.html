@@ -39,65 +39,68 @@
     </section>
 
     <section class="filter-panel hidden">
-
       <section class="selection-boxes">
-        <h2>Allergies</h2>
-        <div><input type="checkbox" class="checkbox" id="">
-        <label for="allergy1">Allergy 1</label></div>
-        <div><input type="checkbox" class="checkbox" id="">
-        <label for="allergy2"> placeholder</label></div>
-        <div><input type="checkbox" class="checkbox" id="">
-        <label for="allergy3"> placeholder</label></div>
-        <div><input type="checkbox" class="checkbox" id="">
-        <label for="allergy4"> placeholder</label></div>
-        <h2>Dietary Restrictions</h2>
-        <div><input type="checkbox" class="checkbox" id="">
-        <label for="restriction1"> placeholder</label></div>
-        <div><input type="checkbox" class="checkbox" id="">
-        <label for="restriction2"> placeholder</label></div>
-        <div><input type="checkbox" class="checkbox" id="">
-        <label for="restriction3"> placeholder</label></div>
-        <div><input type="checkbox" class="checkbox" id="">
-        <label for="restriction4"> placeholder</label></div>
-        <h2>Seasons</h2>
-        <div><input type="checkbox" class="checkbox" id="">
-        <label for="season"> placeholder</label></div>
-        <div><input type="checkbox" class="checkbox" id="">
-        <label for="season2"> placeholder</label></div>
-        <div><input type="checkbox" class="checkbox" id="">
-        <label for="season3"> placeholder</label></div>
-        <div><input type="checkbox" class="checkbox" id="">
-        <label for="season4"> placeholder</label></div>
-        <h2>Ingredients</h2>
-        <div><input type="checkbox" class="checkbox" id="">
-        <label for="ingredient1"> placeholder</label></div>
-        <div><input type="checkbox" class="checkbox" id="">
-        <label for="ingredient2"> placeholder</label></div>
-        <div><input type="checkbox" class="checkbox" id="">
-        <label for="ingredient3"> placeholder</label></div>
-        <div><input type="checkbox" class="checkbox" id="">
-        <label for="ingredient4"> placeholder</label></div>
-        <h2>Category</h2>
-        <div><input type="checkbox" class="checkbox" id="">
-        <label for="category1"> placeholder</label></div>
-        <div><input type="checkbox" class="checkbox" id="">
-        <label for="category2"> placeholder</label></div>
-        <div><input type="checkbox" class="checkbox" id="">
-        <label for="category3"> placeholder</label></div>
-        <div><input type="checkbox" class="checkbox" id="">
-        <label for="category4"> placeholder</label></div>
+        <div id="filter-input-wrapper">
+        <h2>Small Plates</h2>
+        <div><input type="checkbox" class="checkbox" id="antipasti">
+        <label for="antipasti">Antipasti</label></div>
+        <div><input type="checkbox" class="checkbox" id="antipasto">
+        <label for="antipasto">Antipasto</label></div>
+        <div><input type="checkbox" class="checkbox" id="starter">
+        <label for="starter">Starter</label></div>
+        <div><input type="checkbox" class="checkbox" id="snack">
+        <label for="snack">Snack</label></div>
+        <div><input type="checkbox" class="checkbox" id="appetizer">
+        <label for="appetizer">Appetizer</label></div>
+        <div><input type="checkbox" class="checkbox" id="hor d'oeuvre">
+        <label for="hordoeuvre">Hor D'oeuvre</label></div>
+        <h2>Meals</h2>
+        <div><input type="checkbox" class="checkbox" id="breakfast">
+        <label for="breakfast">Breakfast</label></div>
+        <div><input type="checkbox" class="checkbox" id="morningmeal">
+       <label for="morningmeal">Morning Meal</label></div>
+        <div><input type="checkbox" class="checkbox" id="brunch">
+        <label for="brunch">Brunch</label></div>
+        <div><input type="checkbox" class="checkbox" id="lunch">
+        <label for="lunch">Lunch</label></div>
+        <div><input type="checkbox" class="checkbox" id="dinner">
+        <label for="dinner">Dinner</label></div>
+        <h2>Type</h2>
+        <div><input type="checkbox" class="checkbox" id="main course">
+        <label for="maincourse">Main Course</label></div>
+        <div><input type="checkbox" class="checkbox" id="main dish">
+        <label for="maindish">Main Dish</label></div>
+        <div><input type="checkbox" class="checkbox" id="side dish">
+        <label for="sidedish">Side Dish</label></div>
+        <div><input type="checkbox" class="checkbox" id="salad">
+        <label for="salad">Salad</label></div>
+        <div><input type="checkbox" class="checkbox" id="condiment">
+        <label for="condiment">Condiment</label></div>
+        <div><input type="checkbox" class="checkbox" id="dip">
+        <label for="dip">Dip</label></div>
+        <div><input type="checkbox" class="checkbox" id="spread">
+        <label for="spread">Spread</label></div>
+        </div>
       </section>
-
       <section class="recipe-tile-grid">
 
-        <section class="recipe-tile">
-        </section>
+        <div class="recipe-tile">
+          <input type="image" src="" id="tileImage"/>
+        </div>
 
+        </section>
       </section>
 
-    </section>  
-
     <section class="saved-recipes hidden">
+
+      <section class="recipe-tile-grid">
+      
+        <section class="recipe-tile">
+          <h3>""</h3>
+          <input type="image" src="" id="tileImage" />
+        </section>
+      
+      </section>
     </section>
 
     <section class="ingredients-needed">
@@ -108,7 +111,13 @@
         <img src="">
         <h4>directions</h4>
         <button class="previous-page">Previous Page</button>
+
+        <button class="save-recipe">Save Recipe</button>
+        <button class="remove-recipe hidden"></button>
+      </section>
+
     </section>
+
 
   </body>
   <!-- Do not include the scripts.js file here - it is done automatically by the webpack server -->
