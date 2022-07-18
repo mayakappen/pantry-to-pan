@@ -181,7 +181,6 @@ function grabCheckboxValues() {
 }
 
 function returnFiltered(repo) {
-repo.filtered = []
 grabCheckboxValues()
 console.log(checked)
 recipeTile.innerHTML = ``
@@ -193,10 +192,11 @@ return repo.filtered
 
 function displayFiltered(repo) {
 returnFiltered(repo)
-let filteredRecipes = repo.filtered.forEach((recipe) => {
-recipeTile.innerHTML += 
- `<input type="image" src="${recipe.image}" id="${recipe.id}"/><h3>"${recipe.name}"</h3>`;
-  });
+console.log(repo.filtered)
+var filteredRepo = repo.filtered.pop()
+var filteredRecipes = filteredRepo.forEach((recipe) => {
+  recipeTile.innerHTML += ` <input type="image" src="${recipe.image}" id="${recipe.id}"/><h3>"${recipe.name}"</h3>`
+})
   console.log(filteredRecipes)
   return filteredRecipes;
 }
