@@ -110,11 +110,11 @@ describe("Recipe", () => {
     expect(recipe1.tags).to.deep.equal(newRecipe.tags);
   });
 
-  it("Should determine the name of ingredients", () => {
+  it("Should be able measurements of ingredients", () => {
     expect(recipe1.getIngredients(newIngredients)).to.deep.equal([
-      "wheat flour",
-      "bicarbonate of soda",
-      "eggs",
+      "1.5 c wheat flour",
+      "0.5 tsp bicarbonate of soda",
+      "1 large eggs",
     ]);
   });
 
