@@ -8,11 +8,16 @@ import recipeData from "./data/recipes";
 import usersData from "./data/users";
 import ingredientsData from "./data/ingredients";
 import Recipe from "../src/classes/Recipe";
+import User from "../src/classes/User-class"
 //import "../data/ingredients.js";
 // import {userAPIData, ingredientAPIData, recipeAPIData} from './apiCalls';
 
 // 👇🏽 Global variables 👇🏽
 let recipeRepo = new RecipeRepository(recipeData);
+let randomUser = usersData[Math.floor(Math.random() * usersData.length)]
+console.log(randomUser)
+let user = new User(randomUser)
+console.log(user)
 let userAPIData;
 let ingredientAPIData;
 let recipeAPIData;
