@@ -8,9 +8,11 @@
  - Javascript
  - HTML
  - CSS
+ - TDD (Mocha/Chai)
+ - Fetch API
 
 ## Illustration
- ![From Pantry to Pan](<img width="2240" alt="Screen Shot 2022-07-18 at 11 28 03 PM" src="https://user-images.githubusercontent.com/102887963/179665726-8ab19947-96d8-48da-b2c3-d92ef8b8aeb3.png">)
+  <img width="2240" alt="Screen Shot 2022-07-18 at 11 28 03 PM" src="https://user-images.githubusercontent.com/102887963/179665726-8ab19947-96d8-48da-b2c3-d92ef8b8aeb3.png">
 
 ## Features
 - Filter recipe options by meal category, type of meal or dish by clicking a checkbox.
@@ -33,8 +35,8 @@ Visit our published From Pantry to Pan site! [here](https://drslmac.github.io/pa
 
 ## Sources
  - [MDN](http://developer.mozilla.org/en-US/)
- -[JavaTPoint](https://www.javatpoint.com/how-to-check-a-radio-button-using-javascript)
- -[YouTube](https://www.youtube.com/)
+ - [JavaTPoint](https://www.javatpoint.com/how-to-check-a-radio-button-using-javascript)
+ - [YouTube](https://www.youtube.com/)
  - [W3Schools](https://www.w3schools.com/)
 
 ## Contributors
