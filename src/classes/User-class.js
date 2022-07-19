@@ -13,7 +13,7 @@ class User {
     return this.toCook
   }
   removeRecipeToCook(recipe) {
-    return this.toCook.pop(recipe)
+    return this.toCook.find(recipe)
   }
   
 }

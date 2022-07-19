@@ -23,6 +23,7 @@ let userAPIData;
 let ingredientAPIData;
 let recipeAPIData;
 let savedRecipes = [];
+let currentRecipe;
 
 // Promise.all([userAPIData, ingredientAPIData, recipeAPIData]).then(data => data.json()).catch(error => console.log(error));
 
@@ -59,9 +60,10 @@ checkboxes.forEach((box) => {
   box.checked = false;
   box.addEventListener("change", () => displayFiltered(recipeRepo));
 });
-recipePage.addEventListener("click", viewRecipe);
+recipePage.addEventListener("click", (event)=> {saveThisRecipe(event)});
 searchButton.addEventListener("click", filterByName);
 searchInput.addEventListener("input", getInput);
+
 
 // 👇🏽 Filter recipes by tag
 function recipeByCategory(tag) {
@@ -112,17 +114,15 @@ function showHomeScreen() {
 showHomeScreen();
 recipeByCategory();
 
+
+
 function showSavedRecipes() {
-  const hideElements = [homeView, savedRecipeBtn];
-  const showElements = [
-    allRecipesView,
-    savedRecipesView,
-    homeBtn,
-    allRecipeBtn,
-  ];
+  const hideElements = [homeView, savedRecipeBtn, allRecipesView];
+  const showElements = [allRecipesView, savedRecipesView, homeBtn, allRecipeBtn];
   hideElements.forEach((element) => element.classList.add("hidden"));
   showElements.forEach((element) => element.classList.remove("hidden"));
   recipeTile.innerHTML = "";
+  user.toCook.shift();
   const savedRecipes = user.toCook.forEach((recipe) => {
     recipeTile.innerHTML += `<input type="image" src="${recipe.image}" id="${recipe.id}"/><h3>"${recipe.name}"</h3>`;
   });
@@ -132,7 +132,6 @@ function showPantry() {
   window.alert("This page is under construction!");
 }
 
-let recipeCard = new Recipe(recipeData[0]);
 function addRecipeCards() {
   const allRecipes = recipeRepo.recipes.forEach((recipe) => {
     recipeTile.innerHTML += `<input type="image" src="${recipe.image}" id="${recipe.id}"/><h3>"${recipe.name}"</h3>`;
@@ -140,6 +139,15 @@ function addRecipeCards() {
   return allRecipes;
 }
 addRecipeCards();
+
+function saveThisRecipe(ev) {
+    user.recipeToCook(currentRecipe);
+}
+
+function removeThisRecipe(ev) {
+    user.removeRecipeToCook(currentRecipe)
+}
+
 
 function viewRecipe(ev) {
   const hideElements = [homeView, allRecipesView, savedRecipesView];
@@ -151,9 +159,9 @@ function viewRecipe(ev) {
   recipeData.forEach((recipe) => {
     if (recipe.id === targetRecipeId) {
       const recipeInfo = recipeRepo.getById(targetRecipeId);
-      const currentRecipe = new Recipe(recipeInfo);
+      currentRecipe = new Recipe(recipeInfo);
 
-      recipePage.innerHTML = `<h2 class="recipePageName">${recipe.name}</h2>
+      recipePage.innerHTML = `<h2 class="recipePageName" id="${recipe.id}">${recipe.name}</h2>
       <img src="${recipe.image}">
       <h4>
         <ol>
@@ -166,8 +174,9 @@ function viewRecipe(ev) {
       </h4>
       <h4>${currentRecipe.getIngredients(ingredientsData)}</h4>
       <h4>${currentRecipe.getCost()}</h4>`;
-    }
-  });
+        }
+    });
+    recipePage.innerHTML += `<button class="save-this-recipe">Save this recipe!</button>`;
 }
 
 let checked = [];
@@ -218,38 +227,3 @@ function filterByName() {
   }
   return result;
 }
-
-function saveThisRecipe() {
-  //savedRecipes.push()
-  //recipe information added to array
-  //set this.id to date.time
-  //
-  //replace save button with remove button
-  //update saved page
-}
-
-// function addRecipeCards() {
-//     const allRecipies = recipeRepo.recipes.forEach((recipe) => {
-//       recipeTile.innerHTML += `<input type="image" src="${recipe.image}" id="${recipe.id}"/><h3>"${recipe.name}"</h3>`;
-//     });
-//     return allRecipies;
-//     //allRecipeGrid.innerHTML += recipeTile;
-//     //return newRecipeCard;
-//   }
-
-/*
-// As a user, I should be able to add/remove a recipe to a list of recipes to cook
-// click saved recipes
-// hide main page
-// show grid of saved recipes
-// functionality to save or delete, similar to book covers
-//Make a class for saved recipes?
-//Add save recipe button to recipe card.
-//Save button adds save class to recipe card.
-//Removes save button and adds delete button.
-//If recipe card id contains "save" push to array.
-//Delete button will search saved array for recipe id and remove it.
-//Update saved grid
-to add to saved array, we need button to save recipe at bottom of recipe page, adds a saved class, and change add button to remove button, which will remove saved class
-saved recipe grid will filter to only show recipes with saved class when we hit saved recipes button
-*/
