@@ -84,6 +84,7 @@ function showAllRecipes() {
   const showElements = [allRecipesView, homeBtn, savedRecipeBtn];
   hideElements.forEach((element) => element.classList.add("hidden"));
   showElements.forEach((element) => element.classList.remove("hidden"));
+  addRecipeCards();
 }
 
 function showHomeScreen() {
