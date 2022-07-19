@@ -32,9 +32,6 @@ class Recipe {
   }
 
   getCost() {
-    console.log("this.ingredients", this.ingredients);
-    console.log("this.ingredientsNeeded", this.ingredientsNeeded);
-    console.log("this.id", this.id);
     let totalCost = 0;
     let figureTotalCost = this.ingredients.forEach((ingredient) => {
       this.ingredientsNeeded.forEach((item) => {

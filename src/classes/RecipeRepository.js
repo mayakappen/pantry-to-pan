@@ -1,7 +1,6 @@
 class RecipeRepository {
   constructor(cookbook) {
     this.recipes = cookbook;
-    // One class to get you started!
   }
   filterTag(tag) {
     this.filtered = [];
