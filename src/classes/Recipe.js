@@ -1,5 +1,3 @@
-import ingredientsData from "../data/ingredients";
-
 class Recipe {
   constructor(recipeInfo) {
     this.id = recipeInfo.id;
@@ -12,16 +10,21 @@ class Recipe {
   }
 
   getIngredients(ingredients) {
-    const ingredientDetails = this.ingredients.reduce((acc, measurement) => {
-      let name = ingredientsData.find(
-        (ingredient) => measurement.id === ingredient.id
-      );
-      let measurementInfo = `  ${measurement.quantity.amount} ${measurement.quantity.unit} ${name.name}`;
-      acc.push(measurementInfo);
-      return acc;
-    }, []);
-    console.log(ingredientDetails);
-    return ingredientDetails;
+    const ingredientIds = this.ingredients.map((ingredient) => {
+      return ingredient.id;
+    });
+    const filteredIngredients = ingredients.filter((ingredient) => {
+      if (ingredientIds.includes(ingredient.id)) {
+        return ingredient;
+      }
+    });
+    filteredIngredients.forEach((ingredient) => {
+      this.ingredientsNeeded.push(ingredient);
+    });
+    const ingredientNames = this.ingredientsNeeded.map(
+      (ingredient) => ingredient.name
+    );
+    return ingredientNames;
   }
 
   getInstructions() {
@@ -29,14 +32,18 @@ class Recipe {
   }
 
   getCost() {
-    const ingredientCost = this.ingredients.reduce((acc, amount) => {
-      let cost = ingredientsData.find(
-        (ingredient) => amount.id === ingredient.id
-      );
-      acc += amount.quantity.amount * cost.estimatedCostInCents;
-      return acc;
-    }, 0);
-    return `$${(ingredientCost / 100).toFixed(2)}`;
+    console.log("this.ingredients", this.ingredients);
+    console.log("this.ingredientsNeeded", this.ingredientsNeeded);
+    console.log("this.id", this.id);
+    let totalCost = 0;
+    let figureTotalCost = this.ingredients.forEach((ingredient) => {
+      this.ingredientsNeeded.forEach((item) => {
+        if (ingredient.id === item.id) {
+          totalCost += ingredient.quantity.amount * item.estimatedCostInCents;
+        }
+      });
+    });
+    return `$${(totalCost / 100).toFixed(2)}`;
   }
 }
 

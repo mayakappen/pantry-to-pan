@@ -1,30 +1,42 @@
 import "./styles.css";
-import apiCalls from "./apiCalls";
+import { usersAPIData, ingredientsAPIData, recipeAPIData } from './apiCalls';
 // An example of how you tell webpack to use an image (also need to link to it in the index.html)
 import "./images/turing-logo.png";
 import "./images/banner-design.png";
 import RecipeRepository from "../src/classes/RecipeRepository";
-import recipeData from "./data/recipes";
-import usersData from "./data/users";
-import ingredientsData from "./data/ingredients";
+// import recipeData from "./data/recipes";
+// import usersData from "./data/users";
+// import ingredientsData from "./data/ingredients";
 import Recipe from "../src/classes/Recipe";
 import User from "../src/classes/User-class";
 //import "../data/ingredients.js";
-// import {userAPIData, ingredientAPIData, recipeAPIData} from './apiCalls';
 
-// 👇🏽 Global variables 👇🏽
-let recipeRepo = new RecipeRepository(recipeData);
-let randomUser = usersData[Math.floor(Math.random() * usersData.length)];
-console.log(randomUser);
-let user = new User(randomUser);
-console.log(user);
-let userAPIData;
-let ingredientAPIData;
-let recipeAPIData;
+// Promise.all([usersAPIData, ingredientsAPIData, recipeAPIData])
+// console.log(usersAPIData)
+// console.log(ingredientsAPIData)
+// console.log(recipeAPIData)
+// // 👇🏽 Global variables 👇🏽
 let savedRecipes = [];
+let recipeRepo;
+let user;
+let recipeData;
+let usersData;
 
-// Promise.all([userAPIData, ingredientAPIData, recipeAPIData]).then(data => data.json()).catch(error => console.log(error));
+function getPromises() {
+Promise.all([usersAPIData, recipeAPIData, ingredientsAPIData]).then(data => {
+  usersData = data[0].usersData;
+  console.log(usersData)
+  recipeData = data[1].recipeData;
+  user = new User(usersData[getRandomIndex(usersData)])
+  console.log(user)
+  recipeRepo = new RecipeRepository(recipeData)
+  showHomeScreen()
+})
+}
 
+
+
+// // 👇🏽 Query Selectors👇🏽
 const allRecipeBtn = document.querySelector("#all-recipe-button");
 const allRecipesView = document.querySelector(".filter-panel");
 const homeBtn = document.querySelector("#home-button");
@@ -49,6 +61,7 @@ const lunchCategory = document.getElementById("lunch");
 const dinnerCategory = document.getElementById("dinner");
 
 // 👇🏽 Event Handlers & Functions 👇🏽
+window.addEventListener("load", getPromises)
 allRecipeBtn.addEventListener("click", showAllRecipes);
 homeBtn.addEventListener("click", showHomeScreen);
 savedRecipeBtn.addEventListener("click", showSavedRecipes);
@@ -64,15 +77,20 @@ searchButton.addEventListener("click", filterByName);
 searchInput.addEventListener("input", getInput);
 
 
-// 👇🏽 Filter recipes by tag
-function recipeByCategory(tag) {
-  recipeRepo.filterTag(tag);
-  return recipeRepo.filtered;
-}
+console.log(recipeRepo)
+console.log(usersData)
+console.log(recipeData)
 
-breakfastCategory.addEventListener("click", recipeByCategory("breakfast"));
-lunchCategory.addEventListener("click", recipeByCategory("lunch"));
-dinnerCategory.addEventListener("click", recipeByCategory("dinner"));
+
+// 👇🏽 Filter recipes by tag
+// function recipeByCategory(tag) {
+//   recipeRepo.filterTag(tag);
+//   return recipeRepo.filtered;
+// }
+
+// breakfastCategory.addEventListener("click", recipeByCategory("breakfast"));
+// lunchCategory.addEventListener("click", recipeByCategory("lunch"));
+// dinnerCategory.addEventListener("click", recipeByCategory("dinner"));
 allRecipeBtn.addEventListener("click", showAllRecipes);
 homeBtn.addEventListener("click", showHomeScreen);
 savedRecipeBtn.addEventListener("click", showSavedRecipes);
@@ -83,6 +101,7 @@ function showAllRecipes() {
   const showElements = [allRecipesView, homeBtn, savedRecipeBtn];
   hideElements.forEach((element) => element.classList.add("hidden"));
   showElements.forEach((element) => element.classList.remove("hidden"));
+  addRecipeCards(recipeRepo);
 }
 
 function showHomeScreen() {
@@ -90,28 +109,33 @@ function showHomeScreen() {
   const showElements = [homeView, allRecipeBtn, savedRecipeBtn];
   hideElements.forEach((element) => element.classList.add("hidden"));
   showElements.forEach((element) => element.classList.remove("hidden"));
-  homeView.innerHTML = `<button class="home-category-panel" id="breakfast">
-        <h2 class="homeViewTitle">Breakfast</h2>
-        <input type="image" alt="breakfastPic" src="${
-          recipeByCategory("breakfast")[0][0].image
-        }" id="breakfastImage" />
-  </button>
-      <button class="home-category-panel" id="lunch">
-        <h2 class="homeViewTitle">Lunch</h2>
-        <input type="image" alt="lunchPic" src="${
-          recipeByCategory("lunch")[0][0].image
-        }" id="lunchImage"/>
-      </button>
-      <button class="home-category-panel" id="dinner">
-        <h2 class="homeViewTitle">Dinner</h2>
-        <input type="image" alt="dinnerPic" src="${
-          recipeByCategory("dinner")[0][1].image
-        }" id="dinnerImage"/>
-      </button>`;
+//   homeView.innerHTML = `<button class="home-category-panel" id="breakfast">
+//         <h2 class="homeViewTitle">Breakfast</h2>
+//         <input type="image" alt="breakfastPic" src="${
+//           recipeByCategory("breakfast")[0][0].image
+//         }" id="breakfastImage" />
+//   </button>
+//       <button class="home-category-panel" id="lunch">
+//         <h2 class="homeViewTitle">Lunch</h2>
+//         <input type="image" alt="lunchPic" src="${
+//           recipeByCategory("lunch")[0][0].image
+//         }" id="lunchImage"/>
+//       </button>
+//       <button class="home-category-panel" id="dinner">
+//         <h2 class="homeViewTitle">Dinner</h2>
+//         <input type="image" alt="dinnerPic" src="${
+//           recipeByCategory("dinner")[0][1].image
+//         }" id="dinnerImage"/>
+//       </button>`;
+// }
 }
 
 showHomeScreen();
-recipeByCategory();
+// recipeByCategory();
+
+function getRandomIndex(arr) {
+  return Math.floor(Math.random() * arr.length);
+}
 
 function showSavedRecipes() {
   const hideElements = [homeView, allRecipesView, savedRecipeBtn];
@@ -124,14 +148,14 @@ function showPantry() {
   window.alert("This page is under construction!");
 }
 
-let recipeCard = new Recipe(recipeData[0]);
-function addRecipeCards() {
-  const allRecipes = recipeRepo.recipes.forEach((recipe) => {
+
+function addRecipeCards(repo) {
+  const allRecipes = repo.recipes.forEach((recipe) => {
     recipeTile.innerHTML += `<input type="image" src="${recipe.image}" id="${recipe.id}"/><h3>"${recipe.name}"</h3>`;
   });
   return allRecipes;
 }
-addRecipeCards();
+
 
 function viewRecipe(ev) {
   const hideElements = [homeView, allRecipesView, savedRecipesView];
