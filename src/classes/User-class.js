@@ -3,19 +3,20 @@
 
 class User {
   constructor(newUser) {
-    this.name = newUser.name
-    this.id = newUser.id
-    this.pantry = newUser.pantry
-    this.toCook = []
+    this.name = newUser.name;
+    this.id = newUser.id;
+    this.pantry = newUser.pantry;
+    this.toCook = [];
   }
-  recipeToCook(recipe) {
-    this.toCook.push(recipe)
-    return this.toCook
+  saveRecipe(recipeId) {
+    if (!this.toCook.includes(recipeId)) {
+      this.toCook.push(recipeId);
+    }
+    return this.toCook;
   }
-  removeRecipeToCook(recipe) {
-    return this.toCook.find(recipe)
+  deleteRecipe(recipeId) {
+    this.toCook = this.toCook.filter((id) => id !== recipeId);
   }
-  
 }
 
 export default User;

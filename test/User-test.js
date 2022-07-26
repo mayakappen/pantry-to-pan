@@ -1,15 +1,10 @@
 import { expect } from "chai";
 import User from "../src/classes/User-class";
-//import Recipe from "../src/classes/Recipe";
-// import RecipeRepository from '../src/classes/RecipeRepository';
-//import { recipeData } from "../data/recipes.js";
-//import { userData } from "../data/users.js";
 
 describe("User", () => {
   let user1;
   let user2;
   let recipe1;
-  // let recipeRepository = new RecipeRepository(recipeData)
   beforeEach(() => {
     user1 = new User({
       name: "Saige O'Kon",
@@ -29,7 +24,6 @@ describe("User", () => {
         },
       ],
     });
-    //why do we have an array of objects? instead of one object as the argument
     user2 = new User({
       name: "Ephraim Goyette",
       id: 2,
@@ -132,36 +126,27 @@ describe("User", () => {
     expect(user2.pantry[0].amount).to.equal(3);
   });
 
-  // it("should pull a recipe from the recipe scripts", () => {
-  //   console.log(recipeData);
-  //   expect(recipeToCook()).to.be.equal(recipeData[0].id);
-  // });
-
   it("should add a recipe to an array", () => {
     expect(user1.toCook.length).to.equal(0);
-    //need to call as a method
-    //method takes the "recipe" object  as a parameter
-    //converts to Recipe class and pushes to this.toCook array
-    user1.recipeToCook(recipe1);
+    user1.saveRecipe(recipe1);
     expect(user1.toCook[0]).to.equal(recipe1);
 
     expect(user1.toCook.length).to.equal(1);
   });
 
   it("should contain an object in the array of recipes", () => {
-    user1.recipeToCook(recipe1);
+    user1.saveRecipe(recipe1);
     expect(user1.toCook[0]).to.be.an("object");
   });
 
-  
   it("should delete an object from the array of recipes", () => {
-    user1.recipeToCook(recipe1);
+    user1.saveRecipe(recipe1);
     expect(user1.toCook.length).to.equal(1);
     expect(user1.toCook[0].name).to.equal(
       "Loaded Chocolate Chip Pudding Cookie Cups"
     );
 
-    user1.removeRecipeToCook(recipe1);
+    user1.deleteRecipe(recipe1);
     expect(user1.toCook.length).to.equal(0);
   });
 });

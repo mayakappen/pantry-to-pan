@@ -67,11 +67,6 @@ describe("Recipe", () => {
         name: "eggs",
         estimatedCostInCents: 472,
       },
-      {
-        id: 9003,
-        name: "apple",
-        estimatedCostInCents: 207,
-      },
     ];
     recipe1 = new Recipe(newRecipe);
   });
@@ -110,6 +105,10 @@ describe("Recipe", () => {
     expect(recipe1.tags).to.deep.equal(newRecipe.tags);
   });
 
+  // it('Should provide an ID for the ingredient', () => {
+  //   expect(recipe1.getIngredientID())
+  // })
+
   it("Should be able to get measurements of ingredients", () => {
     expect(recipe1.getIngredients(newIngredients)).to.deep.equal([
       "  1.5 c wheat flour",
@@ -140,6 +139,6 @@ describe("Recipe", () => {
   it("Should determine the cost of ingredients", () => {
     recipe1.getIngredients(newIngredients);
 
-    expect(recipe1.getCost()).to.equal("$9.76");
+    expect(recipe1.getCost(newIngredients)).to.equal("$9.76");
   });
 });
