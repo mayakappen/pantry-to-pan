@@ -81,7 +81,7 @@ function handleFavorite(event) {
 }
 
 function showRecipeDetails() {
-  const recipeTitles = document.querySelectorAll(".recipe-title");
+  const recipeTitles = document.querySelectorAll(".recipe-image");
   recipeTitles.forEach((recipeTitle) => {
     recipeTitle.addEventListener("click", viewRecipeDetails);
   })
@@ -98,16 +98,16 @@ function favoriteButton() {
   });
 }
 
-function removeButton() {
-  const removeFavorite = document.querySelectorAll(".removeButton");
-  removeFavorite.forEach((removeButton) => {
-    removeButton.addEventListener("click", handleRemove)
-  })
-}
+// function removeButton() {
+//   const removeFavorite = document.querySelectorAll(".removeButton");
+//   removeFavorite.forEach((removeButton) => {
+//     removeButton.addEventListener("click", handleRemove)
+//   })
+// }
 
-function handleRemove(event) {
-  
-}
+// function handleRemove(event) {
+
+// }
 
 //GET A RANDOM USER FUNCTION
 function getRandomIndex(arr) {
@@ -157,7 +157,7 @@ function showSavedRecipes() {
     if (matchedRecipe) {
       recipeTiles.innerHTML += `
       <section class="recipe-title">
-      <input type="image" src="${matchedRecipe.image}" id="${matchedRecipe.id}"/>
+      <input class="recipe-image" type="image" src="${matchedRecipe.image}" id="${matchedRecipe.id}"/>
       <h3>"${matchedRecipe.name}"</h3>
       <button class="removeButton" role="button" id="fav-${matchedRecipe.id}">Remove</button>
       </section>`
@@ -172,7 +172,7 @@ function addRecipeTiles(repo) {
   repo.recipes.forEach((recipe) => {
     recipeTiles.innerHTML += `
     <section class="recipe-title">
-    <input type="image" src="${recipe.image}" id="${recipe.id}"/>
+    <input class="recipe-image" type="image" src="${recipe.image}" id="${recipe.id}"/>
     <h3>"${recipe.name}"</h3>
     <button class="favBtn" role="button" id="fav-${recipe.id}">Favorite</button>
     </section>`
@@ -213,18 +213,7 @@ function viewRecipeDetails(event) {
       }
     });
   }
-  
-  // Function for show recipe details page
-  // function viewRecipeDetailsPage() {
-  //   viewRecipeDetails()
-  //   hide(homeView);
-  //   hide(filterPanel);
-  //   hide(savedRecipesView);
-  //   view(homeBtn);
-  //   view(allRecipeBtn);
-  //   view(savedRecipeBtn);
-  //   view(recipePage);
-  // }
+
   
 // SHOW PANTRY ITEMS
 function showPantry() {
@@ -261,8 +250,14 @@ function displayFiltered(repo) {
   } else {
     var filteredRepo = repo.filtered.pop();
     var filteredRecipes = filteredRepo.forEach((recipe) => {
-      recipeTiles.innerHTML += ` <input type="image" src="${recipe.image}" id="${recipe.id}"/><h3>"${recipe.name}"</h3>`;
+      recipeTiles.innerHTML += `
+      <section class="recipe-title">
+      <input type="image" src="${recipe.image}" id="${recipe.id}"/>
+      <h3>"${recipe.name}"</h3>
+      <button class="favBtn" role="button" id="fav-${recipe.id}">Favorite</button>
+      </section>`
     });
+    favoriteButton()
     return filteredRecipes;
   }
 }
