@@ -74,21 +74,34 @@ function removeAllChildNodes(parent) {
   }
 }
 
+function hidden(element) {
+  element.classList.add('hidden')
+}
+
+function show(element) {
+  element.classList.remove('hidden')
+}
+
 // HOME SCREEN
 function showHomeScreen() {
-  const hideElements = [allRecipesView, savedRecipesView, homeBtn];
-  const showElements = [homeView, allRecipeBtn, savedRecipeBtn];
-  hideElements.forEach((element) => element.classList.add("hidden"));
-  showElements.forEach((element) => element.classList.remove("hidden"));
+  hidden(allRecipesView);
+  hidden(savedRecipesView);
+  hidden(homeBtn);
+  show(homeView)
+  show(allRecipeBtn)
+  show(savedRecipeBtn)
 }
 showHomeScreen();
 
-// SHOW RECIPIES
+// SHOW RECIPES
 function showAllRecipes() {
-  const hideElements = [homeView, allRecipeBtn, savedRecipesView, recipePage];
-  const showElements = [allRecipesView, homeBtn, savedRecipeBtn];
-  hideElements.forEach((element) => element.classList.add("hidden"));
-  showElements.forEach((element) => element.classList.remove("hidden"));
+  hidden(homeView);
+  hidden(allRecipeBtn);
+  hidden(savedRecipesView);
+  hidden(recipePage);
+  show(allRecipesView);
+  show(homeBtn);
+  show(savedRecipeBtn);
   removeAllChildNodes(recipeTiles);
   addRecipeTiles(recipeRepo);
 }
@@ -100,15 +113,14 @@ function getRandomIndex(arr) {
 
 //SAVED RECIPE SCREEN
 function showSavedRecipes() {
-  const hideElements = [homeView, savedRecipeBtn, allRecipesView];
-  const showElements = [
-    allRecipesView,
-    savedRecipesView,
-    homeBtn,
-    allRecipeBtn,
-  ];
-  hideElements.forEach((element) => element.classList.add("hidden"));
-  showElements.forEach((element) => element.classList.remove("hidden"));
+  hidden(homeView);
+  hidden(savedRecipeBtn);
+  hidden(allRecipesView);
+  show(allRecipesView);
+  show(savedRecipesView);
+  show(homeBtn);
+  show(allRecipeBtn);
+
   recipeTiles.innerHTML = "";
   user.toCook.forEach((recipeId) => {
     const matchedRecipe = recipeRepo.recipes.find((recipe) => {
@@ -136,17 +148,15 @@ function handleFavorite(event) {
 //   user.removeRecipeToCook(currentRecipe);
 // }
 
-// SHOW PANTRY ITEMS
-function showPantry() {
-  window.alert("This page is under construction!");
-}
 
 //ADD A RECIPE CARD GRID
 //maybe make this function a helper function that can be added to showAllRecipes or savedRecipes view
 //because we can keep trying to interpolate this, or just invoke the function when needed
 function addRecipeTiles(repo) {
   repo.recipes.forEach((recipe) => {
-    recipeTiles.innerHTML += `<section class="recipe-title"><input type="image" class="individual-recipe-tile" src="${recipe.image}" id="${recipe.id}"/><h3>"${recipe.name}"</h3></section><div class="heart" id="fav-${recipe.id}">Fave</div>`;
+    recipeTiles.innerHTML += `<section class="recipe-title"><input type="image" class="individual-recipe-tile" src="${recipe.image}" id="${recipe.id}"/><h3>"${recipe.name}"</h3></section>
+    <img class="add-to-favorites-icon" src="../src/images/heart.png">`
+    //<img class="heart" id="fav-${recipe.id}" src="/images/empty-heart.png">`;//
   });
   const recipeTitles = document.querySelectorAll(".recipe-title");
   recipeTitles.forEach((recipeTitle) => {
@@ -159,43 +169,51 @@ function addRecipeTiles(repo) {
 }
 
 // function addSingleRecipeTiles() {
-//   console.log("Hello");
-// }
-
-// VIEW RECIPE CARD FOR SHOW RECIPE
-function viewRecipe(ev) {
-  const hideElements = [homeView, allRecipesView, savedRecipesView];
-  const showElements = [homeBtn, allRecipeBtn, savedRecipeBtn, recipePage];
-  hideElements.forEach((element) => element.classList.add("hidden"));
-  showElements.forEach((element) => element.classList.remove("hidden"));
-  const targetRecipeId = parseInt(ev.target.id);
-
-  recipeData.forEach((recipe) => {
-    if (recipe.id === targetRecipeId) {
-      const recipeInfo = recipeRepo.getById(targetRecipeId);
-      const currentRecipe = new Recipe(recipeInfo);
-
-      recipePage.innerHTML = `<h2 class="recipePageName" id="${recipe.id}">${
-        recipe.name
-      }</h2>
-      <img src="${recipe.image}">
-      <h4>
+  //   console.log("Hello");
+  // }
+  
+  // VIEW RECIPE CARD FOR SHOW RECIPE
+  function viewRecipe(ev) {
+    const hideElements = [homeView, allRecipesView, savedRecipesView];
+    const showElements = [homeBtn, allRecipeBtn, savedRecipeBtn, recipePage];
+    hideElements.forEach((element) => element.classList.add("hidden"));
+    showElements.forEach((element) => element.classList.remove("hidden"));
+    const targetRecipeId = parseInt(ev.target.id);
+    
+    recipeData.forEach((recipe) => {
+      if (recipe.id === targetRecipeId) {
+        const recipeInfo = recipeRepo.getById(targetRecipeId);
+        const currentRecipe = new Recipe(recipeInfo);
+        
+        recipePage.innerHTML = `<h2 class="recipePageName" id="${recipe.id}">${
+          recipe.name
+        }</h2>
+        <img src="${recipe.image}">
+        <h4>
         <ol>
-          ${recipe.instructions
-            .map((instruction) => {
-              return `<li>${instruction.instruction}</li>`;
-            })
-            .join("")}
-        </ol>
-      </h4>
-      <h4>${currentRecipe.getIngredients(ingredientsData)}</h4>
-      <h4>${currentRecipe.getCost(ingredientsData)}</h4>`;
+        ${recipe.instructions
+          .map((instruction) => {
+            return `<li>${instruction.instruction}</li>`;
+          })
+          .join("")}
+          </ol>
+          </h4>
+          <h4>${currentRecipe.getIngredients(ingredientsData)}</h4>
+          <h4>${currentRecipe.getCost(ingredientsData)}</h4>`;
+        }
+      });
+      //recipePage.innerHTML += `<button class="save-this-recipe">Save this recipe!</button>`;
+      //showSavedRecipes();
     }
-  });
-  //recipePage.innerHTML += `<button class="save-this-recipe">Save this recipe!</button>`;
-  //showSavedRecipes();
-}
+    
+    
+// SHOW PANTRY ITEMS
+function showPantry() {
+  window.alert("This page is under construction!");
+  }
 
+
+//~~~~~~~~~~ FILTER FUNCTIONS ~~~~~~~~
 // CHECK BOXES
 let checked = [];
 function grabCheckboxValues() {
