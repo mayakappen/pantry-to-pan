@@ -118,7 +118,8 @@ h2, h3, h4 {
   width: 26vw;
 }
 
-.favBtn {
+.favBtn,
+.removeButton {
   appearance: none;
   background-color: #FFFFFF;
   border-radius: 40em;
@@ -144,18 +145,21 @@ h2, h3, h4 {
   touch-action: manipulation;
 }
 
-.favBtn:hover {
+.favBtn:hover,
+.removeButton:hover {
   background-color: #FFC229;
   box-shadow: #FF6314 0 -6px 8px inset;
   transform: scale(1.125);
 }
 
-.favBtn:active {
+.favBtn:active,
+.removeButton {
   transform: scale(1.025);
 }
 
 @media (min-width: 768px) {
-  .favBtn {
+  .favBtn,
+  .removeButton {
     font-size: 1.5rem;
     padding: .75rem 2rem;
   }
