@@ -67,11 +67,20 @@ homeBtn.addEventListener("click", showHomeScreen);
 savedRecipeBtn.addEventListener("click", showSavedRecipes);
 pantryBtn.addEventListener("click", showPantry);
 
-//HELPER FUNCTIONS
+// HELPER FUNCTIONS
 function removeAllChildNodes(parent) {
   while (parent.firstChild) {
     parent.removeChild(parent.firstChild);
   }
+}
+
+// VIEW/HIDE FUNCTION
+function view(element) {
+  element.classList.remove("hidden");
+}
+
+function hide(element) {
+  element.classList.add("hidden");
 }
 
 // HOME SCREEN
@@ -150,7 +159,7 @@ function addRecipeTiles(repo) {
   });
   const recipeTitles = document.querySelectorAll(".recipe-title");
   recipeTitles.forEach((recipeTitle) => {
-    recipeTitle.addEventListener("click", viewRecipe);
+    recipeTitle.addEventListener("click", viewRecipeDetails);
   });
   const favoriteHearts = document.querySelectorAll(".heart");
   favoriteHearts.forEach((favoriteHeart) => {
@@ -158,17 +167,27 @@ function addRecipeTiles(repo) {
   });
 }
 
-// function addSingleRecipeTiles() {
-//   console.log("Hello");
-// }
-
+// Function for show recipe details page
+function viewRecipeDetailsPage(event) {
+  const targetRecipeId = parseInt(event.target.id);
+  if (event.target.classList.contains(targetRecipeId)) {
+    hide(homeView);
+    hide(allRecipesView);
+    hide(savedRecipesView);
+    show(homeBtn);
+    show(allRecipeBtn);
+    show(savedRecipeBtn);
+    show(recipePage);
+  }
+  viewRecipeDetails();
+}
 // VIEW RECIPE CARD FOR SHOW RECIPE
-function viewRecipe(ev) {
-  const hideElements = [homeView, allRecipesView, savedRecipesView];
-  const showElements = [homeBtn, allRecipeBtn, savedRecipeBtn, recipePage];
-  hideElements.forEach((element) => element.classList.add("hidden"));
-  showElements.forEach((element) => element.classList.remove("hidden"));
-  const targetRecipeId = parseInt(ev.target.id);
+function viewRecipeDetails() {
+  // const hideElements = [homeView, allRecipesView, savedRecipesView];
+  // const showElements = [homeBtn, allRecipeBtn, savedRecipeBtn, recipePage];
+  // hideElements.forEach((element) => element.classList.add("hidden"));
+  // showElements.forEach((element) => element.classList.remove("hidden"));
+  // const targetRecipeId = parseInt(event.target.id);
 
   recipeData.forEach((recipe) => {
     if (recipe.id === targetRecipeId) {
