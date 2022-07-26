@@ -28,7 +28,7 @@ function getPromises() {
 
 // SELECTORS
 const allRecipeBtn = document.querySelector("#all-recipe-button");
-const allRecipesView = document.querySelector(".filter-panel");
+const filterPanel = document.querySelector(".filter-panel");
 const homeBtn = document.querySelector("#home-button");
 const homeView = document.querySelector(".home-view");
 const savedRecipeBtn = document.querySelector("#saved-button");
@@ -74,34 +74,34 @@ function removeAllChildNodes(parent) {
   }
 }
 
-function hidden(element) {
+function hide(element) {
   element.classList.add('hidden')
 }
 
-function show(element) {
+function view(element) {
   element.classList.remove('hidden')
 }
 
 // HOME SCREEN
 function showHomeScreen() {
-  hidden(allRecipesView);
-  hidden(savedRecipesView);
-  hidden(homeBtn);
-  show(homeView)
-  show(allRecipeBtn)
-  show(savedRecipeBtn)
+  hide(filterPanel);
+  hide(savedRecipesView);
+  hide(homeBtn);
+  view(homeView)
+  view(allRecipeBtn)
+  view(savedRecipeBtn)
 }
 showHomeScreen();
 
 // SHOW RECIPES
 function showAllRecipes() {
-  hidden(homeView);
-  hidden(allRecipeBtn);
-  hidden(savedRecipesView);
-  hidden(recipePage);
-  show(allRecipesView);
-  show(homeBtn);
-  show(savedRecipeBtn);
+  hide(homeView);
+  hide(allRecipeBtn);
+  hide(savedRecipesView);
+  hide(recipePage);
+  view(filterPanel);
+  view(homeBtn);
+  view(savedRecipeBtn);
   removeAllChildNodes(recipeTiles);
   addRecipeTiles(recipeRepo);
 }
@@ -113,13 +113,12 @@ function getRandomIndex(arr) {
 
 //SAVED RECIPE SCREEN
 function showSavedRecipes() {
-  hidden(homeView);
-  hidden(savedRecipeBtn);
-  hidden(allRecipesView);
-  show(allRecipesView);
-  show(savedRecipesView);
-  show(homeBtn);
-  show(allRecipeBtn);
+  hide(homeView);
+  hide(savedRecipeBtn);
+  view(filterPanel);
+  view(savedRecipesView);
+  view(homeBtn);
+  view(allRecipeBtn);
 
   recipeTiles.innerHTML = "";
   user.toCook.forEach((recipeId) => {
@@ -154,15 +153,15 @@ function handleFavorite(event) {
 //because we can keep trying to interpolate this, or just invoke the function when needed
 function addRecipeTiles(repo) {
   repo.recipes.forEach((recipe) => {
-    recipeTiles.innerHTML += `<section class="recipe-title"><input type="image" class="individual-recipe-tile" src="${recipe.image}" id="${recipe.id}"/><h3>"${recipe.name}"</h3></section>
-    <img class="add-to-favorites-icon" src="../src/images/heart.png">`
-    //<img class="heart" id="fav-${recipe.id}" src="/images/empty-heart.png">`;//
+    recipeTiles.innerHTML += `<section class="recipe-title"><input type="image" class="individual-recipe-tile" src="${recipe.image}" id="${recipe.id}"/><h3>"${recipe.name}"</h3>
+    <button class="favBtn" role="button" id="fav-${recipe.id}">Favorite</button>
+    </section>`
   });
   const recipeTitles = document.querySelectorAll(".recipe-title");
   recipeTitles.forEach((recipeTitle) => {
     recipeTitle.addEventListener("click", viewRecipe);
   });
-  const favoriteHearts = document.querySelectorAll(".heart");
+  const favoriteHearts = document.querySelectorAll(".favBtn");
   favoriteHearts.forEach((favoriteHeart) => {
     favoriteHeart.addEventListener("click", handleFavorite);
   });
@@ -174,10 +173,13 @@ function addRecipeTiles(repo) {
   
   // VIEW RECIPE CARD FOR SHOW RECIPE
   function viewRecipe(ev) {
-    const hideElements = [homeView, allRecipesView, savedRecipesView];
-    const showElements = [homeBtn, allRecipeBtn, savedRecipeBtn, recipePage];
-    hideElements.forEach((element) => element.classList.add("hidden"));
-    showElements.forEach((element) => element.classList.remove("hidden"));
+    hide(homeView);
+    hide(filterPanel);
+    hide(savedRecipesView);
+    view(homeBtn);
+    view(allRecipeBtn);
+    view(savedRecipeBtn);
+    view(recipePage);
     const targetRecipeId = parseInt(ev.target.id);
     
     recipeData.forEach((recipe) => {
@@ -202,8 +204,8 @@ function addRecipeTiles(repo) {
           <h4>${currentRecipe.getCost(ingredientsData)}</h4>`;
         }
       });
-      //recipePage.innerHTML += `<button class="save-this-recipe">Save this recipe!</button>`;
-      //showSavedRecipes();
+      // recipePage.innerHTML += `<button class="save-this-recipe">Save this recipe!</button>`;
+      // showSavedRecipes();
     }
     
     
