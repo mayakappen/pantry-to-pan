@@ -153,7 +153,11 @@ function handleFavorite(event) {
 //because we can keep trying to interpolate this, or just invoke the function when needed
 function addRecipeTiles(repo) {
   repo.recipes.forEach((recipe) => {
-    recipeTiles.innerHTML += `<section class="recipe-title"><input type="image" class="individual-recipe-tile" src="${recipe.image}" id="${recipe.id}"/><h3>"${recipe.name}"</h3>
+    recipeTiles.innerHTML += `
+    <div class="recipe-image-wrapper">
+    <section class="recipe-title">
+    <input type="image" class="individual-recipe-tile" src="${recipe.image}" id="${recipe.id}"/>
+    <h3>"${recipe.name}"</h3>
     <button class="favBtn" role="button" id="fav-${recipe.id}">Favorite</button>
     </section>`
   });
