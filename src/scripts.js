@@ -219,11 +219,15 @@ function returnFiltered(repo) {
 // DISPLAY FILTERED ITEMS
 function displayFiltered(repo) {
   returnFiltered(repo);
+  if (checked.length === 0) {
+    return showAllRecipes()
+  } else {
   var filteredRepo = repo.filtered.pop();
   var filteredRecipes = filteredRepo.forEach((recipe) => {
     recipeTiles.innerHTML += ` <input type="image" src="${recipe.image}" id="${recipe.id}"/><h3>"${recipe.name}"</h3>`;
   });
   return filteredRecipes;
+}
 }
 
 // FILTER BY NAME
