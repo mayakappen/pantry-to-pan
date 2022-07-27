@@ -46,7 +46,8 @@ Visit our published From Pantry to Pan site! [here](https://drslmac.github.io/pa
  - [Shauna MacFarlane-Okongo](https://github.com/DrSLMac)
  
 ## Project Specs
- - The project spec & rubric can be found [here](https://frontend.turing.edu/projects/whats-cookin-part-one.html)
+ - The project spec & rubric for Part 1 can be found [here](https://frontend.turing.edu/projects/whats-cookin-part-one.html)
+ - The project spec & rubric for Part 2 can be found [here](https://frontend.turing.edu/projects/whats-cookin-part-two.html)
 
 ## Project Management
 -  [GitHub Project](https://github.com/DrSLMac/pantry-to-pan/projects?type=beta)
