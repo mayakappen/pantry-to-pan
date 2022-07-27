@@ -3,6 +3,22 @@
 ## Introduction
  - When it comes to getting meals on the table, using this app will inspire your culinary senses and help you become the chef you've always wanted to be.
  - The purpose of this project was to allow students to practice some of the foundational concepts learned so far within the module. There are other extensions that test different skills that we can build on. The project allowed us to personalize/entertain different ideas with HTML/CSS as well as the functionality(JavaScript) behind the web page created.
+ 
+## Set Up
+### Backend Set Up
+1. Go to this [repository](https://github.com/turingschool-examples/whats-cookin-api)
+2. Follow set up instructions.
+
+### Frontend Set Up
+1. Clone [this repository](https://github.com/DrSLMac/pantry-to-pan) to your local machine
+2. In your terminal, run:
+
+ `npm install`
+
+ `npm start`
+
+3. Enter the following url in your browser: [http://localhost:8080/](http://localhost:8080/)
+4. Enoy the app!
 
 ## Technologies
  - Javascript
@@ -28,10 +44,6 @@ Visit our published From Pantry to Pan site! [here](https://drslmac.github.io/pa
  - A login page would be a great addition, allowing a user to log in to a page account and keep track of their save recipes.
  - Adding in transitions via CSS would have appreciated.
 
-## Set Up
-1. Fork this repo
-2. Clone the repo to your local machine
-3. View the project in the browser by running open index.html in your terminal.
 
 ## Sources
  - [MDN](http://developer.mozilla.org/en-US/)
