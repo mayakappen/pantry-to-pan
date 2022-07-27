@@ -99,6 +99,7 @@ h2, h3, h4 {
 .filter-panel {
   display: flex;
   height: 80%;
+  padding-left: 10px;
 }
 
 .selection-boxes {
@@ -111,12 +112,26 @@ h2, h3, h4 {
   margin: 15px;
   display: grid;
   grid-template-columns: auto auto auto;
-  gap: 4px 4px;
+  gap: 10px 10px;
 }
 
-.individual-recipe-tile {
+.recipe-title {
   width: 26vw;
 }
+
+.recipe-image {
+  border-radius: 20px;
+  /* padding: 20px; */
+  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+}
+
+.recipe-image:hover,
+.recipe-image:focus {
+  box-shadow: 0 0.5em 0.5em -0.4em var(--hover);
+  transform: translateY(-0.25em);
+}
+
+
 
 .favBtn,
 .removeButton {
@@ -129,8 +144,8 @@ h2, h3, h4 {
   color: #000000;
   cursor: pointer;
   display: inline-block;
-  font-family: -apple-system,sans-serif;
-  font-size: 1.2rem;
+  font-family: 'Merriweather', serif;
+  font-size: .8rem;
   font-weight: 700;
   letter-spacing: -.24px;
   margin: 0;
@@ -147,8 +162,8 @@ h2, h3, h4 {
 
 .favBtn:hover,
 .removeButton:hover {
-  background-color: #FFC229;
-  box-shadow: #FF6314 0 -6px 8px inset;
+  background-color: #78a781;
+  box-shadow: #346744 0 -6px 8px inset;
   transform: scale(1.125);
 }
 

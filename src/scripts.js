@@ -75,10 +75,6 @@ function hide(element) {
   element.classList.add("hidden");
 }
 
-function handleFavorite(event) {
-  const favID = Number.parseInt(event.target.id.slice(4));
-  user.saveRecipe(favID);
-}
 
 function showRecipeDetails() {
   const recipeTitles = document.querySelectorAll(".recipe-image");
@@ -91,23 +87,31 @@ function favoriteButton() {
   const favoriteHearts = document.querySelectorAll(".favBtn");
   favoriteHearts.forEach((favoriteHeart) => {
     favoriteHeart.addEventListener("click", handleFavorite);
-
-    //if event.target.classList contains .favBtn, then click => classList === "removeButton"
-    //if event.targe.classList contains removeButton, then click => classList === "favBtn"
-
   });
 }
 
-// function removeButton() {
-//   const removeFavorite = document.querySelectorAll(".removeButton");
-//   removeFavorite.forEach((removeButton) => {
-//     removeButton.addEventListener("click", handleRemove)
-//   })
-// }
+function handleFavorite(event) {
+  const favID = Number.parseInt(event.target.id.slice(4));
+  user.saveRecipe(favID);
+}
 
-// function handleRemove(event) {
+function removeButton() {
+  const removeFavorite = document.querySelectorAll(".removeButton");
+  removeFavorite.forEach((removeButton) => {
+    removeButton.addEventListener("click", handleRemove)
+  })
+}
 
-// }
+function handleRemove(event) {
+  const favID = Number.parseInt(event.target.id.slice(4));
+  console.log('favID: ', favID)
+  user.deleteRecipe(favID)
+  
+  console.log(user.toCook)
+  showSavedRecipes()
+}
+
+
 
 //GET A RANDOM USER FUNCTION
 function getRandomIndex(arr) {
@@ -163,6 +167,7 @@ function showSavedRecipes() {
       </section>`
     }
     showRecipeDetails()
+    removeButton()
     });
   };
 
