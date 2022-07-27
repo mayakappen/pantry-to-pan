@@ -32,6 +32,8 @@ const filterPanel = document.querySelector(".filter-panel");
 const homeBtn = document.querySelector("#home-button");
 const homeView = document.querySelector(".home-view");
 const breakfastPanel = document.querySelector("#breakfast-panel")
+const lunchPanel = document.querySelector("#lunch-panel")
+const dinnerPanel = document.querySelector("#dinner-panel")
 const savedRecipeBtn = document.querySelector("#saved-button");
 const savedRecipesView = document.querySelector(".saved-recipes");
 const pantryBtn = document.querySelector("#pantry-button");
@@ -60,6 +62,8 @@ homeBtn.addEventListener("click", showHomeScreen);
 savedRecipeBtn.addEventListener("click", showSavedRecipes);
 pantryBtn.addEventListener("click", showPantry);
 breakfastPanel.addEventListener("click", showBreakfast);
+lunchPanel.addEventListener("click", showLunch);
+dinnerPanel.addEventListener("click", showDinner)
 
 // HELPER FUNCTIONS
 function removeAllChildNodes(parent) {
@@ -109,8 +113,6 @@ function handleRemove(event) {
   showSavedRecipes()
 }
 
-
-
 //GET A RANDOM USER FUNCTION
 function getRandomIndex(arr) {
   return Math.floor(Math.random() * arr.length);
@@ -141,7 +143,32 @@ function showBreakfast() {
   let breakfastTag = document.querySelector("#breakfast" || "#morningmeal" || "#brunch")
   displayFiltered(breakfastTag)
 }
+
+function showLunch() {
+  hide(homeView);
+  hide(allRecipeBtn);
+  hide(savedRecipesView);
+  hide(recipePage);
+  view(homeBtn);
+  view(filterPanel);
+  view(savedRecipeBtn);
+  removeAllChildNodes(recipeTiles);
+  let lunchTag = document.querySelector("#lunch")
+  displayFiltered(lunchTag)
+}
  
+function showDinner() {
+  hide(homeView);
+  hide(allRecipeBtn);
+  hide(savedRecipesView);
+  hide(recipePage);
+  view(homeBtn);
+  view(filterPanel);
+  view(savedRecipeBtn);
+  removeAllChildNodes(recipeTiles);
+  let dinnerTag = document.querySelector("#dinner")
+  displayFiltered(dinnerTag)
+}
 
 // SHOW RECIPES
 function showAllRecipes() {
