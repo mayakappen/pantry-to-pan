@@ -28,10 +28,10 @@ function getPromises() {
 
 // SELECTORS
 const allRecipeBtn = document.querySelector("#all-recipe-button");
-const favoriteHearts = document.querySelectorAll(".favBtn")
 const filterPanel = document.querySelector(".filter-panel");
 const homeBtn = document.querySelector("#home-button");
 const homeView = document.querySelector(".home-view");
+const breakfastPanel = document.querySelector("#breakfast-panel")
 const savedRecipeBtn = document.querySelector("#saved-button");
 const savedRecipesView = document.querySelector(".saved-recipes");
 const pantryBtn = document.querySelector("#pantry-button");
@@ -59,6 +59,7 @@ allRecipeBtn.addEventListener("click", showAllRecipes);
 homeBtn.addEventListener("click", showHomeScreen);
 savedRecipeBtn.addEventListener("click", showSavedRecipes);
 pantryBtn.addEventListener("click", showPantry);
+breakfastPanel.addEventListener("click", showBreakfast);
 
 // HELPER FUNCTIONS
 function removeAllChildNodes(parent) {
@@ -126,6 +127,21 @@ function showHomeScreen() {
   view(savedRecipeBtn);
 }
 showHomeScreen();
+
+// HOMEPAGE PANEL
+function showBreakfast() {
+  hide(homeView);
+  hide(allRecipeBtn);
+  hide(savedRecipesView);
+  hide(recipePage);
+  view(homeBtn);
+  view(filterPanel);
+  view(savedRecipeBtn);
+  removeAllChildNodes(recipeTiles);
+  let breakfastTag = document.querySelector("#breakfast" || "#morningmeal" || "#brunch")
+  displayFiltered(breakfastTag)
+}
+ 
 
 // SHOW RECIPES
 function showAllRecipes() {
