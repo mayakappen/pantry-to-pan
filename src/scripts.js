@@ -104,10 +104,7 @@ function removeButton() {
 
 function handleRemove(event) {
   const favID = Number.parseInt(event.target.id.slice(4));
-  console.log('favID: ', favID)
   user.deleteRecipe(favID)
-  
-  console.log(user.toCook)
   showSavedRecipes()
 }
 
@@ -214,9 +211,11 @@ function viewRecipeDetails(event) {
         </ol>
       </h4>
       <h4>${currentRecipe.getIngredients(ingredientsData)}</h4>
-      <h4>${currentRecipe.getCost(ingredientsData)}</h4>`;
+      <h4>${currentRecipe.getCost(ingredientsData)}</h4>
+      <button class="favBtn" role="button" id="fav-${recipe.id}">Favorite</button>`;
       }
     });
+    favoriteButton()
   }
 
   
