@@ -140,6 +140,7 @@ function showBreakfast() {
   view(filterPanel);
   view(savedRecipeBtn);
   removeAllChildNodes(recipeTiles);
+
   recipeRepo.filterTag("breakfast");
     var filteredRepo = recipeRepo.filtered.pop();
     var filteredRecipes = filteredRepo.forEach((recipe) => {
@@ -153,6 +154,7 @@ function showBreakfast() {
     showRecipeDetails()
     favoriteButton()
     return filteredRecipes;
+
 }
 
 function showLunch() {
