@@ -308,7 +308,6 @@ function grabCheckboxValues() {
   checkboxes.forEach((checkbox) => {
     if (checkbox.checked) checked.push(checkbox.id);
   });
-  // console.log('checked: ', checked)
   return checked;
 }
 
@@ -322,7 +321,7 @@ function returnFiltered(repo) {
   return repo.filtered;
 }
 
-// DISPLAY FILTERED ITEMS
+//DISPLAY FILTERED ITEMS
 function displayFiltered(repo) {
   returnFiltered(repo);
   if (checked.length === 0) {
@@ -337,6 +336,7 @@ function displayFiltered(repo) {
       <button class="favBtn" role="button" id="fav-${recipe.id}">Favorite</button>
       </section>`
     });
+    showRecipeDetails()
     favoriteButton()
     return filteredRecipes;
   }
