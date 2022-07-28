@@ -142,6 +142,7 @@ function showBreakfast() {
   removeAllChildNodes(recipeTiles);
   let breakfastTag = document.querySelector("#breakfast" || "#morningmeal" || "#brunch")
   displayFiltered(breakfastTag)
+  recipeRepo.filterTag('breakfast')
 }
 
 function showLunch() {
