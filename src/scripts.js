@@ -140,8 +140,19 @@ function showBreakfast() {
   view(filterPanel);
   view(savedRecipeBtn);
   removeAllChildNodes(recipeTiles);
-  let breakfastTag = document.querySelector("#breakfast" || "#morningmeal" || "#brunch")
-  displayFiltered(breakfastTag)
+  recipeRepo.filterTag("breakfast");
+    var filteredRepo = recipeRepo.filtered.pop();
+    var filteredRecipes = filteredRepo.forEach((recipe) => {
+      recipeTiles.innerHTML += `
+      <section class="recipe-title">
+      <input class="recipe-image" type="image" src="${recipe.image}" id="${recipe.id}"/>
+      <h3>"${recipe.name}"</h3>
+      <button class="favBtn" role="button" id="fav-${recipe.id}">Favorite</button>
+      </section>`
+    });
+    showRecipeDetails()
+    favoriteButton()
+    return filteredRecipes;
 }
 
 function showLunch() {
@@ -153,8 +164,19 @@ function showLunch() {
   view(filterPanel);
   view(savedRecipeBtn);
   removeAllChildNodes(recipeTiles);
-  let lunchTag = document.querySelector("#lunch")
-  displayFiltered(lunchTag)
+  recipeRepo.filterTag("lunch");
+    var filteredRepo = recipeRepo.filtered.pop();
+    var filteredRecipes = filteredRepo.forEach((recipe) => {
+      recipeTiles.innerHTML += `
+      <section class="recipe-title">
+      <input class="recipe-image" type="image" src="${recipe.image}" id="${recipe.id}"/>
+      <h3>"${recipe.name}"</h3>
+      <button class="favBtn" role="button" id="fav-${recipe.id}">Favorite</button>
+      </section>`
+    });
+    showRecipeDetails()
+    favoriteButton()
+    return filteredRecipes;
 }
  
 function showDinner() {
@@ -166,8 +188,19 @@ function showDinner() {
   view(filterPanel);
   view(savedRecipeBtn);
   removeAllChildNodes(recipeTiles);
-  let dinnerTag = document.querySelector("#dinner")
-  displayFiltered(dinnerTag)
+  recipeRepo.filterTag("dinner");
+    var filteredRepo = recipeRepo.filtered.pop();
+    var filteredRecipes = filteredRepo.forEach((recipe) => {
+      recipeTiles.innerHTML += `
+      <section class="recipe-title">
+      <input class="recipe-image" type="image" src="${recipe.image}" id="${recipe.id}"/>
+      <h3>"${recipe.name}"</h3>
+      <button class="favBtn" role="button" id="fav-${recipe.id}">Favorite</button>
+      </section>`
+    });
+    showRecipeDetails()
+    favoriteButton()
+    return filteredRecipes;
 }
 
 // SHOW RECIPES
@@ -182,7 +215,6 @@ function showAllRecipes() {
   removeAllChildNodes(recipeTiles);
   addRecipeTiles(recipeRepo);
 }
-
 
 //SAVED RECIPE SCREEN
 function showSavedRecipes() {
@@ -276,6 +308,7 @@ function grabCheckboxValues() {
   checkboxes.forEach((checkbox) => {
     if (checkbox.checked) checked.push(checkbox.id);
   });
+  // console.log('checked: ', checked)
   return checked;
 }
 
@@ -299,7 +332,7 @@ function displayFiltered(repo) {
     var filteredRecipes = filteredRepo.forEach((recipe) => {
       recipeTiles.innerHTML += `
       <section class="recipe-title">
-      <input type="image" src="${recipe.image}" id="${recipe.id}"/>
+      <input type="image" class="recipe-image" src="${recipe.image}" id="${recipe.id}"/>
       <h3>"${recipe.name}"</h3>
       <button class="favBtn" role="button" id="fav-${recipe.id}">Favorite</button>
       </section>`
@@ -308,6 +341,7 @@ function displayFiltered(repo) {
     return filteredRecipes;
   }
 }
+
 
 // FILTER BY NAME
 function getInput() {

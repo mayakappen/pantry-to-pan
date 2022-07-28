@@ -46,7 +46,7 @@ h1 {
 }
 
 .button-panel {
-  height: 30%;
+  /* height: 80%; */
   display: flex;
   justify-content: space-around;
   align-items: center;
