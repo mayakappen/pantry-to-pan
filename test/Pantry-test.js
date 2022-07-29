@@ -6,7 +6,7 @@ import RecipeRepository from "../src/classes/RecipeRepository";
 
 describe("Pantry", () => {
     let dummyUser;
-    let slightlyLessDumbUser;
+   
     let recipe1;
     let recipe2; 
     let recipeData;
@@ -15,7 +15,7 @@ describe("Pantry", () => {
     let recipeRepository;
     let ingredientsDataSet;
     let pantry1;
-    let pantry2;
+    let currentUser;
 
     beforeEach(() => {
     dummyUser =  {
@@ -33,26 +33,6 @@ describe("Pantry", () => {
           {
             "ingredient": 20081,
             "amount": 5
-          }
-        ]
-    }
-    
-    
-    slightlyLessDumbUser = {
-        "name": "Ephraim Goyette",
-        "id": 2,
-        "pantry": [
-          {
-            "ingredient": 6150,
-            "amount": 3
-          },
-          {
-            "ingredient": 1032009,
-            "amount": 7
-          },
-          {
-            "ingredient": 1082047,
-            "amount": 8
           }
         ]
     }
@@ -237,6 +217,7 @@ describe("Pantry", () => {
     newRecipe = new Recipe(recipe1);
     newRecipe2 = new Recipe(recipe2);
     recipeRepository = new RecipeRepository(recipeData)
+    currentUser = new User(dummyUser)
 
     ingredientsDataSet = [
         {
@@ -271,8 +252,8 @@ describe("Pantry", () => {
           }
 
     ]
-    pantry1 = new Pantry(dummyUser);
-    pantry2 = new Pantry(slightlyLessDumbUser);
+    pantry1 = new Pantry(currentUser);
+  
     })
 
     it('should be a function', () => {
@@ -284,31 +265,17 @@ describe("Pantry", () => {
     })
 
     it('should populate ingredients owned', () => {
-        expect(pantry1.ingredientsOwned).to.deep.equal(dummyUser.pantry);
+        expect(pantry1.ingredientsOwned).to.deep.equal(currentUser.pantry);
     })
 
-    it('should take in a recipe', () => {
-        // expect(pantry1.checkForIngredients(newRecipe, recipeData)).to.deep.equal(newRecipe.getIngredients(ingredientsDataSet));
-        dummyUser.pantry.forEach(ingredient => {console.log(ingredient)})
-    })
-
-    // it.skip('', () => {
-
-    // })
-
-    // it.skip('', () => {
-
-    // })
-
-    // it.skip('', () => {
-
-    // })
-
-    // it.skip('', () => {
-
-    // })
-
-    // it.skip('', () => {
-
-    // })
+    it('should be able to check for ingredients', () => {
+      expect(pantry1.checkForIngredients(595736, recipeData)).to.be.deep.equal([
+        20081,   18372,
+         1123,   19335,
+        19206,   19334,
+         2047, 1012047,
+     10019903,    1145,
+         2050
+   ])
+  })
 })
