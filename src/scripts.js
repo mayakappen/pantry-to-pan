@@ -14,8 +14,8 @@ let ingredientsData;
 
 // FETCH CALLS
 function getPromises() {
-  Promise.all([usersAPIData, recipeAPIData, ingredientsAPIData])
-  .then((data) => {
+  Promise.all([usersAPIData, recipeAPIData, ingredientsAPIData]).then(
+    (data) => {
       usersData = data[0].usersData;
       recipeData = data[1].recipeData;
       ingredientsData = data[2].ingredientsData;
@@ -31,13 +31,14 @@ const allRecipeBtn = document.querySelector("#all-recipe-button");
 const filterPanel = document.querySelector(".filter-panel");
 const homeBtn = document.querySelector("#home-button");
 const homeView = document.querySelector(".home-view");
-const breakfastPanel = document.querySelector("#breakfast-panel")
-const lunchPanel = document.querySelector("#lunch-panel")
-const dinnerPanel = document.querySelector("#dinner-panel")
+const breakfastPanel = document.querySelector("#breakfast-panel");
+const lunchPanel = document.querySelector("#lunch-panel");
+const dinnerPanel = document.querySelector("#dinner-panel");
 const savedRecipeBtn = document.querySelector("#saved-button");
 const savedRecipesView = document.querySelector(".saved-recipes");
 const pantryBtn = document.querySelector("#pantry-button");
-const recipeTiles = document.querySelector(".recipe-tile-grid"); 
+const pantryView = document.querySelector(".pantry-page");
+const recipeTiles = document.querySelector(".recipe-tile-grid");
 // const individualRecipeTile = document.querySelector(".recipe-tile");
 const recipePage = document.querySelector(".recipe-page");
 const checkboxes = document.querySelectorAll("input[type='checkbox']");
@@ -63,7 +64,7 @@ savedRecipeBtn.addEventListener("click", showSavedRecipes);
 pantryBtn.addEventListener("click", showPantry);
 breakfastPanel.addEventListener("click", showBreakfast);
 lunchPanel.addEventListener("click", showLunch);
-dinnerPanel.addEventListener("click", showDinner)
+dinnerPanel.addEventListener("click", showDinner);
 
 // HELPER FUNCTIONS
 function removeAllChildNodes(parent) {
@@ -80,12 +81,11 @@ function hide(element) {
   element.classList.add("hidden");
 }
 
-
 function showRecipeDetails() {
   const recipeTitles = document.querySelectorAll(".recipe-image");
   recipeTitles.forEach((recipeTitle) => {
     recipeTitle.addEventListener("click", viewRecipeDetails);
-  })
+  });
 }
 
 function favoriteButton() {
@@ -103,14 +103,14 @@ function handleFavorite(event) {
 function removeButton() {
   const removeFavorite = document.querySelectorAll(".removeButton");
   removeFavorite.forEach((removeButton) => {
-    removeButton.addEventListener("click", handleRemove)
-  })
+    removeButton.addEventListener("click", handleRemove);
+  });
 }
 
 function handleRemove(event) {
   const favID = Number.parseInt(event.target.id.slice(4));
-  user.deleteRecipe(favID)
-  showSavedRecipes()
+  user.deleteRecipe(favID);
+  showSavedRecipes();
 }
 
 //GET A RANDOM USER FUNCTION
@@ -123,10 +123,12 @@ function showHomeScreen() {
   hide(filterPanel);
   hide(savedRecipesView);
   hide(homeBtn);
-  hide(recipePage)
+  hide(recipePage);
+  hide(pantryView);
   view(homeView);
   view(allRecipeBtn);
   view(savedRecipeBtn);
+  view(pantryBtn);
 }
 showHomeScreen();
 
@@ -136,25 +138,26 @@ function showBreakfast() {
   hide(allRecipeBtn);
   hide(savedRecipesView);
   hide(recipePage);
+  hide(pantryView);
   view(homeBtn);
   view(filterPanel);
   view(savedRecipeBtn);
+  view(pantryBtn);
   removeAllChildNodes(recipeTiles);
 
   recipeRepo.filterTag("breakfast");
-    var filteredRepo = recipeRepo.filtered.pop();
-    var filteredRecipes = filteredRepo.forEach((recipe) => {
-      recipeTiles.innerHTML += `
+  var filteredRepo = recipeRepo.filtered.pop();
+  var filteredRecipes = filteredRepo.forEach((recipe) => {
+    recipeTiles.innerHTML += `
       <section class="recipe-title">
       <input class="recipe-image" type="image" src="${recipe.image}" id="${recipe.id}"/>
       <h3>"${recipe.name}"</h3>
       <button class="favBtn" role="button" id="fav-${recipe.id}">Favorite</button>
-      </section>`
-    });
-    showRecipeDetails()
-    favoriteButton()
-    return filteredRecipes;
-
+      </section>`;
+  });
+  showRecipeDetails();
+  favoriteButton();
+  return filteredRecipes;
 }
 
 function showLunch() {
@@ -162,47 +165,51 @@ function showLunch() {
   hide(allRecipeBtn);
   hide(savedRecipesView);
   hide(recipePage);
+  hide(pantryView);
   view(homeBtn);
   view(filterPanel);
+  view(pantryBtn);
   view(savedRecipeBtn);
   removeAllChildNodes(recipeTiles);
   recipeRepo.filterTag("lunch");
-    var filteredRepo = recipeRepo.filtered.pop();
-    var filteredRecipes = filteredRepo.forEach((recipe) => {
-      recipeTiles.innerHTML += `
+  var filteredRepo = recipeRepo.filtered.pop();
+  var filteredRecipes = filteredRepo.forEach((recipe) => {
+    recipeTiles.innerHTML += `
       <section class="recipe-title">
       <input class="recipe-image" type="image" src="${recipe.image}" id="${recipe.id}"/>
       <h3>"${recipe.name}"</h3>
       <button class="favBtn" role="button" id="fav-${recipe.id}">Favorite</button>
-      </section>`
-    });
-    showRecipeDetails()
-    favoriteButton()
-    return filteredRecipes;
+      </section>`;
+  });
+  showRecipeDetails();
+  favoriteButton();
+  return filteredRecipes;
 }
- 
+
 function showDinner() {
   hide(homeView);
   hide(allRecipeBtn);
+  hide(pantryView);
   hide(savedRecipesView);
   hide(recipePage);
   view(homeBtn);
   view(filterPanel);
+  view(pantryBtn);
   view(savedRecipeBtn);
   removeAllChildNodes(recipeTiles);
   recipeRepo.filterTag("dinner");
-    var filteredRepo = recipeRepo.filtered.pop();
-    var filteredRecipes = filteredRepo.forEach((recipe) => {
-      recipeTiles.innerHTML += `
+  var filteredRepo = recipeRepo.filtered.pop();
+  var filteredRecipes = filteredRepo.forEach((recipe) => {
+    recipeTiles.innerHTML += `
       <section class="recipe-title">
       <input class="recipe-image" type="image" src="${recipe.image}" id="${recipe.id}"/>
       <h3>"${recipe.name}"</h3>
       <button class="favBtn" role="button" id="fav-${recipe.id}">Favorite</button>
-      </section>`
-    });
-    showRecipeDetails()
-    favoriteButton()
-    return filteredRecipes;
+      </section>`;
+  });
+  showRecipeDetails();
+  favoriteButton();
+  return filteredRecipes;
 }
 
 // SHOW RECIPES
@@ -211,8 +218,10 @@ function showAllRecipes() {
   hide(allRecipeBtn);
   hide(savedRecipesView);
   hide(recipePage);
+  hide(pantryView);
   view(homeBtn);
   view(filterPanel);
+  view(pantryBtn);
   view(savedRecipeBtn);
   removeAllChildNodes(recipeTiles);
   addRecipeTiles(recipeRepo);
@@ -222,11 +231,13 @@ function showAllRecipes() {
 function showSavedRecipes() {
   hide(homeView);
   hide(savedRecipeBtn);
-  hide(recipePage)
+  hide(recipePage);
+  hide(pantryView);
   view(savedRecipesView);
   view(homeBtn);
   view(filterPanel);
   view(allRecipeBtn);
+  view(pantryBtn);
   recipeTiles.innerHTML = "";
   user.toCook.forEach((recipeId) => {
     const matchedRecipe = recipeRepo.recipes.find((recipe) => {
@@ -238,13 +249,12 @@ function showSavedRecipes() {
       <input class="recipe-image" type="image" src="${matchedRecipe.image}" id="${matchedRecipe.id}"/>
       <h3>"${matchedRecipe.name}"</h3>
       <button class="removeButton" role="button" id="fav-${matchedRecipe.id}">Remove</button>
-      </section>`
+      </section>`;
     }
-    showRecipeDetails()
-    removeButton()
-    });
-  };
-
+    showRecipeDetails();
+    removeButton();
+  });
+}
 
 //PUTS RECIPE TILES ON ALLRECIPEPAGE & BUTTON FOR SAVEDRECIPEPAGE
 function addRecipeTiles(repo) {
@@ -254,53 +264,65 @@ function addRecipeTiles(repo) {
     <input class="recipe-image" type="image" src="${recipe.image}" id="${recipe.id}"/>
     <h3>"${recipe.name}"</h3>
     <button class="favBtn" role="button" id="fav-${recipe.id}">Favorite</button>
-    </section>`
+    </section>`;
   });
-  showRecipeDetails()
-  favoriteButton()
+  showRecipeDetails();
+  favoriteButton();
 }
-
 
 // VIEW RECIPE CARD FOR SHOW RECIPE
 function viewRecipeDetails(event) {
   hide(homeView);
   hide(filterPanel);
   hide(savedRecipesView);
+  hide(pantryView);
   view(homeBtn);
   view(allRecipeBtn);
+  view(pantryBtn);
   view(savedRecipeBtn);
   view(recipePage);
-  
+
   const targetRecipeId = parseInt(event.target.id);
   recipeData.forEach((recipe) => {
     if (recipe.id === targetRecipeId) {
       const recipeInfo = recipeRepo.getById(targetRecipeId);
       const currentRecipe = new Recipe(recipeInfo);
-      
+
       recipePage.innerHTML = `
       <h2 class="recipePageName" id="${recipe.id}">${recipe.name}</h2>
       <img src="${recipe.image}">
       <h4>
         <ol>
           ${recipe.instructions
-          .map((instruction) => {return `<li>${instruction.instruction}</li>`;})
-          .join("")}
+            .map((instruction) => {
+              return `<li>${instruction.instruction}</li>`;
+            })
+            .join("")}
         </ol>
       </h4>
       <h4>${currentRecipe.getIngredients(ingredientsData)}</h4>
       <h4>${currentRecipe.getCost(ingredientsData)}</h4>
-      <button class="favBtn" role="button" id="fav-${recipe.id}">Favorite</button>`;
-      }
-    });
-    favoriteButton()
-  }
+      <button class="favBtn" role="button" id="fav-${
+        recipe.id
+      }">Favorite</button>`;
+    }
+  });
+  favoriteButton();
+}
 
-  
 // SHOW PANTRY ITEMS
 function showPantry() {
-  window.alert("This page is under construction!");
-  }
-
+  hide(homeView);
+  hide(pantryBtn);
+  hide(filterPanel);
+  hide(savedRecipesView);
+  view(pantryView);
+  view(homeBtn);
+  view(allRecipeBtn);
+  view(savedRecipeBtn);
+  view(recipePage);
+  removeAllChildNodes(recipePage);
+}
 
 //~~~~~~~~~~ FILTER FUNCTIONS ~~~~~~~~
 // CHECK BOXES
@@ -336,14 +358,13 @@ function displayFiltered(repo) {
       <input type="image" class="recipe-image" src="${recipe.image}" id="${recipe.id}"/>
       <h3>"${recipe.name}"</h3>
       <button class="favBtn" role="button" id="fav-${recipe.id}">Favorite</button>
-      </section>`
+      </section>`;
     });
-    showRecipeDetails()
-    favoriteButton()
+    showRecipeDetails();
+    favoriteButton();
     return filteredRecipes;
   }
 }
-
 
 // FILTER BY NAME
 function getInput() {
