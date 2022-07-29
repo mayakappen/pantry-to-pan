@@ -377,7 +377,12 @@ function filterByName() {
   if (input && input.trim().length > 0 && result) {
     showAllRecipes();
     recipeTiles.innerHTML = "";
-    recipeTiles.innerHTML += ` <input type="image" src="${result.image}" id="${result.id}"/><h3>"${result.name}"</h3>`;
+    recipeTiles.innerHTML += `
+      <section class="recipe-title">
+      <input type="image" class="recipe-image" src="${result.image}" id="${result.id}"/>
+      <h3>"${result.name}"</h3>
+      <button class="favBtn" role="button" id="fav-${result.id}">Favorite</button>
+      </section>`;
   } else {
     alert("No results found");
   }
