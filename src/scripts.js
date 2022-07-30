@@ -24,6 +24,22 @@ function getPromises() {
       showHomeScreen();
     }
   );
+  then()
+}
+
+function updatePantryItem(user, ingredient, quatity) {
+  return fetch('http://localhost:3001/api/v1/users'), {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json'},
+    body: JSON.stringify({
+      user: 'user info here',
+      ingredient: 'ingredient info here',
+      quantity: 'quantity info here'
+    })
+  }
+  .then(response => response.json())
+  .then(data => console.log(data))
+  .catch(error => console.log('Error: ', error))
 }
 
 // SELECTORS
