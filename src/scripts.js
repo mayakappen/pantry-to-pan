@@ -24,6 +24,22 @@ function getPromises() {
       showHomeScreen();
     }
   );
+  then()
+}
+
+function updatePantryItem(user, ingredient, quatity) {
+  return fetch('http://localhost:3001/api/v1/users'), {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json'},
+    body: JSON.stringify({
+      user: 'user info here',
+      ingredient: 'ingredient info here',
+      quantity: 'quantity info here'
+    })
+  }
+  .then(response => response.json())
+  .then(data => console.log(data))
+  .catch(error => console.log('Error: ', error))
 }
 
 // SELECTORS
@@ -377,7 +393,12 @@ function filterByName() {
   if (input && input.trim().length > 0 && result) {
     showAllRecipes();
     recipeTiles.innerHTML = "";
-    recipeTiles.innerHTML += ` <input type="image" src="${result.image}" id="${result.id}"/><h3>"${result.name}"</h3>`;
+    recipeTiles.innerHTML += `
+      <section class="recipe-title">
+      <input type="image" class="recipe-image" src="${result.image}" id="${result.id}"/>
+      <h3>"${result.name}"</h3>
+      <button class="favBtn" role="button" id="fav-${result.id}">Favorite</button>
+      </section>`;
   } else {
     alert("No results found");
   }
