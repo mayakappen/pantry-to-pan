@@ -8,10 +8,8 @@ describe("Pantry", () => {
   let dummyUser;
 
   let recipe1;
-  let recipe2;
   let recipeData;
   let newRecipe;
-  let newRecipe2;
   let recipeRepository;
   let ingredientsDataSet;
   let pantry1;
@@ -121,100 +119,8 @@ describe("Pantry", () => {
       ],
     };
 
-    recipe2 = {
-      id: 678353,
-      image: "https://spoonacular.com/recipeImages/678353-556x370.jpg",
-      ingredients: [
-        {
-          id: 1009016,
-          quantity: {
-            amount: 1.5,
-            unit: "cups",
-          },
-        },
-        {
-          id: 9003,
-          quantity: {
-            amount: 2,
-            unit: "",
-          },
-        },
-        {
-          id: 20027,
-          quantity: {
-            amount: 1,
-            unit: "tablespoon",
-          },
-        },
-        {
-          id: 1002046,
-          quantity: {
-            amount: 1,
-            unit: "tablespoon",
-          },
-        },
-        {
-          id: 11215,
-          quantity: {
-            amount: 1,
-            unit: "clove",
-          },
-        },
-        {
-          id: 1012046,
-          quantity: {
-            amount: 1,
-            unit: "tablespoon",
-          },
-        },
-        {
-          id: 19911,
-          quantity: {
-            amount: 0.25,
-            unit: "cup",
-          },
-        },
-        {
-          id: 16112,
-          quantity: {
-            amount: 1,
-            unit: "tablespoon",
-          },
-        },
-        {
-          id: 10010062,
-          quantity: {
-            amount: 24,
-            unit: "ounce",
-          },
-        },
-        {
-          id: 1102047,
-          quantity: {
-            amount: 4,
-            unit: "servings",
-          },
-        },
-        {
-          id: 16124,
-          quantity: {
-            amount: 1,
-            unit: "tablespoon",
-          },
-        },
-        {
-          id: 1016168,
-          quantity: {
-            amount: 1,
-            unit: "tablespoon",
-          },
-        },
-      ],
-    };
-
-    recipeData = [recipe1, recipe2];
+    recipeData = [recipe1];
     newRecipe = new Recipe(recipe1);
-    newRecipe2 = new Recipe(recipe2);
     recipeRepository = new RecipeRepository(recipeData);
     currentUser = new User(dummyUser);
 
@@ -266,9 +172,8 @@ describe("Pantry", () => {
   });
 
   it("should be able to check for ingredients", () => {
-    expect(pantry1.checkForIngredients(595736, recipeData)).to.be.deep.equal([
-      20081, 18372, 1123, 19335, 19206, 19334, 2047, 1012047, 10019903, 1145,
-      2050,
+    expect(pantry1.checkForIngredients(recipe1.ingredients)).to.be.deep.equal([
+      18372, 1123, 19335, 19206, 19334, 2047, 1012047, 10019903, 1145, 2050,
     ]);
   });
 });

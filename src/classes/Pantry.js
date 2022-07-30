@@ -3,21 +3,43 @@ class Pantry {
     this.ingredientsOwned = user.pantry;
     this.ingredientsToBuy = [];
   }
-  checkForIngredients(id, recipeData) {
-    console.log("id", id);
-    console.log("this.ingredientsOwned", this.ingredientsOwned);
-    console.log("recipeData", recipeData);
-    const currentRecipe = recipeData.find(
-      (recipe) => recipe.id === id
-    ).ingredients;
-    currentRecipe.forEach((ingredient) => {
-      if (ingredient.id !== this.ingredientsOwned.ingredient) {
-        this.ingredientsToBuy.push(ingredient.id);
+
+  //   recipe1 = {
+  //     id: 595736,
+  //     image: "https://spoonacular.com/recipeImages/595736-556x370.jpg",
+  //     ingredients: [
+  //       {
+  //         id: 20081,
+  //         quantity: {
+  //           amount: 1.5,
+  //           unit: "c",
+  //         },
+  //       },
+  //       {
+  //         id: 18372,
+  //         quantity: {
+  //           amount: 0.5,
+  //           unit: "tsp",
+  //         },
+  //       },
+
+  checkForIngredients(ingredients) {
+    //Ingredients is the recipe we are making ingredient array
+    const ingToBuy = ingredients.reduce((acc, ingredient) => {
+      let matching = this.ingredientsOwned.find((ingredientOwned) => {
+        return ingredientOwned.ingredient === ingredient.id;
+      });
+      //Checks to see if there is a matching ingredient in the use pantry^
+      if (!matching) {
+        // If there is no match, add to our ingredients to buy array^
+        acc.push(ingredient.id);
+      } else if (matching.amount < ingredient.quantity.amount) {
+        // If there is a match, but don't have an ingredient in the pantry, also add.
+        acc.push(ingredient.id);
       }
-    });
-    console.log("this.ingredientsToBuy", this.ingredientsToBuy);
-    //console.log("newRecipe", newRecipe.ingredients);
-    return this.ingredientsToBuy;
+      return acc;
+    }, []);
+    return ingToBuy;
   }
 }
 
