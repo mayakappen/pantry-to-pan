@@ -8,11 +8,12 @@ import User from "../src/classes/User-class";
 import Pantry from "./classes/Pantry";
 
 let recipeRepo;
-const user = new User({ name: "Elana", id: 1 });
-const pantry = new Pantry(user);
+let user 
+let pantry
 let recipeData;
 let usersData;
 let ingredientsData;
+let recipes
 
 // This is the promise all for running on the local server
 // Promise.all([
@@ -38,12 +39,16 @@ let ingredientsData;
 function initializeData() {
   Promise.all([usersAPIData, ingredientsAPIData, recipeAPIData]).then(
     ([usersData, ingredientsData, recipeData]) => {
-      const data = {
-        ingredientsData,
-        recipeData,
-        usersData,
-      };
-      recipeRepo = new RecipeRepository(data);
+      recipes = recipeData.map(recipe => new Recipe(recipe))
+      recipes.forEach(recipe => recipe.getIngredientsDetails(ingredientsData))
+      recipeRepo = new RecipeRepository(recipes)
+      console.log(recipeRepo)
+      const randUser = usersData[Math.floor(Math.random() * usersData.length)]
+      console.log(randUser)
+      user = new User(randUser)
+      console.log(user)
+      pantry = new Pantry(user)
+      console.log(pantry)
     }
   );
 }
