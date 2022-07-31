@@ -285,7 +285,7 @@ function showSavedRecipes() {
   view(pantryBtn);
   recipeTiles.innerHTML = "";
   user.toCook.forEach((recipeId) => {
-    const matchedRecipe = recipeRepo.recipes.recipeData.find((recipe) => {
+    const matchedRecipe = recipeRepo.recipes.find((recipe) => {
       return recipe.id === recipeId;
     });
     if (matchedRecipe) {
@@ -304,7 +304,7 @@ function showSavedRecipes() {
 //PUTS RECIPE TILES ON ALLRECIPEPAGE & BUTTON FOR SAVEDRECIPEPAGE
 function addRecipeTiles(recipeRepo) {
   console.log("repo", recipeRepo.recipes);
-  recipeRepo.recipes.recipeData.forEach((recipe) => {
+  recipeRepo.recipes.forEach((recipe) => {
     recipeTiles.innerHTML += `
     <section class="recipe-title">
     <input class="recipe-image" type="image" src="${recipe.image}" id="${recipe.id}"/>
@@ -329,7 +329,7 @@ function viewRecipeDetails(event) {
   view(recipePage);
 
   const targetRecipeId = parseInt(event.target.id);
-  recipeRepo.recipes.recipeData.forEach((recipe) => {
+  recipeRepo.recipes.forEach((recipe) => {
     if (recipe.id === targetRecipeId) {
       const recipeInfo = recipeRepo.getById(targetRecipeId);
       const currentRecipe = new Recipe(recipeInfo);
