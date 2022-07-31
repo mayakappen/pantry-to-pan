@@ -9,6 +9,7 @@ class User {
     this.toCook = [];
   }
   saveRecipe(recipeId) {
+    console.log({ recipeId });
     if (!this.toCook.includes(recipeId)) {
       this.toCook.push(recipeId);
     }

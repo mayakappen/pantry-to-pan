@@ -4,25 +4,6 @@ class Pantry {
     this.ingredientsToBuy = [];
   }
 
-  //   recipe1 = {
-  //     id: 595736,
-  //     image: "https://spoonacular.com/recipeImages/595736-556x370.jpg",
-  //     ingredients: [
-  //       {
-  //         id: 20081,
-  //         quantity: {
-  //           amount: 1.5,
-  //           unit: "c",
-  //         },
-  //       },
-  //       {
-  //         id: 18372,
-  //         quantity: {
-  //           amount: 0.5,
-  //           unit: "tsp",
-  //         },
-  //       },
-
   checkForIngredients(ingredients) {
     //Ingredients is the recipe we are making ingredient array
     const ingToBuy = ingredients.reduce((acc, ingredient) => {
