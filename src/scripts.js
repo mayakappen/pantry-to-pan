@@ -14,26 +14,6 @@ let recipeData;
 let usersData;
 let ingredientsData;
 
-// This is the promise all for running on the local server
-// Promise.all([
-//   fetchData("ingredients"),
-//   fetchData("recipes"),
-//   fetchData("users"),
-// ]).then(([ingredientsData, recipeData, userData]) => {
-//   IngredientsDATA = ingredientsData;
-//   allRecipes = recipeData.map((recipe) => {
-//     return new Recipe(recipe, ingredientsData);
-//   });
-
-//   recipeRepository = new RecipeRepository(allRecipes);
-//   User = new User(userData[0], recipeRepository);
-
-//   allRecipes.forEach((recipe) => {
-//     createRecipeCard(recipe);
-//   });
-//   hide(homeButton);
-// });
-
 //FETCH CALLS
 function initializeData() {
   Promise.all([usersAPIData, ingredientsAPIData, recipeAPIData]).then(

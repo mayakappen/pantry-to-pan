@@ -215,3 +215,25 @@ h3 {
   align-items: center;
   width: 85%;
 }
+
+
+/* ~~~~~~~~~ Individual ingredient incrementor ~~~~~~~~~~~~ */
+
+.individual-ingredient-button {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 50px;
+  width: 175px;
+  background: #FFFFFF;
+  border-radius: 12px;
+}
+
+span {
+  width: 100%;
+  font-size: 25px;
+  font-weight: 400;
+}
