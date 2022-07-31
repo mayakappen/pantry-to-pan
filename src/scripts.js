@@ -5,41 +5,65 @@ import "./images/banner-design.png";
 import RecipeRepository from "../src/classes/RecipeRepository";
 import Recipe from "../src/classes/Recipe";
 import User from "../src/classes/User-class";
+import Pantry from "./classes/Pantry";
 
 let recipeRepo;
-let user;
+const user = new User({ name: "Elana", id: 1 });
+const pantry = new Pantry(user);
 let recipeData;
 let usersData;
 let ingredientsData;
 
-// FETCH CALLS
-function getPromises() {
-  Promise.all([usersAPIData, recipeAPIData, ingredientsAPIData]).then(
-    (data) => {
-      usersData = data[0].usersData;
-      recipeData = data[1].recipeData;
-      ingredientsData = data[2].ingredientsData;
-      user = new User(usersData[getRandomIndex(usersData)]);
-      recipeRepo = new RecipeRepository(recipeData);
-      showHomeScreen();
+// This is the promise all for running on the local server
+// Promise.all([
+//   fetchData("ingredients"),
+//   fetchData("recipes"),
+//   fetchData("users"),
+// ]).then(([ingredientsData, recipeData, userData]) => {
+//   IngredientsDATA = ingredientsData;
+//   allRecipes = recipeData.map((recipe) => {
+//     return new Recipe(recipe, ingredientsData);
+//   });
+
+//   recipeRepository = new RecipeRepository(allRecipes);
+//   User = new User(userData[0], recipeRepository);
+
+//   allRecipes.forEach((recipe) => {
+//     createRecipeCard(recipe);
+//   });
+//   hide(homeButton);
+// });
+
+//FETCH CALLS
+function initializeData() {
+  Promise.all([usersAPIData, ingredientsAPIData, recipeAPIData]).then(
+    ([usersData, ingredientsData, recipeData]) => {
+      const data = {
+        ingredientsData,
+        recipeData,
+        usersData,
+      };
+      recipeRepo = new RecipeRepository(data);
     }
   );
-  then()
 }
 
-function updatePantryItem(user, ingredient, quatity) {
-  return fetch('http://localhost:3001/api/v1/users'), {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json'},
-    body: JSON.stringify({
-      user: 'user info here',
-      ingredient: 'ingredient info here',
-      quantity: 'quantity info here'
-    })
-  }
-  .then(response => response.json())
-  .then(data => console.log(data))
-  .catch(error => console.log('Error: ', error))
+function updatePantryItem(user, ingredient, quantity) {
+  return (
+    fetch("http://localhost:3001/api/v1/users"),
+    {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        user: "user info here",
+        ingredient: "ingredient info here",
+        quantity: "quantity info here",
+      }),
+    }
+      .then((response) => response.json())
+      .then((data) => console.log(data))
+      .catch((error) => console.log("Error: ", error))
+  );
 }
 
 // SELECTORS
@@ -63,7 +87,7 @@ const searchButton = document.querySelector("#search-button");
 const searchInput = document.querySelector(".input");
 
 // EVENT LISTENERS
-window.addEventListener("load", getPromises);
+window.addEventListener("load", initializeData);
 allRecipeBtn.addEventListener("click", showAllRecipes);
 homeBtn.addEventListener("click", showHomeScreen);
 savedRecipeBtn.addEventListener("click", showSavedRecipes);
@@ -256,7 +280,7 @@ function showSavedRecipes() {
   view(pantryBtn);
   recipeTiles.innerHTML = "";
   user.toCook.forEach((recipeId) => {
-    const matchedRecipe = recipeRepo.recipes.find((recipe) => {
+    const matchedRecipe = recipeRepo.recipes.recipeData.find((recipe) => {
       return recipe.id === recipeId;
     });
     if (matchedRecipe) {
@@ -273,8 +297,9 @@ function showSavedRecipes() {
 }
 
 //PUTS RECIPE TILES ON ALLRECIPEPAGE & BUTTON FOR SAVEDRECIPEPAGE
-function addRecipeTiles(repo) {
-  repo.recipes.forEach((recipe) => {
+function addRecipeTiles(recipeRepo) {
+  console.log("repo", recipeRepo.recipes);
+  recipeRepo.recipes.recipeData.forEach((recipe) => {
     recipeTiles.innerHTML += `
     <section class="recipe-title">
     <input class="recipe-image" type="image" src="${recipe.image}" id="${recipe.id}"/>
@@ -299,7 +324,7 @@ function viewRecipeDetails(event) {
   view(recipePage);
 
   const targetRecipeId = parseInt(event.target.id);
-  recipeData.forEach((recipe) => {
+  recipeRepo.recipes.recipeData.forEach((recipe) => {
     if (recipe.id === targetRecipeId) {
       const recipeInfo = recipeRepo.getById(targetRecipeId);
       const currentRecipe = new Recipe(recipeInfo);
@@ -316,8 +341,10 @@ function viewRecipeDetails(event) {
             .join("")}
         </ol>
       </h4>
-      <h4>${currentRecipe.getIngredients(ingredientsData)}</h4>
-      <h4>${currentRecipe.getCost(ingredientsData)}</h4>
+      <h4>${currentRecipe.getIngredients(
+        recipeRepo.recipes.ingredientsData
+      )}</h4>
+      <h4>${currentRecipe.getCost(recipeRepo.recipes.ingredientsData)}</h4>
       <button class="favBtn" role="button" id="fav-${
         recipe.id
       }">Favorite</button>`;

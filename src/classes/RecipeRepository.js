@@ -4,26 +4,28 @@ class RecipeRepository {
   }
   filterTag(tag) {
     this.filtered = [];
-    const recipes = this.recipes.filter((recipe) => {
+    const recipes = this.recipes.recipeData.filter((recipe) => {
       return recipe.tags.includes(tag);
     });
     this.filtered.push(recipes);
     return this.filtered;
   }
   filterName(name) {
-    let upper = name.toUpperCase()
-    let results = this.recipes.map(recipe => recipe.name).map(recipe => recipe.toUpperCase())
-    let result = results.findIndex(element => {
+    let upper = name.toUpperCase();
+    let results = this.recipes.recipeData.map((recipe) =>
+      recipe.name.toUpperCase()
+    );
+    let result = results.findIndex((element) => {
       if (element === upper) {
-        return true
+        return true;
       }
-      return false
-    })
-    return this.recipes[result]
+      return false;
+    });
+    return this.recipes[result];
   }
-  
+
   getById(id) {
-    const recipe = this.recipes.find((recipe) => {
+    const recipe = this.recipes.recipeData.find((recipe) => {
       return recipe.id === id;
     });
     return recipe;
