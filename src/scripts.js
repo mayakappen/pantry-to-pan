@@ -66,6 +66,15 @@ const searchBar = document.querySelector("#recipe-search");
 const searchButton = document.querySelector("#search-button");
 const searchInput = document.querySelector(".input");
 
+// ingredient incrementor query selectors
+const indivIngredientBtns = document.querySelector(
+  ".individual-ingredient-button"
+);
+const minusBtn = document.querySelector(".minus");
+const plusBtn = document.querySelector(".plus");
+const ingredientLbl = document.querySelector(".ingredient-label");
+const ingredientNumber = document.querySelector(".number");
+
 // EVENT LISTENERS
 window.addEventListener("load", initializeData);
 allRecipeBtn.addEventListener("click", showAllRecipes);
@@ -85,6 +94,10 @@ pantryBtn.addEventListener("click", showPantry);
 breakfastPanel.addEventListener("click", showBreakfast);
 lunchPanel.addEventListener("click", showLunch);
 dinnerPanel.addEventListener("click", showDinner);
+
+//ingredient event listeners
+plusBtn.addEventListener("click", incrementPlus);
+minusBtn.addEventListener("click", decrementMinus);
 
 // HELPER FUNCTIONS
 function removeAllChildNodes(parent) {
@@ -345,7 +358,59 @@ function showPantry() {
   view(savedRecipeBtn);
   view(recipePage);
   removeAllChildNodes(recipePage);
+  incrementPantryButtons(recipeRepo);
 }
+
+function incrementPantryButtons(recipeRepo) {
+  recipeRepo.recipes.ingredientsData.forEach((ingredient) => {
+    console.log("ingredient", ingredient);
+    indivIngredientBtns.innerHTML += `<section class="individual-ingredient-button">
+    <div class="wrapper">
+      <span class="minus">-</span>
+      <span class="ingredient-label">${ingredient.name}</span>
+      <span class="number"> 01</span>
+      <span class="plus">+</span>
+    </div>
+  </section>`;
+  });
+  // incrementPlus();
+}
+
+// function incrementPlus() {
+//   let ingredientBtn = 1;
+//   ingredientBtn++;
+//   ingredientBtn = ingredientBtn < 10 ? "0" + ingredientBtn : ingredientBtn;
+//   console.log(ingredientBtn);
+//   return ingredientBtn;
+// }
+
+// function decrementMinus() {
+//   if (ingredientBtn > 0) {
+//     ingredientBtn--;
+//     ingredientBtn = ingredientBtn > 10 ? "0" + ingredientBtn : ingredientBtn;
+//     ingredientNumber.innerText = ingredientBtn;
+//   }
+//   console.log(ingredientBtn);
+// });
+
+// recipeRepo.recipes.recipeData.forEach((recipe) => {
+//   recipeTiles.innerHTML += `
+//   <section class="recipe-title">
+//   <input class="recipe-image" type="image" src="${recipe.image}" id="${recipe.id}"/>
+//   <h3>"${recipe.name}"</h3>
+//   <button class="favBtn" role="button" id="fav-${recipe.id}">Favorite</button>
+//   </section>`;
+// });
+
+// recipeRepo.filterTag("breakfast");
+//   var filteredRepo = recipeRepo.filtered.pop();
+//   var filteredRecipes = filteredRepo.forEach((recipe) => {
+//     recipeTiles.innerHTML += `
+//       <section class="recipe-title">
+//       <input class="recipe-image" type="image" src="${recipe.image}" id="${recipe.id}"/>
+//       <h3>"${recipe.name}"</h3>
+//       <button class="favBtn" role="button" id="fav-${recipe.id}">Favorite</button>
+//       </section>`;
 
 //~~~~~~~~~~ FILTER FUNCTIONS ~~~~~~~~
 // CHECK BOXES

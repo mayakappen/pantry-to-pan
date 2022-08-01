@@ -1,6 +1,6 @@
 class Recipe {
   constructor(recipeInfo) {
-    this.recipeNameInfo = recipeInfo.newIngredients;
+    // this.recipeNameInfo = recipeInfo.newIngredients;
     this.id = recipeInfo.id;
     this.image = recipeInfo.image;
     this.ingredients = recipeInfo.ingredients;

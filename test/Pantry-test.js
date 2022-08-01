@@ -176,4 +176,10 @@ describe("Pantry", () => {
       18372, 1123, 19335, 19206, 19334, 2047, 1012047, 10019903, 1145, 2050,
     ]);
   });
+  // it("should have a list of all the ingredients", () => {
+  //   console.log("ingredientDataSet: ", ingredientsDataSet);
+  //   expect(
+  //     pantry1.returnAllAvailableIngredients(pantry1.ingredientsDataSet)
+  //   ).to.be.deep.equal([]);
+  // });
 });
