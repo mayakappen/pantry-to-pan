@@ -8,27 +8,31 @@ import User from "../src/classes/User-class";
 import Pantry from "./classes/Pantry";
 
 let recipeRepo;
-let user 
-let pantry
+let user;
+let pantry;
 let recipeData;
 let usersData;
 let ingredientsData;
-let recipes
+let recipes;
 
 //FETCH CALLS
 function initializeData() {
   Promise.all([usersAPIData, ingredientsAPIData, recipeAPIData]).then(
     ([usersData, ingredientsData, recipeData]) => {
-      recipes = recipeData.map(recipe => new Recipe(recipe))
-      recipes.forEach(recipe => recipe.getIngredientsDetails(ingredientsData))
-      recipeRepo = new RecipeRepository(recipes)
-      console.log(recipeRepo)
-      const randUser = usersData[Math.floor(Math.random() * usersData.length)]
-      console.log(randUser)
-      user = new User(randUser)
-      console.log(user)
-      pantry = new Pantry(user)
-      console.log(pantry)
+      recipes = recipeData.map((recipe) => new Recipe(recipe));
+      recipes.forEach((recipe) =>
+        recipe.getIngredientsDetails(ingredientsData)
+      );
+      recipeRepo = new RecipeRepository(recipes);
+      console.log(recipeRepo);
+      const randUser = usersData[Math.floor(Math.random() * usersData.length)];
+      console.log(randUser);
+      user = new User(randUser);
+      console.log(user);
+      pantry = new Pantry(user);
+      console.log(pantry);
+      console.log("all", ingredientsData);
+      return ingredientsData;
     }
   );
 }
@@ -366,9 +370,10 @@ function showPantry() {
   incrementPantryButtons(recipeRepo);
 }
 
-function incrementPantryButtons(recipeRepo) {
+function incrementPantryButtons(ingredients) {
+  ingredients.forEach((individualIng = console.log("LN 374", individualIng)));
   recipeRepo.recipes.ingredientsData.forEach((ingredient) => {
-    console.log("ingredient", ingredient);
+    //console.log("ingredient", ingredient);
     indivIngredientBtns.innerHTML += `<section class="individual-ingredient-button">
     <div class="wrapper">
       <span class="minus">-</span>
