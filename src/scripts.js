@@ -8,12 +8,11 @@ import User from "../src/classes/User-class";
 import Pantry from "./classes/Pantry";
 
 let recipeRepo;
-let user 
-let pantry
+const user = new User({ name: "Elana", id: 1 });
+const pantry = new Pantry(user);
 let recipeData;
 let usersData;
 let ingredientsData;
-let recipes
 
 // This is the promise all for running on the local server
 // Promise.all([
@@ -39,16 +38,12 @@ let recipes
 function initializeData() {
   Promise.all([usersAPIData, ingredientsAPIData, recipeAPIData]).then(
     ([usersData, ingredientsData, recipeData]) => {
-      recipes = recipeData.map(recipe => new Recipe(recipe))
-      recipes.forEach(recipe => recipe.getIngredientsDetails(ingredientsData))
-      recipeRepo = new RecipeRepository(recipes)
-      console.log(recipeRepo)
-      const randUser = usersData[Math.floor(Math.random() * usersData.length)]
-      console.log(randUser)
-      user = new User(randUser)
-      console.log(user)
-      pantry = new Pantry(user)
-      console.log(pantry)
+      const data = {
+        ingredientsData,
+        recipeData,
+        usersData,
+      };
+      recipeRepo = new RecipeRepository(data);
     }
   );
 }
@@ -285,7 +280,7 @@ function showSavedRecipes() {
   view(pantryBtn);
   recipeTiles.innerHTML = "";
   user.toCook.forEach((recipeId) => {
-    const matchedRecipe = recipeRepo.recipes.find((recipe) => {
+    const matchedRecipe = recipeRepo.recipes.recipeData.find((recipe) => {
       return recipe.id === recipeId;
     });
     if (matchedRecipe) {
@@ -304,7 +299,7 @@ function showSavedRecipes() {
 //PUTS RECIPE TILES ON ALLRECIPEPAGE & BUTTON FOR SAVEDRECIPEPAGE
 function addRecipeTiles(recipeRepo) {
   console.log("repo", recipeRepo.recipes);
-  recipeRepo.recipes.forEach((recipe) => {
+  recipeRepo.recipes.recipeData.forEach((recipe) => {
     recipeTiles.innerHTML += `
     <section class="recipe-title">
     <input class="recipe-image" type="image" src="${recipe.image}" id="${recipe.id}"/>
@@ -329,7 +324,7 @@ function viewRecipeDetails(event) {
   view(recipePage);
 
   const targetRecipeId = parseInt(event.target.id);
-  recipeRepo.recipes.forEach((recipe) => {
+  recipeRepo.recipes.recipeData.forEach((recipe) => {
     if (recipe.id === targetRecipeId) {
       const recipeInfo = recipeRepo.getById(targetRecipeId);
       const currentRecipe = new Recipe(recipeInfo);
