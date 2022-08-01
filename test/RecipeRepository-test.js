@@ -1,11 +1,9 @@
 import { expect } from "chai";
 import RecipeRepository from "../src/classes/RecipeRepository";
-//import Recipe from "../src/classes/Recipe";
 
 describe("RecipeRepository", () => {
-  let recipeData; //recipe.js
+  let recipeData;
   let recipeRepository;
-  //let newRecipe;
 
   beforeEach(function () {
     recipeData = [
