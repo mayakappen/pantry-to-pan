@@ -4,7 +4,7 @@ class RecipeRepository {
   }
   filterTag(tag) {
     this.filtered = [];
-    const recipes = this.recipes.recipeData.filter((recipe) => {
+    const recipes = this.recipes.filter((recipe) => {
       return recipe.tags.includes(tag);
     });
     this.filtered.push(recipes);
@@ -12,7 +12,7 @@ class RecipeRepository {
   }
   filterName(name) {
     let upper = name.toUpperCase();
-    let results = this.recipes.recipeData.map((recipe) =>
+    let results = this.recipes.map((recipe) =>
       recipe.name.toUpperCase()
     );
     let result = results.findIndex((element) => {
@@ -21,11 +21,12 @@ class RecipeRepository {
       }
       return false;
     });
+    console.log(this.recipes[result])
     return this.recipes[result];
   }
 
   getById(id) {
-    const recipe = this.recipes.recipeData.find((recipe) => {
+    const recipe = this.recipes.find((recipe) => {
       return recipe.id === id;
     });
     return recipe;
