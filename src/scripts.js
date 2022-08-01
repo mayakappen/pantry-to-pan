@@ -101,8 +101,8 @@ const searchButton = document.querySelector("#search-button");
 const searchInput = document.querySelector(".input");
 
 // ingredient incrementor query selectors
-const indivIngredientBtns = document.querySelector(
-  ".individual-ingredient-button"
+const ingredientBtns = document.querySelectorAll(
+  "iingredient-button"
 );
 const minusBtn = document.querySelector(".minus");
 const plusBtn = document.querySelector(".plus");
@@ -368,10 +368,10 @@ function viewRecipeDetails(event) {
             .join("")}
         </ol>
       </h4>
-      <h4>${currentRecipe.getIngredients(
-        recipeRepo.recipes.ingredientsData
+      <h4>${currentRecipe.getIngredientsDetails(
+        recipeRepo.recipes
       )}</h4>
-      <h4>${currentRecipe.getCost(recipeRepo.recipes.ingredientsData)}</h4>
+      <h4>${currentRecipe.getCost(recipeRepo.recipes)}</h4>
       <button class="favBtn" role="button" id="fav-${
         recipe.id
       }">Favorite</button>`;
@@ -394,28 +394,26 @@ function showPantry() {
   removeAllChildNodes(recipePage);
   incrementPantryButtons();
 }
-
+let buttons = []
 function incrementPantryButtons() {
   console.log("allIngredientsData", allIngredientsData);
   allIngredientsData.forEach((ingredient) => {
     //console.log("ingredient", ingredient);
-    indivIngredientBtns.innerHTML += `<section class="individual-ingredient-button">
+    ingredientBtns.innerHTML += `<section class="individual-ingredient-button">
     <div class="wrapper">
       <span class="minus">-</span>
-      <span class="ingredient-label">${ingredient.name}</span>
+      <span class="ingredient-label" ${ingredient.name}>${ingredient.name}</span>
       <span class="number"> 01</span>
       <span class="plus">+</span>
     </div>
   </section>`;
   });
+  buttons = document.querySelectorAll(ingredientBtns)
 }
 
-// function incrementPlus() {
-//   let ingredientBtn = 1;
-//   ingredientBtn++;
-//   ingredientBtn = ingredientBtn < 10 ? "0" + ingredientBtn : ingredientBtn;
-//   console.log(ingredientBtn);
-//   return ingredientBtn;
+// function incrementPlus(event.target) {
+  
+//   ingredientBtn.value++;
 // }
 
 // function decrementMinus() {
