@@ -1,5 +1,6 @@
 class Recipe {
   constructor(recipeInfo) {
+    this.recipeNameInfo = recipeInfo.newIngredients;
     this.id = recipeInfo.id;
     this.image = recipeInfo.image;
     this.ingredients = recipeInfo.ingredients;
@@ -26,20 +27,21 @@ class Recipe {
     );
     return ingredientNames;
   }
-  getIngredients(ingredientDetails) {
-    const mergedIngredients = this.ingredients.reduce((acc, measurement) => {
-      let name = ingredientDetails.find(
-        (ingredient) => measurement.id === ingredient.id
-      );
-      let measurementInfo = `  ${measurement.quantity.amount} ${measurement.quantity.unit} ${name.name}`;
-      acc.push(measurementInfo);
-      return acc;
-    }, []);
-    mergedIngredients.forEach((ingredient) => {
-      this.ingredientsNeeded.push(ingredient);
-    });
-    return mergedIngredients;
-  }
+
+  // getIngredients(ingredientDetails) {
+  //   const mergedIngredients = this.ingredients.reduce((acc, measurement) => {
+  //     let name = ingredientDetails.find(
+  //       (ingredient) => measurement.id === ingredient.id
+  //     );
+  //     let measurementInfo = `  ${measurement.quantity.amount} ${measurement.quantity.unit} ${name.name}`;
+  //     acc.push(measurementInfo);
+  //     return acc;
+  //   }, []);
+  //   mergedIngredients.forEach((ingredient) => {
+  //     this.ingredientsNeeded.push(ingredient);
+  //   });
+  //   return mergedIngredients;
+  // }
 
   getInstructions() {
     return this.instructions;

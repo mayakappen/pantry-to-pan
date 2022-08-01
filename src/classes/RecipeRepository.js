@@ -12,16 +12,13 @@ class RecipeRepository {
   }
   filterName(name) {
     let upper = name.toUpperCase();
-    let results = this.recipes.map((recipe) =>
-      recipe.name.toUpperCase()
-    );
+    let results = this.recipes.map((recipe) => recipe.name.toUpperCase());
     let result = results.findIndex((element) => {
       if (element === upper) {
         return true;
       }
       return false;
     });
-    console.log(this.recipes[result])
     return this.recipes[result];
   }
 

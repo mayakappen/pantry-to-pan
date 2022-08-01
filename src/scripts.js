@@ -12,8 +12,33 @@ let user;
 let pantry;
 let recipeData;
 let usersData;
-let ingredientsData;
+let allIngredientsData;
 let recipes;
+// const user = new User({ name: "Elana", id: 1 });
+// const pantry = new Pantry(user);
+// let recipeData;
+// let usersData;
+// let ingredientsData;
+
+// This is the promise all for running on the local server
+// Promise.all([
+//   fetchData("ingredients"),
+//   fetchData("recipes"),
+//   fetchData("users"),
+// ]).then(([ingredientsData, recipeData, userData]) => {
+//   IngredientsDATA = ingredientsData;
+//   allRecipes = recipeData.map((recipe) => {
+//     return new Recipe(recipe, ingredientsData);
+//   });
+
+//   recipeRepository = new RecipeRepository(allRecipes);
+//   User = new User(userData[0], recipeRepository);
+
+//   allRecipes.forEach((recipe) => {
+//     createRecipeCard(recipe);
+//   });
+//   hide(homeButton);
+// });
 
 //FETCH CALLS
 function initializeData() {
@@ -32,7 +57,7 @@ function initializeData() {
       pantry = new Pantry(user);
       console.log(pantry);
       console.log("all", ingredientsData);
-      return ingredientsData;
+      allIngredientsData = ingredientsData;
     }
   );
 }
@@ -300,7 +325,7 @@ function showSavedRecipes() {
 
 //PUTS RECIPE TILES ON ALLRECIPEPAGE & BUTTON FOR SAVEDRECIPEPAGE
 function addRecipeTiles(recipeRepo) {
-  console.log("repo", recipeRepo.recipes);
+  console.log("repo", recipeRepo);
   recipeRepo.recipes.forEach((recipe) => {
     recipeTiles.innerHTML += `
     <section class="recipe-title">
@@ -367,12 +392,12 @@ function showPantry() {
   view(savedRecipeBtn);
   view(recipePage);
   removeAllChildNodes(recipePage);
-  incrementPantryButtons(recipeRepo);
+  incrementPantryButtons();
 }
 
-function incrementPantryButtons(ingredients) {
-  ingredients.forEach((individualIng = console.log("LN 374", individualIng)));
-  recipeRepo.recipes.ingredientsData.forEach((ingredient) => {
+function incrementPantryButtons() {
+  console.log("allIngredientsData", allIngredientsData);
+  allIngredientsData.forEach((ingredient) => {
     //console.log("ingredient", ingredient);
     indivIngredientBtns.innerHTML += `<section class="individual-ingredient-button">
     <div class="wrapper">
@@ -383,7 +408,6 @@ function incrementPantryButtons(ingredients) {
     </div>
   </section>`;
   });
-  // incrementPlus();
 }
 
 // function incrementPlus() {
